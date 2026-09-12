@@ -1,0 +1,44 @@
+.defect-verdict {
+  margin: 0.75rem 0 0;
+  padding: 0.6rem 0.75rem;
+  border-left: 3px solid var(--line);
+  font-size: 0.82rem;
+}
+
+.defect-verdict.is-fault {
+  border-left-color: #b91c1c;
+}
+
+.defect-verdict.is-contextual {
+  border-left-color: #b45309;
+}
+
+.defect-explain {
+  margin: 0.6rem 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.defect-cause {
+  margin: 0.4rem 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.defect-context-line {
+  margin: 0.5rem 0 1.25rem;
+  font-size: 0.86rem;
+  color: var(--muted);
+  max-width: 52ch;
+}
+
+.defect-context-line strong,
+.defect-explain strong {
+  color: var(--fg);
+}
+
+.defect-tag {
+  color: #b45309;
+  font-weight: 700;
+}

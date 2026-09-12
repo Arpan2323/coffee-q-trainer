@@ -1,0 +1,290 @@
+{
+  "version": "0.1.0",
+  "note": "Curated cross-branch confusable pairs. These are perceptually legitimate confusions that the tree structure under-credits, because the two attributes sit in different branches (or different categories) despite tasting alike. Weight is a fraction of a perfect score; the engine awards max(structural base, weight * 100). Pairs are symmetric. Ring-3 siblings are deliberately absent - the sibling tier already credits those, and an entry that scores below its own structural base is dead weight (enforced by test).",
+  "reviewStatus": "provisional",
+  "reviewTarget": "Q1 KR3.2 - inter-rater agreement >= 0.7 across 3 Q-graders. Until then these weights are one practitioner's judgement, not consensus.",
+  "pairs": [
+    {
+      "a": "roasted",
+      "b": "nutty-cocoa",
+      "weight": 0.35,
+      "note": "Category-level. Both are Maillard products of the same roast, and telling them apart is one of the hardest calls a beginner faces. The wheel's ring order places Spices between them, so the geometry scores them as unrelated - they are anything but."
+    },
+    {
+      "a": "roasted",
+      "b": "sweet",
+      "weight": 0.3,
+      "note": "Category-level. Sugar browning produces both: caramelisation and roast character are two points on one continuum with no sharp edge. The wheel separates them by three positions."
+    },
+    {
+      "a": "nutty-cocoa",
+      "b": "sweet",
+      "weight": 0.3,
+      "note": "Category-level. Toasted kernel and cooked sugar share Maillard aromatics and routinely co-occur; tasters split on which one leads."
+    },
+    {
+      "a": "sour-fermented.sour.malic-acid",
+      "b": "fruity.other-fruit.apple",
+      "weight": 0.65,
+      "note": "Malic acid is the dominant acid in apples - the sensation and the fruit reference are the same thing seen from two directions. Beginners taste 'green apple' and reach for the fruit; graders name the acid."
+    },
+    {
+      "a": "sour-fermented.sour.malic-acid",
+      "b": "fruity.other-fruit.pear",
+      "weight": 0.4,
+      "note": "Softer, rounder malic expression reads as pear rather than apple."
+    },
+    {
+      "a": "sour-fermented.sour.citric-acid",
+      "b": "fruity.citrus-fruit.lemon",
+      "weight": 0.6,
+      "note": "Same acid/fruit duality as malic-apple. The distinction worth teaching: citric acid is the sensation, lemon carries aromatics on top of it."
+    },
+    {
+      "a": "sour-fermented.sour.citric-acid",
+      "b": "fruity.citrus-fruit.lime",
+      "weight": 0.5,
+      "note": "Lime reads as citric acid with a greener, more pungent aromatic."
+    },
+    {
+      "a": "sour-fermented.sour.citric-acid",
+      "b": "fruity.citrus-fruit.orange",
+      "weight": 0.35,
+      "note": "Lower-intensity citric with sweetness present pulls the call toward orange."
+    },
+    {
+      "a": "sour-fermented.alcohol-fermented.winey",
+      "b": "fruity.other-fruit.grape",
+      "weight": 0.5,
+      "note": "The fruity/fermented boundary. Winey is grape aromatics plus alcohol and acetic lift; drop the lift and tasters say grape."
+    },
+    {
+      "a": "sour-fermented.alcohol-fermented.overripe",
+      "b": "fruity.berry.strawberry",
+      "weight": 0.4,
+      "note": "Overripe strawberry sits exactly on the line between desirable fruit and incipient ferment. A classic split-the-table call."
+    },
+    {
+      "a": "sour-fermented.alcohol-fermented.fermented",
+      "b": "fruity.berry.blueberry",
+      "weight": 0.35,
+      "note": "Naturals pushed hard in drying give blueberry-like intensity that is really early ferment. Beginners hear 'blueberry natural' as praise; it is often a process fault."
+    },
+    {
+      "a": "sour-fermented.sour.acetic-acid",
+      "b": "sour-fermented.alcohol-fermented.fermented",
+      "weight": 0.5,
+      "note": "Acetic lift is the leading edge of ferment character - same defect pathway, different intensity."
+    },
+    {
+      "a": "sour-fermented.sour.butyric-acid",
+      "b": "sour-fermented.alcohol-fermented.fermented",
+      "weight": 0.5,
+      "note": "Butyric (rancid butter, vomit-like) is a ferment marker; naming the specific acid is the harder, more useful call."
+    },
+    {
+      "a": "sour-fermented.sour.isovaleric-acid",
+      "b": "sour-fermented.alcohol-fermented.fermented",
+      "weight": 0.45,
+      "note": "Isovaleric (sweaty, cheesy) likewise indicates over-fermentation."
+    },
+    {
+      "a": "sour-fermented.sour.butyric-acid",
+      "b": "other.papery-musty.animalic",
+      "weight": 0.35,
+      "note": "Rancid-dairy and animal notes overlap heavily at low intensity."
+    },
+    {
+      "a": "sour-fermented.sour.isovaleric-acid",
+      "b": "other.papery-musty.animalic",
+      "weight": 0.35,
+      "note": "Sweaty/cheesy character is routinely called animalic by untrained panels."
+    },
+    {
+      "a": "fruity.dried-fruit.raisin",
+      "b": "sweet.brown-sugar.molasses",
+      "weight": 0.35,
+      "note": "Dried fruit and brown sugar converge in darker roasts - both are concentrated sugar with cooked-fruit aromatics."
+    },
+    {
+      "a": "fruity.dried-fruit.prune",
+      "b": "sweet.brown-sugar.molasses",
+      "weight": 0.4,
+      "note": "Prune and molasses are the same dark, syrupy register; roast level usually decides which word a taster reaches for."
+    },
+    {
+      "a": "fruity.other-fruit.coconut",
+      "b": "nutty-cocoa.nutty.almond",
+      "weight": 0.35,
+      "note": "Both sit in a sweet, fatty, mildly lactonic space. Crossing a category boundary here is a small error, not a large one."
+    },
+    {
+      "a": "nutty-cocoa.nutty.almond",
+      "b": "roasted.cereal.grain",
+      "weight": 0.35,
+      "note": "The nutty/cereal boundary. Toasted almond and toasted grain share the same Maillard aromatics."
+    },
+    {
+      "a": "nutty-cocoa.nutty.almond",
+      "b": "roasted.cereal.malt",
+      "weight": 0.3,
+      "note": "Malt adds sweetness to the same toasted-nut register."
+    },
+    {
+      "a": "nutty-cocoa.nutty.peanuts",
+      "b": "roasted.cereal.grain",
+      "weight": 0.35,
+      "note": "Peanut and raw grain overlap strongly in under-developed roasts."
+    },
+    {
+      "a": "roasted.cereal.grain",
+      "b": "other.papery-musty.papery",
+      "weight": 0.35,
+      "note": "The hardest call in staling. Cereal is a roast character; papery is age. Same dry, dusty impression, opposite diagnosis."
+    },
+    {
+      "a": "roasted.cereal.grain",
+      "b": "other.papery-musty.cardboard",
+      "weight": 0.3,
+      "note": "As above - cardboard is oxidised lipid, not roast, but the two read alike to a new palate."
+    },
+    {
+      "a": "roasted.cereal.grain",
+      "b": "other.papery-musty.stale",
+      "weight": 0.3,
+      "note": "Stale coffee flattens toward a dry cereal impression."
+    },
+    {
+      "a": "roasted.tobacco",
+      "b": "roasted.pipe-tobacco",
+      "weight": 0.6,
+      "note": "Cured leaf versus sweetened aromatic blend. The tree only knows they share a category, so it scores them as far apart as Blackberry and Raisin; perceptually they are near-neighbours."
+    },
+    {
+      "a": "other.papery-musty.woody",
+      "b": "roasted.pipe-tobacco",
+      "weight": 0.4,
+      "note": "Dry, aged, woody character underlies both; pipe tobacco adds sweetness."
+    },
+    {
+      "a": "other.papery-musty.woody",
+      "b": "roasted.tobacco",
+      "weight": 0.35,
+      "note": "Old-crop woodiness is frequently called tobacco."
+    },
+    {
+      "a": "roasted.burnt.brown-roast",
+      "b": "nutty-cocoa.cocoa.dark-chocolate",
+      "weight": 0.45,
+      "note": "Dark chocolate is largely a roast artefact. Where roast ends and cocoa begins is a genuine judgement call, not an error."
+    },
+    {
+      "a": "roasted.burnt.smoky",
+      "b": "nutty-cocoa.cocoa.dark-chocolate",
+      "weight": 0.3,
+      "note": "Heavy roast pushes cocoa toward smoke; the two coexist more often than they separate."
+    },
+    {
+      "a": "roasted.burnt.brown-roast",
+      "b": "sweet.brown-sugar.caramelized",
+      "weight": 0.4,
+      "note": "Sugar browning is a continuum. Caramelized and brown-roast are two points on it, and the boundary is a matter of degree."
+    },
+    {
+      "a": "roasted.burnt.smoky",
+      "b": "other.papery-musty.phenolic",
+      "weight": 0.4,
+      "note": "Smoke and phenol share the same aromatic family, but one is roast and the other is a serious defect. Worth partial credit and a firm correction."
+    },
+    {
+      "a": "other.chemical.medicinal",
+      "b": "other.papery-musty.phenolic",
+      "weight": 0.6,
+      "note": "Near-synonymous in practice. Phenolic is the diagnostic term; medicinal is what tasters say first."
+    },
+    {
+      "a": "other.chemical.medicinal",
+      "b": "spices.brown-spice.clove",
+      "weight": 0.4,
+      "note": "Eugenol drives both. Clove is the pleasant expression of the same compound family that reads as medicinal when it dominates."
+    },
+    {
+      "a": "other.papery-musty.phenolic",
+      "b": "spices.brown-spice.clove",
+      "weight": 0.4,
+      "note": "As above - the clove/phenol axis is a real perceptual continuum, not a mistake."
+    },
+    {
+      "a": "sweet.vanilla",
+      "b": "sweet.vanillin",
+      "weight": 0.7,
+      "note": "Natural vanilla is complex and floral; vanillin is the single synthetic note. They branch directly off the category, so the tree gives them no more credit than an unrelated pair - perceptually they are almost adjacent."
+    },
+    {
+      "a": "sweet.sweet-aromatics",
+      "b": "sweet.vanilla",
+      "weight": 0.5,
+      "note": "Sweet aromatics is the umbrella impression; vanilla is one of its most common components."
+    },
+    {
+      "a": "sweet.brown-sugar.honey",
+      "b": "sweet.overall-sweet",
+      "weight": 0.4,
+      "note": "Honey is often what tasters mean by a general sweetness impression."
+    },
+    {
+      "a": "sweet.brown-sugar.maple-syrup",
+      "b": "sweet.vanilla",
+      "weight": 0.45,
+      "note": "Maple and vanilla overlap in the sweet-aromatic register."
+    },
+    {
+      "a": "nutty-cocoa.cocoa.chocolate",
+      "b": "sweet.brown-sugar.molasses",
+      "weight": 0.35,
+      "note": "Milk-chocolate character and molasses share sweetness plus cooked-sugar depth."
+    },
+    {
+      "a": "floral.black-tea",
+      "b": "floral.floral.jasmine",
+      "weight": 0.4,
+      "note": "Jasmine tea exists for a reason. Black tea is tannic and floral; jasmine is the floral without the tannin."
+    },
+    {
+      "a": "floral.black-tea",
+      "b": "floral.floral.chamomile",
+      "weight": 0.4,
+      "note": "Both are dried-flower infusions; chamomile is softer and hay-adjacent."
+    },
+    {
+      "a": "floral.floral.chamomile",
+      "b": "green-vegetative.green-vegetative.hay-like",
+      "weight": 0.35,
+      "note": "Chamomile sits directly on the floral/hay boundary. Crossing it is a defensible call, not a miss."
+    },
+    {
+      "a": "green-vegetative.beany",
+      "b": "green-vegetative.green-vegetative.peapod",
+      "weight": 0.5,
+      "note": "Beany terminates at ring 2 while peapod sits a level deeper, so the tree separates two attributes that are almost the same sensation."
+    },
+    {
+      "a": "green-vegetative.raw",
+      "b": "green-vegetative.green-vegetative.under-ripe",
+      "weight": 0.5,
+      "note": "Raw is under-development in the roast; under-ripe is under-development in the fruit. Same green impression, different cause - a distinction worth drilling."
+    },
+    {
+      "a": "spices.pungent",
+      "b": "spices.pepper",
+      "weight": 0.5,
+      "note": "Both terminate at ring 2 and both describe trigeminal sharpness rather than aroma; the tree scores them as distant when they are close."
+    },
+    {
+      "a": "spices.brown-spice.cinnamon",
+      "b": "roasted.burnt.brown-roast",
+      "weight": 0.3,
+      "note": "Cinnamon-like warmth is often a roast artefact rather than an origin character."
+    }
+  ]
+}

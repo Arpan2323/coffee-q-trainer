@@ -1,0 +1,141 @@
+{
+  "version": "0.1.0",
+  "note": "Every profile here is synthetic - an illustrative composite of commonly reported notes for the region/process/roast combination, not a real cupped lot or a published score sheet. PLAN.md section 5's content bar: real profiles get synthetic:false and a citation in `source`; these are marked honestly until roaster-sourced score sheets replace them (STRATEGY.md section 5, the bag-QR loop). The Cause & Effect UI never hides the flag.",
+  "profiles": [
+    {
+      "id": "ethiopia-yirgacheffe-washed-light",
+      "name": "Ethiopia Yirgacheffe, washed",
+      "origin": "Ethiopia (Yirgacheffe)",
+      "variety": "Heirloom",
+      "altitude": 1950,
+      "process": "washed",
+      "roast": "light",
+      "descriptors": [
+        { "nodeId": "floral.floral.jasmine" },
+        { "nodeId": "floral.black-tea" },
+        { "nodeId": "fruity.citrus-fruit.lemon" },
+        { "nodeId": "sweet.brown-sugar.honey" }
+      ],
+      "synthetic": true,
+      "source": "Composite of commonly reported washed-Yirgacheffe cupping notes (jasmine, black tea, lemon, honey) - not a specific lot."
+    },
+    {
+      "id": "ethiopia-guji-natural-light",
+      "name": "Ethiopia Guji, natural",
+      "origin": "Ethiopia (Guji)",
+      "variety": "Heirloom",
+      "altitude": 2100,
+      "process": "natural",
+      "roast": "light",
+      "descriptors": [
+        { "nodeId": "fruity.berry.blueberry" },
+        { "nodeId": "fruity.berry.strawberry" },
+        { "nodeId": "sour-fermented.alcohol-fermented.fermented" },
+        { "nodeId": "sweet.brown-sugar.honey" }
+      ],
+      "synthetic": true,
+      "source": "Composite of typical natural-Ethiopia notes: heavy berry fruit plus a mild fermented edge, which is the sun-dried process working as intended rather than a flaw - the deliberate pairing with `defect: \"contextual\"` in wheel.json (see DefectFlag in domain/types.ts)."
+    },
+    {
+      "id": "colombia-huila-washed-medium",
+      "name": "Colombia Huila, washed",
+      "origin": "Colombia (Huila)",
+      "variety": "Caturra",
+      "altitude": 1700,
+      "process": "washed",
+      "roast": "medium",
+      "descriptors": [
+        { "nodeId": "fruity.other-fruit.apple" },
+        { "nodeId": "nutty-cocoa.cocoa.chocolate" },
+        { "nodeId": "sweet.brown-sugar.caramelized" },
+        { "nodeId": "sour-fermented.sour.malic-acid" }
+      ],
+      "synthetic": true,
+      "source": "Composite of commonly reported Huila notes: red apple and malic brightness over a caramel/chocolate base - not a specific lot."
+    },
+    {
+      "id": "brazil-cerrado-natural-medium-dark",
+      "name": "Brazil Cerrado, natural",
+      "origin": "Brazil (Cerrado Mineiro)",
+      "variety": "Mundo Novo",
+      "altitude": 1100,
+      "process": "natural",
+      "roast": "medium-dark",
+      "descriptors": [
+        { "nodeId": "nutty-cocoa.nutty.peanuts" },
+        { "nodeId": "nutty-cocoa.cocoa.chocolate" },
+        { "nodeId": "roasted.cereal.grain" },
+        { "nodeId": "sweet.brown-sugar.molasses" }
+      ],
+      "synthetic": true,
+      "source": "Composite of the low-acid, nutty/chocolate profile typically reported for natural-process Brazils used in espresso blends - not a specific lot."
+    },
+    {
+      "id": "costa-rica-tarrazu-honey-medium",
+      "name": "Costa Rica Tarrazú, honey",
+      "origin": "Costa Rica (Tarrazú)",
+      "variety": "Villa Sarchí",
+      "altitude": 1800,
+      "process": "honey",
+      "roast": "medium",
+      "descriptors": [
+        { "nodeId": "fruity.citrus-fruit.orange" },
+        { "nodeId": "sweet.brown-sugar.honey" },
+        { "nodeId": "sweet.brown-sugar.caramelized" },
+        { "nodeId": "sour-fermented.sour.citric-acid" }
+      ],
+      "synthetic": true,
+      "source": "Composite illustrating the honey-process signature: the sugar-sweetness and syrupy body honey processing is chosen for, layered onto a washed-Costa-Rica citrus base - not a specific lot."
+    },
+    {
+      "id": "sumatra-mandheling-wet-hulled-dark",
+      "name": "Sumatra Mandheling, wet-hulled",
+      "origin": "Indonesia (Sumatra)",
+      "variety": "Typica",
+      "altitude": 1300,
+      "process": "wet-hulled",
+      "roast": "dark",
+      "descriptors": [
+        { "nodeId": "green-vegetative.green-vegetative.herb-like" },
+        { "nodeId": "roasted.tobacco" },
+        { "nodeId": "roasted.burnt.brown-roast" },
+        { "nodeId": "other.chemical.bitter" }
+      ],
+      "synthetic": true,
+      "source": "Composite of the low-acid, heavy-bodied, herbal/earthy profile commonly attributed to Sumatra's wet-hulled (giling basah) process and dark roasting - not a specific lot."
+    },
+    {
+      "id": "kenya-nyeri-washed-light",
+      "name": "Kenya Nyeri, washed",
+      "origin": "Kenya (Nyeri)",
+      "variety": "SL28",
+      "altitude": 1750,
+      "process": "washed",
+      "roast": "light",
+      "descriptors": [
+        { "nodeId": "fruity.berry.blackberry" },
+        { "nodeId": "sour-fermented.sour.citric-acid" },
+        { "nodeId": "sour-fermented.alcohol-fermented.winey" }
+      ],
+      "synthetic": true,
+      "source": "Composite of the intense berry acidity and winey character Kenyan SL28/SL34 lots are commonly reported for - not a specific lot."
+    },
+    {
+      "id": "panama-boquete-anaerobic-light",
+      "name": "Panama Boquete, anaerobic natural",
+      "origin": "Panama (Boquete)",
+      "variety": "Geisha",
+      "altitude": 1650,
+      "process": "anaerobic",
+      "roast": "light",
+      "descriptors": [
+        { "nodeId": "fruity.other-fruit.pineapple" },
+        { "nodeId": "fruity.other-fruit.cherry" },
+        { "nodeId": "sour-fermented.alcohol-fermented.whiskey" },
+        { "nodeId": "sour-fermented.alcohol-fermented.winey" }
+      ],
+      "synthetic": true,
+      "source": "Composite illustrating an anaerobic-natural's boozy, tropical-fruit signature - the sealed-tank fermentation that defines the process pushed to the front - not a specific lot."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+.ce-profile {
+  margin: 0 0 0.9rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--panel);
+}
+
+.ce-profile h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.ce-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+  gap: 0.5rem 0.75rem;
+  margin: 0;
+}
+
+.ce-facts dt {
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+.ce-facts dd {
+  margin: 0.05rem 0 0;
+  font-size: 0.85rem;
+}
+
+.ce-synthetic {
+  margin: 0.6rem 0 0;
+  padding-top: 0.55rem;
+  border-top: 1px dashed var(--line);
+  font-size: 0.74rem;
+  color: #b45309;
+}
+
+p.ce-synthetic {
+  max-width: 58ch;
+}
+
+.ce-descriptors {
+  margin: 0.6rem 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.ce-matched {
+  color: var(--fg);
+  font-weight: 700;
+}

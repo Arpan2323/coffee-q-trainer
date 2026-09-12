@@ -1,0 +1,172 @@
+﻿/*
+ * Ring fills are one hue per category separated by opacity rather than by pre-mixed tints, so the
+ * same palette reads correctly against a light or a dark page without a second set of colours.
+ */
+.flavor-wheel {
+  --wheel-stroke: rgb(255 255 255 / 0.75);
+  --wheel-text: #1c1917;
+  --wheel-text-inverse: #fffbf7;
+  --wheel-hub-fill: #fffbf7;
+  --wheel-hub-stroke: rgb(28 25 23 / 0.15);
+  --wheel-focus: #1c1917;
+  --wheel-reveal: #15803d;
+
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 82vh;
+  touch-action: manipulation;
+}
+
+@media (prefers-color-scheme: dark) {
+  .flavor-wheel {
+    --wheel-stroke: rgb(20 18 17 / 0.65);
+    --wheel-text: #f5f0eb;
+    --wheel-text-inverse: #fffbf7;
+    --wheel-hub-fill: #1c1917;
+    --wheel-hub-stroke: rgb(245 240 235 / 0.2);
+    --wheel-focus: #f5f0eb;
+  --wheel-reveal: #4ade80;
+  }
+}
+
+:root[data-theme='dark'] .flavor-wheel {
+  --wheel-stroke: rgb(20 18 17 / 0.65);
+  --wheel-text: #f5f0eb;
+  --wheel-text-inverse: #fffbf7;
+  --wheel-hub-fill: #1c1917;
+  --wheel-hub-stroke: rgb(245 240 235 / 0.2);
+  --wheel-focus: #f5f0eb;
+  --wheel-reveal: #4ade80;
+}
+
+:root[data-theme='light'] .flavor-wheel {
+  --wheel-stroke: rgb(255 255 255 / 0.75);
+  --wheel-text: #1c1917;
+  --wheel-text-inverse: #fffbf7;
+  --wheel-hub-fill: #fffbf7;
+  --wheel-hub-stroke: rgb(28 25 23 / 0.15);
+  --wheel-focus: #1c1917;
+  --wheel-reveal: #15803d;
+}
+
+.wedge {
+  cursor: pointer;
+  outline: none;
+}
+
+.wedge path {
+  stroke: var(--wheel-stroke);
+  stroke-width: 0.75;
+  transition:
+    fill-opacity 140ms ease,
+    stroke-width 140ms ease;
+}
+
+.wedge:hover path {
+  fill-opacity: 1;
+}
+
+.wedge.is-selected path {
+  fill-opacity: 1;
+  stroke: var(--wheel-focus);
+  stroke-width: 2;
+}
+
+/* The revealed answer is outlined, never refilled - refilling would hide the category hue that
+   makes the size of the miss readable. */
+.wedge.is-revealed path {
+  fill-opacity: 1;
+  stroke: var(--wheel-reveal);
+  stroke-width: 3;
+  stroke-dasharray: none;
+}
+
+.wedge.is-revealed .wedge-label {
+  font-weight: 700;
+}
+
+/* Dimming the rest of the wheel makes the selected branch legible without moving anything. */
+.wedge.is-dimmed path {
+  fill-opacity: 0.18;
+}
+
+.wedge.is-dimmed .wedge-label {
+  opacity: 0.35;
+}
+
+.wedge:focus-visible path {
+  stroke: var(--wheel-focus);
+  stroke-width: 2.5;
+  stroke-dasharray: 4 2;
+}
+
+.wedge-label {
+  pointer-events: none;
+  user-select: none;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-weight: 500;
+  fill: var(--wheel-text);
+}
+
+/* Ring 1 sits at near-full opacity, so its labels need the inverse colour in both themes. */
+.wedge.ring-1 .wedge-label {
+  fill: var(--wheel-text-inverse);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Faults are hatched rather than recoloured - recolouring would break the category hue that the
+   whole scoring model depends on being readable at a glance. */
+.wedge.is-defect path {
+  stroke-dasharray: 2 1.5;
+  stroke-width: 1;
+}
+
+.wheel-hub {
+  cursor: pointer;
+  outline: none;
+}
+
+.wheel-hub[aria-disabled='true'] {
+  cursor: default;
+}
+
+.wheel-hub circle {
+  fill: var(--wheel-hub-fill);
+  stroke: var(--wheel-hub-stroke);
+  stroke-width: 1.5;
+}
+
+.wheel-hub:focus-visible circle {
+  stroke: var(--wheel-focus);
+  stroke-width: 2.5;
+}
+
+.wheel-hub-label,
+.wheel-hub-hint {
+  pointer-events: none;
+  user-select: none;
+  text-anchor: middle;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  fill: var(--wheel-text);
+}
+
+.wheel-hub-label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.wheel-hub-hint {
+  font-size: 9px;
+  opacity: 0.6;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wedge path {
+    transition: none;
+  }
+}
+

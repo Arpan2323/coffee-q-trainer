@@ -1,0 +1,250 @@
+{
+  "version": "0.1.0",
+  "note": "Taxonomy structure of the coffee taster's flavor wheel, authored in-house per the IP decision in PLAN.md section 2.5. Category order is clockwise and encodes perceptual adjacency: neighbouring categories are more easily confused than distant ones, and the scoring engine reads that ordering as a cost function. Attribute records (definitions, physical references, intensity anchors, causes) are a separate content asset - see attributeRecordSchema in src/domain/schema.ts.",
+  "categories": [
+    {
+      "id": "fruity",
+      "label": "Fruity",
+      "color": "#D6455B",
+      "children": [
+        {
+          "id": "berry",
+          "label": "Berry",
+          "children": [
+            { "id": "blackberry", "label": "Blackberry" },
+            { "id": "raspberry", "label": "Raspberry" },
+            { "id": "blueberry", "label": "Blueberry" },
+            { "id": "strawberry", "label": "Strawberry" }
+          ]
+        },
+        {
+          "id": "dried-fruit",
+          "label": "Dried Fruit",
+          "children": [
+            { "id": "raisin", "label": "Raisin" },
+            { "id": "prune", "label": "Prune" }
+          ]
+        },
+        {
+          "id": "other-fruit",
+          "label": "Other Fruit",
+          "children": [
+            { "id": "coconut", "label": "Coconut" },
+            { "id": "cherry", "label": "Cherry" },
+            { "id": "pomegranate", "label": "Pomegranate" },
+            { "id": "pineapple", "label": "Pineapple" },
+            { "id": "grape", "label": "Grape" },
+            { "id": "apple", "label": "Apple" },
+            { "id": "peach", "label": "Peach" },
+            { "id": "pear", "label": "Pear" }
+          ]
+        },
+        {
+          "id": "citrus-fruit",
+          "label": "Citrus Fruit",
+          "children": [
+            { "id": "grapefruit", "label": "Grapefruit" },
+            { "id": "orange", "label": "Orange" },
+            { "id": "lemon", "label": "Lemon" },
+            { "id": "lime", "label": "Lime" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sour-fermented",
+      "label": "Sour/Fermented",
+      "color": "#E8B23A",
+      "children": [
+        {
+          "id": "sour",
+          "label": "Sour",
+          "children": [
+            { "id": "sour-aromatics", "label": "Sour Aromatics" },
+            { "id": "acetic-acid", "label": "Acetic Acid" },
+            { "id": "butyric-acid", "label": "Butyric Acid" },
+            { "id": "isovaleric-acid", "label": "Isovaleric Acid" },
+            { "id": "citric-acid", "label": "Citric Acid" },
+            { "id": "malic-acid", "label": "Malic Acid" }
+          ]
+        },
+        {
+          "id": "alcohol-fermented",
+          "label": "Alcohol/Fermented",
+          "children": [
+            { "id": "winey", "label": "Winey" },
+            { "id": "whiskey", "label": "Whiskey" },
+            { "id": "fermented", "label": "Fermented", "defect": "contextual" },
+            { "id": "overripe", "label": "Overripe", "defect": "contextual" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "green-vegetative",
+      "label": "Green/Vegetative",
+      "color": "#4E9A5A",
+      "children": [
+        { "id": "olive-oil", "label": "Olive Oil" },
+        { "id": "raw", "label": "Raw" },
+        {
+          "id": "green-vegetative",
+          "label": "Green/Vegetative",
+          "children": [
+            { "id": "under-ripe", "label": "Under-ripe" },
+            { "id": "peapod", "label": "Peapod" },
+            { "id": "fresh", "label": "Fresh" },
+            { "id": "dark-green", "label": "Dark Green" },
+            { "id": "vegetative", "label": "Vegetative" },
+            { "id": "hay-like", "label": "Hay-like" },
+            { "id": "herb-like", "label": "Herb-like" }
+          ]
+        },
+        { "id": "beany", "label": "Beany" }
+      ]
+    },
+    {
+      "id": "other",
+      "label": "Other",
+      "color": "#6E9BB5",
+      "children": [
+        {
+          "id": "papery-musty",
+          "label": "Papery/Musty",
+          "children": [
+            { "id": "stale", "label": "Stale", "defect": true },
+            { "id": "cardboard", "label": "Cardboard", "defect": true },
+            { "id": "papery", "label": "Papery", "defect": true },
+            { "id": "woody", "label": "Woody", "defect": "contextual" },
+            { "id": "moldy-damp", "label": "Moldy/Damp", "defect": true },
+            { "id": "musty-dusty", "label": "Musty/Dusty", "defect": true },
+            { "id": "musty-earthy", "label": "Musty/Earthy", "defect": true },
+            { "id": "animalic", "label": "Animalic", "defect": "contextual" },
+            { "id": "meaty-brothy", "label": "Meaty Brothy", "defect": "contextual" },
+            { "id": "phenolic", "label": "Phenolic", "defect": true }
+          ]
+        },
+        {
+          "id": "chemical",
+          "label": "Chemical",
+          "children": [
+            { "id": "bitter", "label": "Bitter" },
+            { "id": "salty", "label": "Salty" },
+            { "id": "medicinal", "label": "Medicinal", "defect": true },
+            { "id": "petroleum", "label": "Petroleum", "defect": true },
+            { "id": "skunky", "label": "Skunky", "defect": true },
+            { "id": "rubber", "label": "Rubber", "defect": true }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "roasted",
+      "label": "Roasted",
+      "color": "#6E3B2A",
+      "children": [
+        { "id": "pipe-tobacco", "label": "Pipe Tobacco" },
+        { "id": "tobacco", "label": "Tobacco" },
+        {
+          "id": "burnt",
+          "label": "Burnt",
+          "children": [
+            { "id": "acrid", "label": "Acrid", "defect": true },
+            { "id": "ashy", "label": "Ashy", "defect": true },
+            { "id": "smoky", "label": "Smoky", "defect": "contextual" },
+            { "id": "brown-roast", "label": "Brown, Roast" }
+          ]
+        },
+        {
+          "id": "cereal",
+          "label": "Cereal",
+          "children": [
+            { "id": "grain", "label": "Grain" },
+            { "id": "malt", "label": "Malt" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "spices",
+      "label": "Spices",
+      "color": "#A8443C",
+      "children": [
+        { "id": "pungent", "label": "Pungent" },
+        { "id": "pepper", "label": "Pepper" },
+        {
+          "id": "brown-spice",
+          "label": "Brown Spice",
+          "children": [
+            { "id": "anise", "label": "Anise" },
+            { "id": "nutmeg", "label": "Nutmeg" },
+            { "id": "cinnamon", "label": "Cinnamon" },
+            { "id": "clove", "label": "Clove" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nutty-cocoa",
+      "label": "Nutty/Cocoa",
+      "color": "#9C6B42",
+      "children": [
+        {
+          "id": "nutty",
+          "label": "Nutty",
+          "children": [
+            { "id": "peanuts", "label": "Peanuts" },
+            { "id": "hazelnut", "label": "Hazelnut" },
+            { "id": "almond", "label": "Almond" }
+          ]
+        },
+        {
+          "id": "cocoa",
+          "label": "Cocoa",
+          "children": [
+            { "id": "chocolate", "label": "Chocolate" },
+            { "id": "dark-chocolate", "label": "Dark Chocolate" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sweet",
+      "label": "Sweet",
+      "color": "#E09A48",
+      "children": [
+        {
+          "id": "brown-sugar",
+          "label": "Brown Sugar",
+          "children": [
+            { "id": "molasses", "label": "Molasses" },
+            { "id": "maple-syrup", "label": "Maple Syrup" },
+            { "id": "caramelized", "label": "Caramelized" },
+            { "id": "honey", "label": "Honey" }
+          ]
+        },
+        { "id": "vanilla", "label": "Vanilla" },
+        { "id": "vanillin", "label": "Vanillin" },
+        { "id": "overall-sweet", "label": "Overall Sweet" },
+        { "id": "sweet-aromatics", "label": "Sweet Aromatics" }
+      ]
+    },
+    {
+      "id": "floral",
+      "label": "Floral",
+      "color": "#C86B9E",
+      "children": [
+        { "id": "black-tea", "label": "Black Tea" },
+        {
+          "id": "floral",
+          "label": "Floral",
+          "children": [
+            { "id": "chamomile", "label": "Chamomile" },
+            { "id": "rose", "label": "Rose" },
+            { "id": "jasmine", "label": "Jasmine" }
+          ]
+        }
+      ]
+    }
+  ]
+}

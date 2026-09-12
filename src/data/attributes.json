@@ -1,0 +1,923 @@
+{
+  "version": "0.1.0",
+  "note": "One record for all 110 attributes on the wheel. The beginner definition is the Descriptor Golf clue, so it must describe the attribute WITHOUT using any word from its own label, or the hole becomes a word search against a wheel that already shows every name - buildAttributes throws on a clue that leaks, and a test covers it. The expert definition carries the diagnostic detail a Q candidate needs, and repeatedly names what an attribute is confused with and why. Intensity anchors are deliberately absent: a calibrated 0-15 value is panel measurement data against a physical kit, not something that can be written from a desk.",
+  "reviewStatus": "provisional",
+  "records": [
+    {
+      "nodeId": "roasted",
+      "definition": {
+        "beginner": "Character created by the heat of the drum rather than anything the bean brought from the farm: smoke, char, toast, and the edge of burning.",
+        "expert": "Pyrolytic attributes generated during roasting. Increases with development time and drum temperature, progressively masking origin character."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "roast": ["medium-dark", "dark"], "note": "Rises steadily with development; dominant past second crack." }]
+    },
+    {
+      "nodeId": "roasted.pipe-tobacco",
+      "definition": {
+        "beginner": "Sweetened cured leaf — the aroma of an unlit pouch rather than anything alight: soft, honeyed, faintly woody.",
+        "expert": "Cased and sweetened cured leaf. Distinguished from its unsweetened neighbour by the honeyed top note and softer, less dusty body."
+      },
+      "modality": ["aroma"]
+    },
+    {
+      "nodeId": "roasted.tobacco",
+      "definition": {
+        "beginner": "Dry cured leaf without any sweetening: dusty, slightly bitter, the smell of a fresh cigarette before it is lit.",
+        "expert": "Unsweetened cured leaf. Frequently confused with aged or old-crop woodiness, which arrives from storage rather than from the roast."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "note": "Often reported in aged or long-stored lots as well as darker roasts." }]
+    },
+    {
+      "nodeId": "roasted.burnt",
+      "definition": {
+        "beginner": "Past the point of pleasant browning: sharp, dark, carbonised.",
+        "expert": "Carbonisation attributes beyond the sugar-browning range. A fault when it dominates, though light smoke is stylistic in some dark blends."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "roast": ["dark"], "note": "Excess drum temperature or development past second crack." }]
+    },
+    {
+      "nodeId": "roasted.cereal",
+      "definition": {
+        "beginner": "Dry toasted grain-and-husk character, like a breakfast box or a plain cracker.",
+        "expert": "Toasted starch attributes. Under-development pushes this toward raw and dusty; adequate development pushes it toward sweetness."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "roast": ["light"], "note": "Prominent in under-developed roasts where starches have toasted but sugars have not caramelised." }]
+    },
+    {
+      "nodeId": "roasted.burnt.acrid",
+      "definition": {
+        "beginner": "Sharp and stinging at the back of the throat — the pungent bite of something scorched.",
+        "expert": "Trigeminal irritation from over-carbonisation. Perceived as a physical sting rather than an aroma, which separates it from its dry, powdery neighbour."
+      },
+      "modality": ["aroma", "flavor", "mouthfeel"],
+      "causes": [{ "roast": ["dark"], "note": "Scorching from excessive charge temperature or a stalled, then rushed, roast." }]
+    },
+    {
+      "nodeId": "roasted.burnt.ashy",
+      "definition": {
+        "beginner": "Dry, powdery and cold, like a fireplace the morning after.",
+        "expert": "Residual carbon character. Distinguished from the stinging neighbour by being drying and inert rather than pungent."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "roast": ["dark"], "note": "Surface carbonisation, often alongside oil migration to the bean surface." }]
+    },
+    {
+      "nodeId": "roasted.burnt.smoky",
+      "definition": {
+        "beginner": "Wood-fire aroma clinging to clothing — drying on the palate rather than sharp.",
+        "expert": "Phenolic-adjacent wood combustion character. Stylistic at low intensity in dark blends; at high intensity it is indistinguishable from a roast fault."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "roast": ["medium-dark", "dark"], "note": "Also introduced by exhaust or chaff burning in a poorly maintained roaster." }]
+    },
+    {
+      "nodeId": "roasted.burnt.brown-roast",
+      "definition": {
+        "beginner": "The comfortable middle of sugar caramelisation in the drum: toasted, deep and rounded, with no char and no rawness.",
+        "expert": "The desirable centre of the sugar-browning range. The reference point against which under-development and carbonisation are both judged."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "roast": ["medium", "medium-dark"], "note": "The target zone for most commercial roast profiles." }]
+    },
+    {
+      "nodeId": "roasted.cereal.grain",
+      "definition": {
+        "beginner": "Dry, plain and husky, like uncooked oats or the smell inside a flour bag.",
+        "expert": "Raw starch character with no sweetness developed. A reliable marker of under-development, and easily mistaken for staling."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "roast": ["light"], "note": "Insufficient development time; the classic under-roast signature." }]
+    },
+    {
+      "nodeId": "roasted.cereal.malt",
+      "definition": {
+        "beginner": "Toasted grain with sweetness behind it, like the crust of a fresh loaf or a milkshake powder.",
+        "expert": "Toasted starch with caramelisation present. The sweet counterpart to plain toasted starch, and a sign that development was adequate."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "roast": ["medium"], "note": "Appears once development is sufficient to caramelise sugars alongside the starches." }]
+    },
+
+    {
+      "nodeId": "nutty-cocoa",
+      "definition": {
+        "beginner": "Two families that sit together: the oily toasted character of shelled kernels, and the dry bitterness of ground beans.",
+        "expert": "Maillard-derived attributes spanning kernel and confection character. The most commonly reported category in commercial blends, and the one beginners over-use."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "nutty-cocoa.nutty",
+      "definition": {
+        "beginner": "Oily, toasted, mildly sweet kernel character — the smell of a warm shell being cracked.",
+        "expert": "Toasted kernel attributes. Shares Maillard aromatics with toasted starch, which is why the boundary with cereal is a genuine judgement call."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "nutty-cocoa.cocoa",
+      "definition": {
+        "beginner": "Dry, dark, faintly bitter powder — the smell of a baking tin rather than a sweet bar.",
+        "expert": "Unsweetened confection character, largely a roast artefact. Where roast ends and this begins is a matter of judgement rather than fact."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "nutty-cocoa.nutty.peanuts",
+      "definition": {
+        "beginner": "The dusty, skin-on, faintly savoury kernel you find in a bar snack bowl.",
+        "expert": "Legume rather than true kernel character: drier and more savoury than the others in this group, with a papery skin note."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "nutty-cocoa.nutty.hazelnut",
+      "definition": {
+        "beginner": "Sweet, buttery and slightly floral kernel — the base of a chocolate spread.",
+        "expert": "The sweetest and most aromatic of the kernel group, with a distinct lactonic roundness the others lack."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "nutty-cocoa.nutty.almond",
+      "definition": {
+        "beginner": "Blanched, faintly bitter kernel with a marzipan edge.",
+        "expert": "Benzaldehyde-adjacent character. The driest of the kernel group and the one most often confused with toasted starch."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "nutty-cocoa.cocoa.chocolate",
+      "definition": {
+        "beginner": "Sweetened, milky and rounded confection character.",
+        "expert": "Sweetened confection with dairy roundness. Separated from its darker sibling by sweetness and lower drying bitterness."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "nutty-cocoa.cocoa.dark-chocolate",
+      "definition": {
+        "beginner": "High-percentage confection: drying, bitter, with little sweetness to soften it.",
+        "expert": "Unsweetened to high-percentage confection with pronounced astringency. Substantially a roast artefact in coffee rather than an origin character."
+      },
+      "modality": ["aroma", "flavor", "mouthfeel"],
+      "causes": [{ "roast": ["medium-dark", "dark"], "note": "Deepens with development; at the far end it becomes indistinguishable from roast character." }]
+    },
+
+    {
+      "nodeId": "sweet",
+      "definition": {
+        "beginner": "Not sugar on the tongue but the aromas the brain reads as sugary: syrup, cooked sugar, soft baking notes.",
+        "expert": "Aromatic sweetness rather than the basic taste. On the cupping form this is scored as an attribute in its own right, distinct from perceived intensity of the basic taste."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "sweet.brown-sugar",
+      "definition": {
+        "beginner": "Cooked syrup with dark, faintly mineral depth — what unrefined cane smells like.",
+        "expert": "Caramelisation products with molasses depth. The group where roast-derived and origin-derived sweetness are hardest to separate."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "sweet.vanilla",
+      "definition": {
+        "beginner": "Warm, creamy, faintly floral pod character with real complexity behind it.",
+        "expert": "Natural pod extract: complex, with floral and lactonic facets absent from the isolated compound."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "sweet.vanillin",
+      "definition": {
+        "beginner": "The single flat note of a synthesised compound: sugary, one-dimensional, like cheap ice cream.",
+        "expert": "The isolated compound. Reads as a single note where the natural extract reads as a chord - the distinction is complexity, not intensity."
+      },
+      "modality": ["aroma"]
+    },
+    {
+      "nodeId": "sweet.overall-sweet",
+      "definition": {
+        "beginner": "A general impression of sugariness with no particular source you can name.",
+        "expert": "An umbrella impression used when the sweetness carries no identifiable character. Frequently a hedge - worth pushing a taster to specify."
+      },
+      "modality": ["flavor", "basic-taste"]
+    },
+    {
+      "nodeId": "sweet.sweet-aromatics",
+      "definition": {
+        "beginner": "The umbrella smell of baking: sugar, dairy and warm spice together, none dominant.",
+        "expert": "A compound impression rather than a single attribute. Like its umbrella neighbour, it often marks an unwillingness to commit to a specific descriptor."
+      },
+      "modality": ["aroma"]
+    },
+    {
+      "nodeId": "sweet.brown-sugar.molasses",
+      "definition": {
+        "beginner": "Thick, dark, faintly bitter cane syrup with a mineral edge.",
+        "expert": "The darkest point of the caramelisation range, carrying bitterness and mineral depth alongside the sweetness."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "sweet.brown-sugar.maple-syrup",
+      "definition": {
+        "beginner": "Woody, buttery sap boiled down — thinner and more aromatic than cane.",
+        "expert": "Distinguished from cane-derived sweetness by a woody, faintly resinous top note and lower viscosity of impression."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "sweet.brown-sugar.caramelized",
+      "definition": {
+        "beginner": "Sugar taken just past melting: toasty, faintly bitter, deeply aromatic.",
+        "expert": "Mid-range caramelisation. Sits directly on the boundary with roast character, and which word a taster reaches for is usually decided by roast level."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "roast": ["medium", "medium-dark"], "note": "A sugar-browning product; the continuum it shares with roast character has no sharp edge." }]
+    },
+    {
+      "nodeId": "sweet.brown-sugar.honey",
+      "definition": {
+        "beginner": "Floral, waxy, slightly sharp sweetness straight from the comb.",
+        "expert": "Floral-sweet with a waxy body. The most origin-driven member of this group, and the least explicable as a roast artefact."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+
+    {
+      "nodeId": "fruity",
+      "definition": {
+        "beginner": "Sweet, bright and juicy character the bean brought from the farm rather than from the roaster.",
+        "expert": "Origin-derived attributes, heavily modulated by processing and drying. High-value and high-variance: the category most affected by fermentation control."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "process": ["natural", "honey", "anaerobic"], "note": "Intensity rises sharply with pulp contact during drying." }]
+    },
+    {
+      "nodeId": "fruity.berry",
+      "definition": {
+        "beginner": "Small, dark, sweet-tart soft fruit — jammy when ripe, sharp when not.",
+        "expert": "Anthocyanin-rich soft fruit character. Common in naturals and high-altitude washed lots; at high intensity it shades into ferment."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.dried-fruit",
+      "definition": {
+        "beginner": "Concentrated, sticky, sun-shrunk sweetness — sugar without the juice.",
+        "expert": "Dehydrated sugar character with reduced acidity. Converges with molasses at darker roasts, which is the usual source of confusion."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.other-fruit",
+      "definition": {
+        "beginner": "The orchard and tropical group: stone, pome and pulpy sweetness that is neither small-and-dark nor sharp-and-zesty.",
+        "expert": "A catch-all spanning pome, stone and tropical character. Its breadth makes it the least diagnostic group in the category."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.citrus-fruit",
+      "definition": {
+        "beginner": "Zesty, sharp and aromatic peel character with a clean, mouth-watering finish.",
+        "expert": "Peel and juice character driven by citric acidity plus terpene aromatics. The acid and the aroma are separable, and good tasters separate them."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.berry.blackberry",
+      "definition": {
+        "beginner": "Deep, dark, jammy soft fruit with a faint floral edge and little sharpness.",
+        "expert": "Dark soft fruit with lower acidity and a floral top note. Distinguished from its bramble neighbour by depth rather than sharpness."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.berry.raspberry",
+      "definition": {
+        "beginner": "Bright, tart and slightly perfumed soft fruit; sharper and more delicate than the darker ones.",
+        "expert": "High-acid bramble character with pronounced perfume. Sharper and less dense than its dark neighbour."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.berry.blueberry",
+      "definition": {
+        "beginner": "Soft, round, faintly waxy dark fruit — sweet with almost no bite.",
+        "expert": "Round, low-acid dark fruit. Frequently a marker of extended fermentation in naturals rather than of origin, which is worth saying out loud."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "process": ["natural"], "note": "Often produced by extended pulp contact rather than by variety or terroir." }]
+    },
+    {
+      "nodeId": "fruity.berry.strawberry",
+      "definition": {
+        "beginner": "Light, sweet red fruit with a faint green-stem note; fragrant rather than deep.",
+        "expert": "Fragrant red fruit with a green-stem facet. At higher intensity it slides toward the overripe boundary."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.dried-fruit.raisin",
+      "definition": {
+        "beginner": "Sticky sun-dried vine fruit, deep and slightly leathery.",
+        "expert": "Dehydrated vine fruit; the lighter of the two dried attributes, carrying less bitterness than its stone-fruit sibling."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.dried-fruit.prune",
+      "definition": {
+        "beginner": "Dark, syrupy dried stone fruit with a faint bitterness behind the sweetness.",
+        "expert": "Dehydrated stone fruit. Darker and more bitter than its vine-fruit sibling, and the closer of the two to molasses."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.other-fruit.coconut",
+      "definition": {
+        "beginner": "Sweet, fatty, faintly milky tropical flesh with a dry, fibrous edge.",
+        "expert": "Lactonic tropical character. Shares fatty sweetness with the kernel group, which is why it crosses that category boundary so readily."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.other-fruit.cherry",
+      "definition": {
+        "beginner": "Sweet dark stone fruit with a faint marzipan note behind it.",
+        "expert": "Stone fruit with a benzaldehyde facet. Common in naturals; the marzipan note is what separates it from soft dark fruit."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.other-fruit.pomegranate",
+      "definition": {
+        "beginner": "Sharp, jewel-bright, tannic red juice — sweet and astringent at once.",
+        "expert": "High-acid red fruit with tannic astringency, which is what separates it from the softer red fruits."
+      },
+      "modality": ["aroma", "flavor", "mouthfeel"]
+    },
+    {
+      "nodeId": "fruity.other-fruit.pineapple",
+      "definition": {
+        "beginner": "Sharp tropical sweetness with an enzymatic, almost prickly edge.",
+        "expert": "High-acid tropical character with a bromelain-like bite. At intensity it becomes hard to separate from early ferment."
+      },
+      "modality": ["aroma", "flavor", "mouthfeel"]
+    },
+    {
+      "nodeId": "fruity.other-fruit.grape",
+      "definition": {
+        "beginner": "Musky, sweet vine juice with soft acidity and a faint skin note.",
+        "expert": "Vine fruit character. The sober end of a continuum whose far end carries alcohol, and the boundary is the presence of that lift."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.other-fruit.apple",
+      "definition": {
+        "beginner": "Crisp orchard sharpness — clean, watery-sweet, with a green snap.",
+        "expert": "Malic-driven pome character. The fruit face of an acid a grader would name directly; the same percept from the other side."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.other-fruit.peach",
+      "definition": {
+        "beginner": "Soft, fuzzy-skinned stone fruit; floral, sweet and low in sharpness.",
+        "expert": "Lactonic stone fruit with floral lift. Rounder and less acidic than pome character."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.other-fruit.pear",
+      "definition": {
+        "beginner": "Delicate, grainy-fleshed orchard sweetness with very little acidity.",
+        "expert": "Soft pome character. Lower in acid and more subtle than its crisp neighbour, and easily buried by roast development."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.citrus-fruit.grapefruit",
+      "definition": {
+        "beginner": "Bitter-edged pink zest with a slightly resinous, mouth-drying finish.",
+        "expert": "Bitter citrus with naringin-like astringency — the most bitter and most drying member of the group."
+      },
+      "modality": ["aroma", "flavor", "mouthfeel"]
+    },
+    {
+      "nodeId": "fruity.citrus-fruit.orange",
+      "definition": {
+        "beginner": "Round, sweet zest with soft acidity and a warm peel aroma.",
+        "expert": "Sweet citrus with lower acidity than the sharp members; the most approachable of the group and the least diagnostic."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.citrus-fruit.lemon",
+      "definition": {
+        "beginner": "Clean, sharp, mouth-watering zest — bright without much sweetness.",
+        "expert": "High citric expression with clean zest aromatics. The usual reference point for the acid itself."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "fruity.citrus-fruit.lime",
+      "definition": {
+        "beginner": "Sharp zest with a green, faintly bitter edge; more aromatic than sweet.",
+        "expert": "Sharp citrus with a green terpene facet that distinguishes it from its yellow neighbour."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+
+    {
+      "nodeId": "sour-fermented",
+      "definition": {
+        "beginner": "Sharpness, and the products of pulp breaking down — from clean brightness through to boozy, over-processed intensity.",
+        "expert": "Spans desirable organic acidity and process-derived attributes. The category where description and quality judgement most often diverge."
+      },
+      "modality": ["aroma", "flavor", "basic-taste"],
+      "causes": [{ "process": ["natural", "anaerobic"], "note": "Uncontrolled pulp contact pushes the whole category from the bright end toward the boozy end." }]
+    },
+    {
+      "nodeId": "sour-fermented.sour",
+      "definition": {
+        "beginner": "The sharp, mouth-watering sensation itself, named as a sensation rather than as a fruit.",
+        "expert": "Organic acid attributes named by compound rather than by fruit reference. The Q exam tests these directly, and naming them is a distinct skill from naming fruit."
+      },
+      "modality": ["flavor", "basic-taste"]
+    },
+    {
+      "nodeId": "sour-fermented.alcohol-fermented",
+      "definition": {
+        "beginner": "Boozy, yeasty, over-ripened character from pulp left to break down too far — or deliberately.",
+        "expert": "Ethanol and ester-driven attributes. Stylistic under controlled anaerobic processing, a fault when uncontrolled — the sensory evidence is identical either way."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "process": ["anaerobic", "natural"], "note": "Extended or uncontrolled fermentation; intent does not change the percept." }]
+    },
+    {
+      "nodeId": "sour-fermented.sour.sour-aromatics",
+      "definition": {
+        "beginner": "A general sharp, tangy smell with no particular compound you can name.",
+        "expert": "An umbrella sharpness used when the specific organic acid cannot be identified. Like other umbrella terms, worth pushing a taster past."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "sour-fermented.sour.acetic-acid",
+      "definition": {
+        "beginner": "The sharp, nose-tingling smell of vinegar.",
+        "expert": "Vinegar character. In small amounts it lifts and brightens; in quantity it is the leading edge of a ferment fault."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "process": ["natural", "anaerobic"], "note": "Acetic bacteria during fermentation; the first marker to appear as control slips." }]
+    },
+    {
+      "nodeId": "sour-fermented.sour.butyric-acid",
+      "definition": {
+        "beginner": "Rancid dairy — the sour smell of butter left out far too long.",
+        "expert": "Rancid butterfat character. A definitive over-fermentation marker, and frequently mislabelled as animalic by untrained panels."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "process": ["natural", "anaerobic"], "note": "Anaerobic bacterial activity past the useful window." }]
+    },
+    {
+      "nodeId": "sour-fermented.sour.isovaleric-acid",
+      "definition": {
+        "beginner": "Sweaty and cheesy — old socks, or a strong washed-rind cheese.",
+        "expert": "Sweaty, cheesy character from over-fermentation. Shares its cause with the rancid-dairy marker and usually appears alongside it."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "process": ["natural", "anaerobic"], "note": "Over-fermentation; typically co-occurs with butyric character." }]
+    },
+    {
+      "nodeId": "sour-fermented.sour.citric-acid",
+      "definition": {
+        "beginner": "Clean, sharp brightness of the kind that makes the mouth water — the sensation under lemon and lime.",
+        "expert": "The dominant acid in citrus. Clean and mouth-watering; distinguished from malic by lacking the green pome facet."
+      },
+      "modality": ["flavor", "basic-taste"]
+    },
+    {
+      "nodeId": "sour-fermented.sour.malic-acid",
+      "definition": {
+        "beginner": "Crisp green sharpness, like biting a tart apple.",
+        "expert": "The dominant acid in pome fruit. Green and crisp, and the acid most often reported as a fruit rather than as a sensation."
+      },
+      "modality": ["flavor", "basic-taste"]
+    },
+    {
+      "nodeId": "sour-fermented.alcohol-fermented.winey",
+      "definition": {
+        "beginner": "Sweet vine fruit with a warm boozy lift behind it.",
+        "expert": "Vine character with ethanol lift. The boundary with plain vine fruit is the presence of alcohol and acetic top notes, not the fruit itself."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "sour-fermented.alcohol-fermented.whiskey",
+      "definition": {
+        "beginner": "Warm, oaky spirit character with vanilla and caramel behind the burn.",
+        "expert": "Barrel-aged spirit character: ethanol with oak lactones. Rare, and usually stylistic rather than faulty."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "sour-fermented.alcohol-fermented.fermented",
+      "definition": {
+        "beginner": "Pulpy, yeasty, slightly sour funk — fruit that has begun to turn.",
+        "expert": "Uncontrolled pulp breakdown. Sought after in some modern processing and disqualifying in a washed lot; the cup cannot tell you which was intended."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "process": ["natural", "anaerobic"], "note": "Extended pulp contact, wet weather during drying, or deliberate tank fermentation." }]
+    },
+    {
+      "nodeId": "sour-fermented.alcohol-fermented.overripe",
+      "definition": {
+        "beginner": "Fruit a day or two past its best: heavy, sweet, and starting to go.",
+        "expert": "The transition point between desirable fruit and ferment, and the most common split-the-table call on a cupping table."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+
+    {
+      "nodeId": "green-vegetative",
+      "definition": {
+        "beginner": "Fresh plant character: leaf, stalk, pod and sap, running from bright and living to dry and cured.",
+        "expert": "Chlorophyll and aldehyde-driven plant attributes. Usually a marker of under-ripe cherry or under-developed roast rather than of origin."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "roast": ["light"], "note": "Under-development leaves plant aldehydes intact; picking unripe cherry produces the same family from a different cause." }]
+    },
+    {
+      "nodeId": "green-vegetative.olive-oil",
+      "definition": {
+        "beginner": "Smooth, fatty, faintly peppery pressed-fruit character with a leafy edge.",
+        "expert": "Fatty, peppery character. Rare, and more often registered as a texture impression than as an aroma."
+      },
+      "modality": ["aroma", "flavor", "mouthfeel"]
+    },
+    {
+      "nodeId": "green-vegetative.raw",
+      "definition": {
+        "beginner": "Unfinished and starchy, as though the heat never quite got into it.",
+        "expert": "Under-development in the roast rather than in the fruit. Separated from immaturity by cause, not by sensation - which is why the two are so often confused."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "roast": ["light"], "note": "Insufficient heat penetration; the bean is cooked outside and raw within." }]
+    },
+    {
+      "nodeId": "green-vegetative.green-vegetative",
+      "definition": {
+        "beginner": "The living-plant band: leaf, stalk, pod and cut stem.",
+        "expert": "The core plant group. Its members differ mostly in freshness and in how dried-out they read, not in kind."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "green-vegetative.beany",
+      "definition": {
+        "beginner": "Starchy, dull legume character, like the water from a tin of pulses.",
+        "expert": "Cooked legume character. Almost indistinguishable from fresh pod character and, like it, a marker of under-development."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "green-vegetative.green-vegetative.under-ripe",
+      "definition": {
+        "beginner": "Picked too early: hard, sharp, grassy and lacking sweetness.",
+        "expert": "Immature cherry character. Distinguished from roast under-development by the accompanying sharpness and astringency."
+      },
+      "modality": ["aroma", "flavor", "mouthfeel"],
+      "causes": [{ "note": "Strip-picking or careless selection bringing immature cherry into the lot." }]
+    },
+    {
+      "nodeId": "green-vegetative.green-vegetative.peapod",
+      "definition": {
+        "beginner": "The bright snap of a freshly split legume casing.",
+        "expert": "Fresh legume character, aldehyde-driven. The freshest member of the plant group and the least unpleasant."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "green-vegetative.green-vegetative.fresh",
+      "definition": {
+        "beginner": "Living, watery, just-cut plant smell — cool rather than dry.",
+        "expert": "Cut-plant aldehydes at low intensity; the most pleasant expression available in this group."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "green-vegetative.green-vegetative.dark-green",
+      "definition": {
+        "beginner": "Deep leafy character, like raw spinach or chard.",
+        "expert": "Concentrated chlorophyll character; heavier and less bright than cut-plant notes."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "green-vegetative.green-vegetative.vegetative",
+      "definition": {
+        "beginner": "Cooked plant matter — the water left in the pan after boiling greens.",
+        "expert": "Cooked plant character; duller and more sulfurous than the fresh members of the group."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "green-vegetative.green-vegetative.hay-like",
+      "definition": {
+        "beginner": "Dry, dusty, sun-cured grass — warm and faintly sweet, with all the moisture gone out of it.",
+        "expert": "Dried grass character. Sits on the boundary with chamomile, and old-crop lots frequently show it alongside woodiness."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "note": "Ageing in storage as well as drying conditions at origin." }]
+    },
+    {
+      "nodeId": "green-vegetative.green-vegetative.herb-like",
+      "definition": {
+        "beginner": "Aromatic leafy sharpness — mint, thyme or sage rather than grass.",
+        "expert": "Aromatic herbaceous character with terpene lift, distinct from the flat green of cooked plant matter."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+
+    {
+      "nodeId": "other",
+      "definition": {
+        "beginner": "The remainder: staling, storage damage, taints, and the basic tastes that fit nowhere else.",
+        "expert": "A heterogeneous category holding most of the fault vocabulary plus two basic tastes. Where cupping most needs precision and usually gets least."
+      },
+      "modality": ["aroma", "flavor", "basic-taste"]
+    },
+    {
+      "nodeId": "other.papery-musty",
+      "definition": {
+        "beginner": "Age, damp and storage: flat, dry, boxy and cellar-cold character.",
+        "expert": "Staling and storage attributes. The group most diagnostic of green handling and age rather than of roast or origin."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "note": "Time, moisture and poor storage; almost never a roasting problem." }]
+    },
+    {
+      "nodeId": "other.chemical",
+      "definition": {
+        "beginner": "Sharp, synthetic, medicine-cabinet and workshop smells, plus plain bitterness and saltiness.",
+        "expert": "Taints and basic tastes. Membership is defined by cause rather than by any shared sensory quality, which makes it the least coherent group on the wheel."
+      },
+      "modality": ["aroma", "flavor", "basic-taste"]
+    },
+    {
+      "nodeId": "other.papery-musty.stale",
+      "definition": {
+        "beginner": "Flat and lifeless — the aromatics have simply gone.",
+        "expert": "Loss of volatiles through age. The earliest and mildest point on the staling continuum."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "other.papery-musty.cardboard",
+      "definition": {
+        "beginner": "Dry, flat and faintly fatty, like a damp packing box drying out.",
+        "expert": "Lipid oxidation product. Further along the staling continuum than simple flatness, and the point at which most drinkers notice."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "other.papery-musty.papery",
+      "definition": {
+        "beginner": "Dry, thin and dusty, like the inside of an old book.",
+        "expert": "Dry oxidised character without the fatty note of its cardboard neighbour."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "other.papery-musty.woody",
+      "definition": {
+        "beginner": "Dry, hollow, old-timber character with the sweetness gone out of it.",
+        "expert": "Old-crop marker. Frequently reported as tobacco, which arrives from the roast rather than from storage - a useful diagnostic split."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "note": "Extended green storage; the classic past-crop signature." }]
+    },
+    {
+      "nodeId": "other.papery-musty.moldy-damp",
+      "definition": {
+        "beginner": "Wet cellar and mildew — the smell of something stored badly.",
+        "expert": "Fungal growth from excess moisture in storage. A fault at any intensity, and a food-safety concern at high ones."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "other.papery-musty.musty-dusty",
+      "definition": {
+        "beginner": "Shut-up-room air with a fine powder note.",
+        "expert": "Dry storage taint without fungal wetness; distinguished from its earthy sibling by the absence of soil character."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "other.papery-musty.musty-earthy",
+      "definition": {
+        "beginner": "Damp soil and cellar floor — wet ground rather than dry powder.",
+        "expert": "Geosmin-driven soil character from damp storage. The wet counterpart to dusty staling."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "other.papery-musty.animalic",
+      "definition": {
+        "beginner": "Hide, wet fur and barnyard — warm and faintly sour.",
+        "expert": "Barnyard character. Overlaps heavily with the sweaty and rancid organic acids, which have an entirely different cause."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "other.papery-musty.meaty-brothy",
+      "definition": {
+        "beginner": "Savoury and warm, like stock or a butcher's counter.",
+        "expert": "Savoury umami character. Contextual: at low intensity it reads as body and depth, at high intensity as a fault."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "other.papery-musty.phenolic",
+      "definition": {
+        "beginner": "Antiseptic and sharp — a hospital corridor, or a freshly opened plaster.",
+        "expert": "A serious fault, usually from bacterial contamination or specific agronomic problems. Shares an eugenol-adjacent family with clove, which is why the confusion is legitimate."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "other.chemical.bitter",
+      "definition": {
+        "beginner": "One of the basic tastes: the drying, sharp sensation at the back of the tongue.",
+        "expert": "A basic taste, not an aroma. Excess usually indicates over-extraction or dark roast rather than a green defect."
+      },
+      "modality": ["basic-taste"]
+    },
+    {
+      "nodeId": "other.chemical.salty",
+      "definition": {
+        "beginner": "One of the basic tastes: a mineral, saline edge.",
+        "expert": "A basic taste. Rare in coffee; when present it usually points at brewing water or under-extraction rather than the bean."
+      },
+      "modality": ["basic-taste"]
+    },
+    {
+      "nodeId": "other.chemical.medicinal",
+      "definition": {
+        "beginner": "Sharp and clinical — antiseptic, iodine, a first-aid box.",
+        "expert": "Clinical taint, near-synonymous in practice with phenol. Tasters reach for this word first and the diagnostic term second."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "other.chemical.petroleum",
+      "definition": {
+        "beginner": "Fuel and solvent — a filling station forecourt.",
+        "expert": "Hydrocarbon taint, usually from contaminated storage or transport rather than from anything at the farm."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "other.chemical.skunky",
+      "definition": {
+        "beginner": "Sulfurous and sharp, like a struck match or a gas leak.",
+        "expert": "Sulfur compound taint. Distinct from the softer cooked-plant sulfur of the vegetative group by its sharpness."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "other.chemical.rubber",
+      "definition": {
+        "beginner": "Hot tyres and elastic bands — a burnt synthetic smell.",
+        "expert": "Common and characteristic in some robusta, where it is not a fault at all. Context decides, which makes it a good test of a taster's judgement."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+
+    {
+      "nodeId": "spices",
+      "definition": {
+        "beginner": "Warm, sharp and aromatic seasoning character — sweet-warm at one end, biting at the other.",
+        "expert": "Spans trigeminal pungency and sweet aromatic seasoning, which have little in common perceptually. Rarely dominant; usually a supporting note."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "spices.pungent",
+      "definition": {
+        "beginner": "A sharp physical bite in the nose and throat rather than a smell.",
+        "expert": "Trigeminal irritation without a defining aroma. Perceived as sensation rather than scent, which is why it resists description."
+      },
+      "modality": ["aroma", "mouthfeel"]
+    },
+    {
+      "nodeId": "spices.pepper",
+      "definition": {
+        "beginner": "Dry, woody heat with a sneeze-provoking sharpness.",
+        "expert": "Piperine-driven character with woody top notes; distinguished from generic pungency by having an identifiable aroma."
+      },
+      "modality": ["aroma", "flavor", "mouthfeel"]
+    },
+    {
+      "nodeId": "spices.brown-spice",
+      "definition": {
+        "beginner": "The warm baking group: sweet, woody, faintly resinous seasoning.",
+        "expert": "Sweet aromatic seasoning. Members share warmth and differ mostly in sweetness and volatility."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "spices.brown-spice.anise",
+      "definition": {
+        "beginner": "Sweet liquorice warmth with a cooling finish.",
+        "expert": "Anethole-driven sweet seasoning. The cooling facet is what separates it from the other warm spices."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "spices.brown-spice.nutmeg",
+      "definition": {
+        "beginner": "Dry, dusty, faintly woody warmth with a bitter edge.",
+        "expert": "Dry, resinous warmth. The least sweet member of the warm seasoning group."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "spices.brown-spice.cinnamon",
+      "definition": {
+        "beginner": "Sweet bark warmth, dry and slightly sharp.",
+        "expert": "Cinnamaldehyde character. Frequently a roast artefact rather than an origin note, particularly at lighter development."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "roast": ["light", "medium"], "note": "Often produced in the drum rather than carried from the farm." }]
+    },
+    {
+      "nodeId": "spices.brown-spice.clove",
+      "definition": {
+        "beginner": "Intense sweet-warm bud character with a numbing, faintly antiseptic edge.",
+        "expert": "Eugenol-driven. The pleasant expression of the compound family that reads as a serious fault when it dominates."
+      },
+      "modality": ["aroma", "flavor", "mouthfeel"]
+    },
+
+    {
+      "nodeId": "floral",
+      "definition": {
+        "beginner": "Perfumed, delicate blossom and dried-petal character.",
+        "expert": "Terpene and ester-driven blossom attributes. High-value, fragile, and the first thing lost to roast development."
+      },
+      "modality": ["aroma", "flavor"],
+      "causes": [{ "roast": ["light"], "note": "Destroyed by development; a dark roast cannot show this category at all." }]
+    },
+    {
+      "nodeId": "floral.black-tea",
+      "definition": {
+        "beginner": "Dry, tannic, faintly perfumed leaf infusion with a drying finish.",
+        "expert": "Tannic infusion character with floral lift. Astringency is what separates it from the blossom notes proper."
+      },
+      "modality": ["aroma", "flavor", "mouthfeel"]
+    },
+    {
+      "nodeId": "floral.floral",
+      "definition": {
+        "beginner": "The blossom group itself: sweet, perfumed and delicate.",
+        "expert": "Blossom attributes proper. Members differ in sweetness, weight, and how quickly they fade from the cup as it cools."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "floral.floral.chamomile",
+      "definition": {
+        "beginner": "Soft, sweet, faintly dried-grass flower infusion.",
+        "expert": "Dried flower character sitting directly on the boundary with cured grass - a defensible confusion rather than an error."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "floral.floral.rose",
+      "definition": {
+        "beginner": "Sweet, heavy, unmistakably perfumed petal character.",
+        "expert": "Geraniol and phenethyl alcohol driven; heavier and sweeter than the other blossoms."
+      },
+      "modality": ["aroma", "flavor"]
+    },
+    {
+      "nodeId": "floral.floral.jasmine",
+      "definition": {
+        "beginner": "Intense, sweet, slightly green white-flower perfume.",
+        "expert": "Indole-containing white blossom. The most intense floral, and the one most often paired with leaf-infusion character."
+      },
+      "modality": ["aroma", "flavor"]
+    }
+  ]
+}

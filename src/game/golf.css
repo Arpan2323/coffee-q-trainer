@@ -1,0 +1,361 @@
+.golf {
+  min-width: 0;
+}
+
+.golf h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1.2rem;
+}
+
+.golf-lede {
+  margin: 0 0 1.25rem;
+  color: var(--muted);
+  font-size: 0.87rem;
+  max-width: 58ch;
+}
+
+/* Progress. Mastered leads and the streak follows: the streak measures attendance, and only one
+   of these two numbers moves when the player actually learns something. */
+
+.golf-progress-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--panel);
+  max-width: 34rem;
+}
+
+.golf-progress-bar dt {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+.golf-progress-bar dd {
+  margin: 0.15rem 0 0.1rem;
+  font-size: 1.35rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.golf-progress-bar small {
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+.golf-unit {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.golf-mastered {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0 0 1.25rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid #15803d;
+  border-radius: 8px;
+  background: var(--panel);
+  font-size: 0.9rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .golf-mastered {
+    border-left-color: #4ade80;
+  }
+}
+
+.golf-mastered span {
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+.golf-streak-line {
+  margin: 0 0 1rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* Belt picker */
+
+.golf-belts ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+  max-width: 34rem;
+}
+
+.golf-belts button {
+  width: 100%;
+  display: grid;
+  gap: 0.2rem;
+  text-align: left;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--panel);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.golf-belts button:hover {
+  border-color: var(--fg);
+}
+
+.golf-belts button span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.golf-belts button small {
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Play */
+
+.golf-play {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .golf-play {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.golf-board {
+  min-width: 0;
+}
+
+.golf-panel {
+  min-width: 0;
+  position: sticky;
+  top: 1.5rem;
+}
+
+.golf-progress {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+
+.golf-clue {
+  margin: 0 0 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-left-width: 3px;
+  border-radius: 8px;
+  background: var(--panel);
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.golf-hint {
+  margin: 0 0 1rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.golf-commit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.golf-commit span {
+  font-size: 0.9rem;
+}
+
+.golf button {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--fg);
+  border-radius: 7px;
+  background: var(--fg);
+  color: var(--bg);
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.golf button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.golf button.is-quiet {
+  background: none;
+  color: inherit;
+  border-color: var(--line);
+}
+
+/* Result */
+
+.golf-result {
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+
+.golf-result-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.golf-result-score {
+  font-size: 2rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.golf-result-relation {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+.golf-result-detail {
+  margin: 0 0 0.7rem;
+  font-size: 0.9rem;
+}
+
+.golf-result-note {
+  margin: 0 0 0.9rem;
+  padding: 0.6rem 0.75rem;
+  border-left: 2px solid var(--line);
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* Summary */
+
+.golf-headline {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.golf-total {
+  font-size: 2.6rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.golf-outof {
+  color: var(--muted);
+}
+
+.golf-vspar {
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.golf-vspar.is-good {
+  color: #15803d;
+}
+
+.golf-vspar.is-bad {
+  color: #b91c1c;
+}
+
+@media (prefers-color-scheme: dark) {
+  .golf-vspar.is-good {
+    color: #4ade80;
+  }
+  .golf-vspar.is-bad {
+    color: #f87171;
+  }
+}
+
+.golf-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--panel);
+}
+
+.golf-metrics dt {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+.golf-metrics dd {
+  margin: 0.15rem 0 0.1rem;
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.golf-metrics small {
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.golf-scorecard {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  max-width: 34rem;
+}
+
+.golf-scorecard li {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr 1fr 2.5rem;
+  gap: 0.6rem;
+  align-items: baseline;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.85rem;
+}
+
+.golf-hole-no,
+.golf-hole-score {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.golf-hole-score {
+  text-align: right;
+  color: inherit;
+}
+
+.golf-hole-answer {
+  color: var(--muted);
+}
+
+.golf-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
