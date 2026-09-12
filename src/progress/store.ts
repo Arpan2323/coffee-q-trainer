@@ -1,12 +1,14 @@
 import type { Round } from '../game/round.js';
 import { roundSummary } from '../game/round.js';
 import type { CauseEffectRound } from '../game/causeEffectRound.js';
+import type { ReverseRound } from '../game/causeEffectReverse.js';
 import type { Ring, Wheel } from '../domain/types.js';
 import { DEFAULT_SCORING } from '../domain/scoring.js';
 import { WHEEL, getNode } from '../domain/wheel.js';
 import {
   EMPTY_ANSWER_TOTALS,
   EMPTY_PROGRESS,
+  EMPTY_REVERSE_STATS,
   PROGRESS_VERSION,
   type AttributeStat,
   type ConfusionEntry,
@@ -330,6 +332,33 @@ export function recordCauseEffectRound(
   return { ...next, rounds: [...next.rounds, record].slice(-ROUND_HISTORY_LIMIT) };
 }
 
+/**
+ * Reverse counts as real practice for the streak, same as any completed round - but it does not
+ * touch `attributes`, `categories`, `confusions` or `vocab`. A process guess has no wheel node to
+ * credit: crediting one would be inventing a link between "you said washed" and "you know Jasmine"
+ * that isn't there. `reverse` is the whole of what gets recorded, and it stays out of `rounds`
+ * (a history of attribute-practice rounds the belts/Defect Lab/Cause & Effect Forward share) rather
+ * than force a `specificityIndex` and `hedgeRate` that mean nothing here.
+ */
+export function recordReverseRound(
+  progress: Progress,
+  round: ReverseRound,
+  at: number = Date.now(),
+): Progress {
+  if (!round.complete) throw new Error('only a completed round can be recorded');
+
+  const next = recordStreakDay(progress, at);
+  const correct = round.holes.filter((h) => h.correct === true).length;
+
+  return {
+    ...next,
+    reverse: {
+      attempts: next.reverse.attempts + round.holes.length,
+      correct: next.reverse.correct + correct,
+    },
+  };
+}
+
 export function masteredIds(progress: Progress): string[] {
   return Object.entries(progress.attributes)
     .filter(([, stat]) => stat.masteredAt !== null)
@@ -505,5 +534,6 @@ export function reviveProgress(raw: unknown): Progress {
     categories: candidate.categories ?? {},
     confusions: candidate.confusions ?? [],
     vocab: candidate.vocab ?? {},
+    reverse: { ...EMPTY_REVERSE_STATS, ...candidate.reverse },
   };
 }

@@ -180,3 +180,5 @@ export type ConfusableSource = z.infer<typeof confusableSourceSchema>;
 export type AttributeRecord = z.infer<typeof attributeRecordSchema>;
 export type ProfilesSource = z.infer<typeof profilesSourceSchema>;
 export type CoffeeProfile = z.infer<typeof coffeeProfileSchema>;
+/** Pulled out because Cause & Effect Reverse guesses this specifically, not a whole profile. */
+export type Process = CoffeeProfile['process'];

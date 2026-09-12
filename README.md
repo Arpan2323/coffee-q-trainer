@@ -9,7 +9,7 @@ the build; see that file before assuming a push always ships). This is the dev h
 below, not a finished product screen — content is provisional and unreviewed (next section), and
 IP clearance (STRATEGY.md O4) hasn't happened, so treat this link as a working demo, not a launch.
 
-## Status — M1 and M2 complete, M3 nearly done
+## Status — M1 and M2 complete, M3 nearly done (Perturbation only gap)
 
 | Deliverable | State |
 |---|---|
@@ -25,9 +25,11 @@ IP clearance (STRATEGY.md O4) hasn't happened, so treat this link as a working d
 | M3 · Wheel Walk detail | done — browse panel shows each node's record: both definition registers, modality, causes, curated confusions |
 | M3 · Confusion matrix + Palate Profile | done — per-answer aggregates persisted; radar (Breadth, Specificity, Accuracy, Commitment, Coverage), per-category coverage, blind sectors, top confusions |
 | M3 · Defect Lab | done — 6-fault round over the fault-flagged attributes; reveal teaches fault vs context-dependent |
-| M3 · Cause & Effect | done, forward direction — 8 coffee profiles, **all synthetic**; Reverse and Perturbation not built |
+| M3 · Cause & Effect — Forward | done — 8 coffee profiles, **all synthetic**; predict a descriptor from origin/process/roast |
+| M3 · Cause & Effect — Reverse | done — given the cup's descriptors, name the process; binary scoring, no wheel involved |
+| M3 · Cause & Effect — Perturbation | not built — "roast 30s longer, which wedges move?" needs a small roast-delta model this project doesn't have yet |
 
-156 tests passing. Belts now narrow as they deepen: all nine categories at ring 1, five at ring 2,
+166 tests passing. Belts now narrow as they deepen: all nine categories at ring 1, five at ring 2,
 three at ring 3.
 
 **Nothing in the content set has been reviewed by a Q grader.** 110 definitions and 47 confusable
@@ -60,8 +62,9 @@ src/game/defects.ts          Defect Lab round builder over the fault-flagged att
 src/game/DefectLab.tsx       the Defect Lab screen
 src/data/profiles.json       coffee profiles for Cause & Effect - all synthetic, see below
 src/domain/profiles.ts       loader, validates descriptors resolve to terminal wheel nodes
-src/game/causeEffectRound.ts Cause & Effect round builder, scored against every descriptor (pure)
-src/game/CauseEffect.tsx     the Cause & Effect screen
+src/game/causeEffectRound.ts Cause & Effect Forward round builder, scored against every descriptor (pure)
+src/game/causeEffectReverse.ts  Cause & Effect Reverse round builder, binary process guess (pure)
+src/game/CauseEffect.tsx     the Cause & Effect screen - direction picker, then Forward or Reverse
 src/progress/store.ts        streaks, mastery, decay, sampling weights, the Palate Profile (pure)
 src/progress/storage.ts      the persistence adapter - swap this for IndexedDB at M4
 src/progress/PalateProfile.tsx  the radar, coverage bars and confusion list
@@ -219,11 +222,16 @@ fault rather than just scoring it.
 
 ## Cause & Effect
 
-PLAN.md section 3.2 mode 3, forward direction only: given a coffee's origin, process and roast — the
-cause — predict a descriptor the cup would carry — the effect. Reverse (profile → deduce process) and
-Perturbation ("roast 30s longer, which wedges move?") are not built; forward is what the existing
-wheel-click UI and `scoreAgainstAny` already fit, and building it puts the profiles to work rather
-than leaving them inert content.
+PLAN.md section 3.2 mode 3: origin, process and roast are the cause; the cup is the effect. Two of
+its three directions are built. Perturbation ("roast 30s longer, which wedges move?") is not — it
+needs a small model of how a roast delta shifts the wheel, which this project doesn't have and
+won't guess at.
+
+### Forward
+
+Given a coffee's origin, process and roast, predict a descriptor the cup would carry. This is what
+the existing wheel-click UI and `scoreAgainstAny` already fit, and building it puts the profiles to
+work rather than leaving them inert content.
 
 **Every profile is `synthetic: true`, and the UI never hides it.** `src/data/profiles.json` holds 8
 composites — Ethiopia Yirgacheffe washed, Ethiopia Guji natural, Colombia Huila washed, Brazil
@@ -246,11 +254,48 @@ reveal shows every descriptor the cup carries and bolds whichever one the answer
 closest — to mastery, the confusion matrix and the Palate Profile's category coverage. A correct
 "Jasmine" for a washed Yirgacheffe is real evidence the player knows Jasmine, so it counts.
 
-**No spaced repetition yet.** `nextCauseEffectRound` accepts per-profile weights and is tested, but
-the UI does not call it: `weightsForRound` is keyed by attribute node ids from `progress.attributes`,
-and profile ids are not attribute ids, so wiring it today would silently be a no-op. Profile-level
-weak-spot tracking is future work, not a broken feature — at 8 profiles it matters less than it will
-once the set grows.
+**No spaced repetition yet, in either direction.** `nextCauseEffectRound` and `nextReverseRound` both
+accept per-profile weights and are tested, but neither screen calls them: `weightsForRound` is keyed
+by attribute node ids from `progress.attributes`, and profile ids are not attribute ids, so wiring it
+today would silently be a no-op. Profile-level weak-spot tracking is future work, not a broken
+feature — at 8 profiles it matters less than it will once the set grows.
+
+### Reverse
+
+Given the cup's descriptors (plus origin, variety and roast — the parts of the cause that don't give
+away the answer), name the process. Scoped down from PLAN's narrative example, which also infers
+origin and a specific drying story from descriptors alone: the one well-posed, closed-answer question
+in it is process, a fixed five-value enum. An open-ended origin guess needs free text and a fuzzy
+grading model this project isn't going to invent.
+
+**Scoring is binary, not wheel-distance.** Processes have no tree position and no curated confusable
+table between them. Inventing a partial-credit distance between "honey" and "natural" would be
+guessing at a perceptual model exactly the way uniform category gaps already are (see the Maillard
+cluster note below) — the rule here is not to invent numbers the project can't defend, so right or
+wrong is what it is.
+
+**`profile.source` would leak the answer, so Reverse never shows it before the guess.** Every
+profile's `source` names its process directly, because that is literally what the composite is
+justifying (see the profiles.json excerpts above). `SyntheticNote` in `CauseEffect.tsx` takes a
+`showSource` flag that stays false throughout Reverse's answering phase — the mandatory `synthetic`
+disclosure itself is never hidden, only the sentence that would spoil the puzzle. Caught by playing
+the feature, not by a test: worth remembering that a `synthetic` flag's *supporting text* can carry
+content of its own that a different game mode needs to treat as a spoiler.
+
+**The reveal reuses attribute causes as evidence, the same way Forward reuses them.** For each
+descriptor the cup carries, if its attribute record has a `causes` entry tagged with the true
+process, that note is shown as supporting evidence ("Fermented: extended pulp contact, wet weather
+during drying, or deliberate tank fermentation"). Coverage is uneven — only `anaerobic`, `honey` and
+`natural` appear as cause tags anywhere in `attributes.json` today, so `washed` and `wet-hulled`
+rounds currently show no evidence bullets. That is a content gap, not a bug: the UI shows nothing
+rather than inventing a reason.
+
+**Progress doesn't touch attribute mastery.** A process guess has no wheel node to credit -
+`recordReverseRound` only advances the streak and a small lifetime `reverse: {attempts, correct}`
+tally on `Progress`, deliberately kept out of `rounds` (a history of attribute-practice rounds the
+belts, Defect Lab and Forward share) and out of `attributes`/`categories`/`confusions`/`vocab`.
+Crediting a wheel node for a correct process guess would invent a link - "you said washed, so you
+must know Jasmine" - that isn't there.
 
 ### The Maillard cluster problem
 

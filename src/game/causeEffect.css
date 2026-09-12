@@ -52,3 +52,46 @@ p.ce-synthetic {
   color: var(--fg);
   font-weight: 700;
 }
+
+/* Reverse has no wheel, so it gets a single narrow column instead of golf-play's two-up grid. */
+.ce-reverse {
+  max-width: 34rem;
+  min-width: 0;
+}
+
+.ce-process-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+
+.ce-process-choices button {
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.ce-process-choices button.is-active {
+  border-color: var(--fg);
+  background: var(--panel);
+  font-weight: 700;
+}
+
+.ce-evidence {
+  margin: 0.6rem 0 0;
+  padding: 0 0 0 1.1rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  display: grid;
+  gap: 0.3rem;
+}
+
+.ce-evidence strong {
+  color: var(--fg);
+}
