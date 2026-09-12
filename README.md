@@ -3,6 +3,12 @@
 A learning game that teaches coffee tasting through the flavor wheel.
 See [PLAN.md](PLAN.md) for product design and [STRATEGY.md](STRATEGY.md) for goals and metrics.
 
+**Live:** https://arpan2323.github.io/coffee-q-trainer/ — deployed from `main` via
+[`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) (tests + typecheck gate
+the build; see that file before assuming a push always ships). This is the dev harness described
+below, not a finished product screen — content is provisional and unreviewed (next section), and
+IP clearance (STRATEGY.md O4) hasn't happened, so treat this link as a working demo, not a launch.
+
 ## Status — M1 and M2 complete, M3 nearly done
 
 | Deliverable | State |
