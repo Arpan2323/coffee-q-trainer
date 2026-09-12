@@ -2,8 +2,14 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import type { Round } from '../game/round.js';
 import type { CauseEffectRound } from '../game/causeEffectRound.js';
 import type { ReverseRound } from '../game/causeEffectReverse.js';
+import type { PerturbationRound } from '../game/perturbation.js';
 import { defaultStorage, type ProgressStorage } from './storage.js';
-import { recordCauseEffectRound, recordReverseRound, recordRound } from './store.js';
+import {
+  recordCauseEffectRound,
+  recordPerturbationRound,
+  recordReverseRound,
+  recordRound,
+} from './store.js';
 import type { Progress } from './types.js';
 
 export interface UseProgress {
@@ -11,6 +17,7 @@ export interface UseProgress {
   readonly commitRound: (round: Round) => Progress;
   readonly commitCauseEffectRound: (round: CauseEffectRound) => Progress;
   readonly commitReverseRound: (round: ReverseRound) => Progress;
+  readonly commitPerturbationRound: (round: PerturbationRound) => Progress;
   readonly reset: () => void;
 }
 
@@ -44,13 +51,27 @@ export function useProgress(storage: ProgressStorage = defaultStorage()): UsePro
     return next;
   }, []);
 
+  const commitPerturbationRound = useCallback((round: PerturbationRound): Progress => {
+    const next = recordPerturbationRound(storageRef.current.load(), round);
+    storageRef.current.save(next);
+    setProgress(next);
+    return next;
+  }, []);
+
   const reset = useCallback(() => {
     storageRef.current.clear();
     setProgress(storageRef.current.load());
   }, []);
 
   return useMemo(
-    () => ({ progress, commitRound, commitCauseEffectRound, commitReverseRound, reset }),
-    [progress, commitRound, commitCauseEffectRound, commitReverseRound, reset],
+    () => ({
+      progress,
+      commitRound,
+      commitCauseEffectRound,
+      commitReverseRound,
+      commitPerturbationRound,
+      reset,
+    }),
+    [progress, commitRound, commitCauseEffectRound, commitReverseRound, commitPerturbationRound, reset],
   );
 }

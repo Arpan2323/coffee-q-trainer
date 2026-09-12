@@ -54,11 +54,12 @@ export interface ConfusionEntry {
 }
 
 /**
- * Cause & Effect Reverse doesn't fit the attribute-mastery model - there is no wheel node to credit,
- * just a correct or incorrect process guess - so it gets its own, much smaller lifetime tally rather
- * than being forced through `attributes`/`categories`/`vocab`.
+ * A tally of binary guesses: how many, how many right. Shared shape for the two Cause & Effect
+ * directions that don't fit the attribute-mastery model - Reverse (a process guess) and Perturbation
+ * (a roast-trend guess) - neither has a wheel node to credit, so each gets its own small lifetime
+ * tally rather than being forced through `attributes`/`categories`/`vocab`.
  */
-export interface ReverseStats {
+export interface GuessStats {
   readonly attempts: number;
   readonly correct: number;
 }
@@ -89,11 +90,12 @@ export interface Progress {
   readonly confusions: readonly ConfusionEntry[];
   /** Distinct descriptors the player has committed to, and how often. "Breadth" is its size. */
   readonly vocab: Readonly<Record<string, number>>;
-  readonly reverse: ReverseStats;
+  readonly reverse: GuessStats;
+  readonly perturbation: GuessStats;
 }
 
 export const EMPTY_ANSWER_TOTALS: AnswerTotals = { count: 0, scoreSum: 0, ringSum: 0, hedges: 0 };
-export const EMPTY_REVERSE_STATS: ReverseStats = { attempts: 0, correct: 0 };
+export const EMPTY_GUESS_STATS: GuessStats = { attempts: 0, correct: 0 };
 
 export const EMPTY_PROGRESS: Progress = {
   version: PROGRESS_VERSION,
@@ -106,5 +108,6 @@ export const EMPTY_PROGRESS: Progress = {
   categories: {},
   confusions: [],
   vocab: {},
-  reverse: EMPTY_REVERSE_STATS,
+  reverse: EMPTY_GUESS_STATS,
+  perturbation: EMPTY_GUESS_STATS,
 };

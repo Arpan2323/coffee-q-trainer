@@ -17,6 +17,7 @@ import {
   reverseSummary,
   type ReverseRound,
 } from './causeEffectReverse.js';
+import { PerturbationRound } from './PerturbationRound.js';
 import { useProgress } from '../progress/useProgress.js';
 import './golf.css';
 import './causeEffect.css';
@@ -124,21 +125,22 @@ function ProfileCard({
   );
 }
 
-type Direction = 'forward' | 'reverse';
+type Direction = 'forward' | 'reverse' | 'perturbation';
 
 export function CauseEffect() {
   const [direction, setDirection] = useState<Direction | null>(null);
 
   if (direction === 'forward') return <ForwardRound onBack={() => setDirection(null)} />;
   if (direction === 'reverse') return <ReverseRound onBack={() => setDirection(null)} />;
+  if (direction === 'perturbation') return <PerturbationRound onBack={() => setDirection(null)} />;
 
   return (
     <section className="golf golf-belts">
       <h2>Cause &amp; Effect</h2>
       <p className="golf-lede">
-        Origin, process and roast are the cause; the cup is the effect. Two directions through the
-        same idea: predict the cup from what made it, or work backward from the cup to how it was
-        made.
+        Origin, process and roast are the cause; the cup is the effect. Three directions through the
+        same idea: predict the cup from what made it, work backward from the cup to how it was made,
+        or track how the cup moves when one cause changes.
       </p>
       <p className="golf-lede ce-synthetic">
         Every profile is synthetic — an illustrative composite, not a real cupped lot or a published
@@ -158,6 +160,13 @@ export function CauseEffect() {
             <strong>Reverse</strong>
             <span>Given the cup&rsquo;s descriptors, name the process that produced it.</span>
             <small>five coffees, right or wrong — processes have no partial credit</small>
+          </button>
+        </li>
+        <li>
+          <button type="button" onClick={() => setDirection('perturbation')}>
+            <strong>Perturbation</strong>
+            <span>Same coffee, roasted further into development — which wedges move, and which way?</span>
+            <small>three coffees, all nine categories judged each time</small>
           </button>
         </li>
       </ul>

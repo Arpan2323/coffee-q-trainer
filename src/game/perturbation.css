@@ -1,0 +1,92 @@
+.pt-round {
+  max-width: 40rem;
+  min-width: 0;
+}
+
+.pt-premise {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.pt-premise strong {
+  color: var(--fg);
+}
+
+.pt-grid {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+
+.pt-row {
+  display: grid;
+  grid-template-columns: 9rem auto;
+  align-items: center;
+  gap: 0.5rem 0.9rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.pt-cat {
+  font-size: 0.85rem;
+  border-left: 3px solid transparent;
+  padding-left: 0.5rem;
+}
+
+.pt-choices {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.pt-choices button {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.pt-choices button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.pt-choices button.is-active {
+  border-color: var(--fg);
+  background: var(--panel);
+  font-weight: 700;
+  opacity: 1;
+}
+
+.pt-verdict {
+  grid-column: 1 / -1;
+  font-size: 0.8rem;
+}
+
+.pt-verdict > span {
+  font-weight: 700;
+}
+
+.pt-verdict.is-correct > span {
+  color: #15803d;
+}
+
+.pt-verdict.is-wrong > span {
+  color: #b45309;
+}
+
+.pt-verdict p {
+  margin: 0.2rem 0 0;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+@media (max-width: 520px) {
+  .pt-row {
+    grid-template-columns: 1fr;
+  }
+}

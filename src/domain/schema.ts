@@ -68,6 +68,31 @@ export const confusableSourceSchema = z.object({
 });
 
 /**
+ * One category's direction of travel as roast development continues - Perturbation's whole answer
+ * key. `up`/`down` are the coarse, well-established chemistry (Maillard/caramelization building
+ * Roasted/Nutty-Cocoa/Spices; chlorogenic-acid degradation and volatile loss emptying
+ * Sour-Fermented/Fruity/Floral/Green-Vegetative). `mixed` is the honest answer where the category
+ * doesn't move monotonically (Sweet peaks mid-roast then is masked by bitterness) or has no
+ * roast-driven mechanism at all (Other's papery/chemical notes trace to green-coffee handling, not
+ * the roast) - the same discipline that leaves confusable weights `provisional` rather than invented.
+ */
+export const roastTrendSchema = z
+  .object({
+    categoryId: z.string().min(1),
+    direction: z.enum(['up', 'down', 'mixed']),
+    note: z.string().min(1),
+  })
+  .strict();
+
+export const roastTrendsSourceSchema = z.object({
+  version: z.string(),
+  note: z.string().optional(),
+  reviewStatus: z.string(),
+  reviewTarget: z.string().optional(),
+  trends: z.array(roastTrendSchema).min(1),
+});
+
+/**
  * Attribute records are the separate content asset that the taxonomy hangs meaning on: what the
  * attribute means, what to buy to smell it, and what causes it in the cup. The schema lands in M1
  * so the content workstream has a target to author against; the records themselves are M2 work and
@@ -182,3 +207,6 @@ export type ProfilesSource = z.infer<typeof profilesSourceSchema>;
 export type CoffeeProfile = z.infer<typeof coffeeProfileSchema>;
 /** Pulled out because Cause & Effect Reverse guesses this specifically, not a whole profile. */
 export type Process = CoffeeProfile['process'];
+export type RoastTrendsSource = z.infer<typeof roastTrendsSourceSchema>;
+export type RoastTrend = z.infer<typeof roastTrendSchema>;
+export type TrendDirection = RoastTrend['direction'];

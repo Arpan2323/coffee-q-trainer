@@ -9,7 +9,7 @@ the build; see that file before assuming a push always ships). This is the dev h
 below, not a finished product screen — content is provisional and unreviewed (next section), and
 IP clearance (STRATEGY.md O4) hasn't happened, so treat this link as a working demo, not a launch.
 
-## Status — M1 and M2 complete, M3 nearly done (Perturbation only gap)
+## Status — M1, M2 and M3 complete
 
 | Deliverable | State |
 |---|---|
@@ -27,9 +27,9 @@ IP clearance (STRATEGY.md O4) hasn't happened, so treat this link as a working d
 | M3 · Defect Lab | done — 6-fault round over the fault-flagged attributes; reveal teaches fault vs context-dependent |
 | M3 · Cause & Effect — Forward | done — 8 coffee profiles, **all synthetic**; predict a descriptor from origin/process/roast |
 | M3 · Cause & Effect — Reverse | done — given the cup's descriptors, name the process; binary scoring, no wheel involved |
-| M3 · Cause & Effect — Perturbation | not built — "roast 30s longer, which wedges move?" needs a small roast-delta model this project doesn't have yet |
+| M3 · Cause & Effect — Perturbation | done — categorical roast-trend table (9 categories, up/down/mixed), scored per-category across 3 coffees |
 
-166 tests passing. Belts now narrow as they deepen: all nine categories at ring 1, five at ring 2,
+185 tests passing. Belts now narrow as they deepen: all nine categories at ring 1, five at ring 2,
 three at ring 3.
 
 **Nothing in the content set has been reviewed by a Q grader.** 110 definitions and 47 confusable
@@ -62,9 +62,13 @@ src/game/defects.ts          Defect Lab round builder over the fault-flagged att
 src/game/DefectLab.tsx       the Defect Lab screen
 src/data/profiles.json       coffee profiles for Cause & Effect - all synthetic, see below
 src/domain/profiles.ts       loader, validates descriptors resolve to terminal wheel nodes
+src/data/roastTrends.json    per-category roast-trend answer key for Perturbation - provisional
+src/domain/roastTrends.ts    loader, asserts every ring-1 category has exactly one trend
 src/game/causeEffectRound.ts Cause & Effect Forward round builder, scored against every descriptor (pure)
 src/game/causeEffectReverse.ts  Cause & Effect Reverse round builder, binary process guess (pure)
+src/game/perturbation.ts     Cause & Effect Perturbation round builder, one guess per category (pure)
 src/game/CauseEffect.tsx     the Cause & Effect screen - direction picker, then Forward or Reverse
+src/game/PerturbationRound.tsx  the Perturbation screen
 src/progress/store.ts        streaks, mastery, decay, sampling weights, the Palate Profile (pure)
 src/progress/storage.ts      the persistence adapter - swap this for IndexedDB at M4
 src/progress/PalateProfile.tsx  the radar, coverage bars and confusion list
@@ -222,10 +226,8 @@ fault rather than just scoring it.
 
 ## Cause & Effect
 
-PLAN.md section 3.2 mode 3: origin, process and roast are the cause; the cup is the effect. Two of
-its three directions are built. Perturbation ("roast 30s longer, which wedges move?") is not — it
-needs a small model of how a roast delta shifts the wheel, which this project doesn't have and
-won't guess at.
+PLAN.md section 3.2 mode 3: origin, process and roast are the cause; the cup is the effect. All
+three directions are built.
 
 ### Forward
 
@@ -254,11 +256,11 @@ reveal shows every descriptor the cup carries and bolds whichever one the answer
 closest — to mastery, the confusion matrix and the Palate Profile's category coverage. A correct
 "Jasmine" for a washed Yirgacheffe is real evidence the player knows Jasmine, so it counts.
 
-**No spaced repetition yet, in either direction.** `nextCauseEffectRound` and `nextReverseRound` both
-accept per-profile weights and are tested, but neither screen calls them: `weightsForRound` is keyed
-by attribute node ids from `progress.attributes`, and profile ids are not attribute ids, so wiring it
-today would silently be a no-op. Profile-level weak-spot tracking is future work, not a broken
-feature — at 8 profiles it matters less than it will once the set grows.
+**No spaced repetition yet, in any direction.** `nextCauseEffectRound`, `nextReverseRound` and
+`nextPerturbationRound` all accept per-profile weights and are tested, but no screen calls them:
+`weightsForRound` is keyed by attribute node ids from `progress.attributes`, and profile ids are not
+attribute ids, so wiring it today would silently be a no-op. Profile-level weak-spot tracking is
+future work, not a broken feature — at 8 profiles it matters less than it will once the set grows.
 
 ### Reverse
 
@@ -296,6 +298,39 @@ tally on `Progress`, deliberately kept out of `rounds` (a history of attribute-p
 belts, Defect Lab and Forward share) and out of `attributes`/`categories`/`confusions`/`vocab`.
 Crediting a wheel node for a correct process guess would invent a link - "you said washed, so you
 must know Jasmine" - that isn't there.
+
+### Perturbation
+
+"Same coffee, roasted further into development — which wedges move, and which way?" One coffee
+profile grounds each hole, but the question - and its answer key - is the same nine-category
+roast-trend table every time, on purpose: the lesson is that the physics is coffee-invariant, not a
+fact about any one cup. Every hole asks about all nine ring-1 categories; there are only nine facts
+to learn, so unlike Forward/Reverse there's no meaningful subset to sample.
+
+**The answer key is categorical, not a numeric model.** `src/data/roastTrends.json` gives each
+category a direction - `up`, `down`, or `mixed` - with a one- or two-sentence justification in
+standard roasting chemistry: Maillard browning and caramelization push Roasted, Nutty/Cocoa and
+Spices up; chlorogenic-acid degradation and the loss of the most volatile aromatics pull
+Sour/Fermented, Fruity, Green/Vegetative and Floral down. `mixed` is the honest answer where a
+category doesn't move monotonically (Sweet peaks mid-roast, then is masked by bitterness in dark
+roasts) or has no roast-driven mechanism at all (Other's papery/chemical notes trace to green-coffee
+handling, not the roast). This is exactly the discipline that leaves confusable weights
+`provisional` rather than invented - `roastTrends.json` carries the same `reviewStatus` and the same
+open `reviewTarget` (a Q-grader pass this project doesn't have yet).
+
+**Scoring is per-category, independent, binary** - the same reasoning as Reverse: no invented
+distance between "up" and "down." A hole is complete only once all nine categories have a guess
+(`isHoleReady`); submitting scores every category against `ROAST_TRENDS` at once and reveals all nine
+verdicts together, each with its justification, rather than one at a time.
+
+**Reuses the coffee profiles rather than inventing a fourth content shape.** `furtherRoast` in
+`perturbation.ts` is a small light→medium→medium-dark→dark ladder; a profile already at `dark` has
+nowhere further to go, and the screen says so rather than pretending there's a next step.
+
+**Progress mirrors Reverse exactly.** `recordPerturbationRound` advances the streak and a lifetime
+`perturbation: {attempts, correct}` tally - `GuessStats`, the same shape `reverse` uses, since both
+are binary-guess tallies with no wheel node to credit. Neither touches `attributes`, `categories`,
+`confusions`, `vocab`, or `rounds`.
 
 ### The Maillard cluster problem
 

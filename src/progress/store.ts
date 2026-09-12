@@ -2,13 +2,14 @@ import type { Round } from '../game/round.js';
 import { roundSummary } from '../game/round.js';
 import type { CauseEffectRound } from '../game/causeEffectRound.js';
 import type { ReverseRound } from '../game/causeEffectReverse.js';
+import type { PerturbationRound } from '../game/perturbation.js';
 import type { Ring, Wheel } from '../domain/types.js';
 import { DEFAULT_SCORING } from '../domain/scoring.js';
 import { WHEEL, getNode } from '../domain/wheel.js';
 import {
   EMPTY_ANSWER_TOTALS,
+  EMPTY_GUESS_STATS,
   EMPTY_PROGRESS,
-  EMPTY_REVERSE_STATS,
   PROGRESS_VERSION,
   type AttributeStat,
   type ConfusionEntry,
@@ -359,6 +360,32 @@ export function recordReverseRound(
   };
 }
 
+/**
+ * Perturbation's guesses are category-level roast-trend judgements, not attribute identifications -
+ * the same reasoning as `recordReverseRound` above applies here, so `perturbation` is recorded the
+ * same way and just as separately from `attributes`/`categories`. A hole asks about all nine
+ * categories, so `round.holes.length * 9` attempts get folded in per completed round.
+ */
+export function recordPerturbationRound(
+  progress: Progress,
+  round: PerturbationRound,
+  at: number = Date.now(),
+): Progress {
+  if (!round.complete) throw new Error('only a completed round can be recorded');
+
+  const next = recordStreakDay(progress, at);
+  const guesses = round.holes.flatMap((h) => h.guesses);
+  const correct = guesses.filter((g) => g.correct === true).length;
+
+  return {
+    ...next,
+    perturbation: {
+      attempts: next.perturbation.attempts + guesses.length,
+      correct: next.perturbation.correct + correct,
+    },
+  };
+}
+
 export function masteredIds(progress: Progress): string[] {
   return Object.entries(progress.attributes)
     .filter(([, stat]) => stat.masteredAt !== null)
@@ -534,6 +561,7 @@ export function reviveProgress(raw: unknown): Progress {
     categories: candidate.categories ?? {},
     confusions: candidate.confusions ?? [],
     vocab: candidate.vocab ?? {},
-    reverse: { ...EMPTY_REVERSE_STATS, ...candidate.reverse },
+    reverse: { ...EMPTY_GUESS_STATS, ...candidate.reverse },
+    perturbation: { ...EMPTY_GUESS_STATS, ...candidate.perturbation },
   };
 }

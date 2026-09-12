@@ -1,0 +1,53 @@
+{
+  "version": "0.1.0",
+  "note": "Coarse, category-level directions of travel as roast development continues - Perturbation's whole answer key. Deliberately categorical (up/down/mixed), not a numeric model: this project does not have per-degree roast-curve data any more than it has the perceptual-distance data behind the wheel's gap widths, and won't invent either. What follows is standard roasting chemistry taught in any Q or SCA roasting course, not original research.",
+  "reviewStatus": "provisional",
+  "reviewTarget": "Needs the same Q-grader pass as the confusable table before v1 - directionally uncontroversial, but nobody with a Q certification has signed off on it yet.",
+  "trends": [
+    {
+      "categoryId": "roasted",
+      "direction": "up",
+      "note": "This category is the direct byproduct of pyrolysis - by definition, more roasting means more of it, right through to Burnt past second crack."
+    },
+    {
+      "categoryId": "nutty-cocoa",
+      "direction": "up",
+      "note": "Maillard browning is the direct source of nutty and cocoa character; it builds steadily as development continues."
+    },
+    {
+      "categoryId": "spices",
+      "direction": "up",
+      "note": "Brown spice notes (cinnamon, clove, nutmeg) are Maillard products that build with development, the same reaction driving Roasted and Nutty/Cocoa upward."
+    },
+    {
+      "categoryId": "sweet",
+      "direction": "mixed",
+      "note": "Caramelization builds brown-sugar sweetness through most of the roast, but perceived sweetness typically peaks around medium development and is masked by bitterness in dark roasts - net direction depends on where the comparison sits, so this is not a clean up or down."
+    },
+    {
+      "categoryId": "fruity",
+      "direction": "down",
+      "note": "Delicate fruit-forward aromatics and the organic acids that carry them are among the first casualties of continued roasting; the fruit brightness that defines a light roast fades toward brown-sugar and roast character as development continues."
+    },
+    {
+      "categoryId": "sour-fermented",
+      "direction": "down",
+      "note": "Chlorogenic acids degrade steadily through the roast, which is the main reason perceived acidity falls as roast advances - true of the clean acids and of the fermented/winey notes, which fade under caramelization too."
+    },
+    {
+      "categoryId": "green-vegetative",
+      "direction": "down",
+      "note": "Grassy, vegetal notes are a signature of under-development; they burn off early in the roast and are essentially gone by the time development is well underway."
+    },
+    {
+      "categoryId": "floral",
+      "direction": "down",
+      "note": "The most volatile aromatics in the cup, and the first lost to heat; floral character is a light-roast signature that fades fastest of all."
+    },
+    {
+      "categoryId": "other",
+      "direction": "mixed",
+      "note": "This category bundles green-coffee defects (chemical, papery/musty) that trace to handling before the roast, not to the roast itself - continued roasting neither reliably creates nor removes them, so there is no clean roast-direction claim to make here."
+    }
+  ]
+}
