@@ -4,7 +4,9 @@ import { REGION_LABEL } from '../domain/references.js';
 import { AromaKitDrill } from '../game/AromaKitDrill.js';
 import { ReferenceHomework } from '../game/ReferenceHomework.js';
 import { TriangulationSession } from '../game/TriangulationSession.js';
+import { CoffeeJournal } from './CoffeeJournal.js';
 import { CuppingSession } from './CuppingSession.js';
+import { BREW_METHOD_LABEL } from './journal.js';
 import { palateStats } from './log.js';
 import { formatClock } from './timer.js';
 import { useSessions } from './useSessions.js';
@@ -21,13 +23,14 @@ import './physical.css';
  * together. The palate summary at the top of this screen is the second meter.
  */
 
-type Mode = 'menu' | 'cupping' | 'triangulation' | 'homework' | 'aroma-kit' | 'log';
+type Mode = 'menu' | 'cupping' | 'triangulation' | 'homework' | 'aroma-kit' | 'journal' | 'log';
 
 const KIND_LABEL: Record<SessionKind, string> = {
   cupping: 'Cupping',
   triangulation: 'Triangulation',
   homework: 'Homework',
   'aroma-kit': 'Aroma kit',
+  journal: 'Coffee Journal',
 };
 
 const dateOf = (at: number): string =>
@@ -50,6 +53,14 @@ function headline(session: PhysicalSession): string {
     case 'aroma-kit': {
       const exact = detail.items.filter((i) => i.exact).length;
       return `${exact} of ${detail.items.length} vials named · ${detail.vials.join(', ')}`;
+    }
+    case 'journal': {
+      const method =
+        detail.brewMethod === 'other' && detail.brewMethodOther.trim() !== ''
+          ? detail.brewMethodOther
+          : BREW_METHOD_LABEL[detail.brewMethod];
+      const stars = detail.rating > 0 ? ` · ${'★'.repeat(detail.rating)}` : '';
+      return `${detail.name.trim() || 'Unnamed coffee'} · ${method}${stars}`;
     }
   }
 }
@@ -144,6 +155,9 @@ function SessionLogView({ onBack }: { onBack: () => void }) {
                     ))}
                   </ul>
                 )}
+                {session.detail.kind === 'journal' && session.detail.notes.trim() !== '' && (
+                  <p className="ph-descriptors">{session.detail.notes}</p>
+                )}
                 {session.durationSec > 0 && (
                   <small className="ph-session-time">{formatClock(session.durationSec)}</small>
                 )}
@@ -170,6 +184,7 @@ export function PhysicalTrack() {
   if (mode === 'triangulation') return <TriangulationSession onBack={back} />;
   if (mode === 'homework') return <ReferenceHomework onBack={back} />;
   if (mode === 'aroma-kit') return <AromaKitDrill onBack={back} />;
+  if (mode === 'journal') return <CoffeeJournal onBack={back} />;
   if (mode === 'log') return <SessionLogView onBack={back} />;
 
   return (
@@ -216,6 +231,15 @@ export function PhysicalTrack() {
             <span>
               Draw a vial without looking, name it, then read the number. The only drill here whose
               blinding needs no trust.
+            </span>
+          </button>
+        </li>
+        <li>
+          <button type="button" onClick={() => setMode('journal')}>
+            <strong>Coffee Journal</strong>
+            <span>
+              Not blind, not timed — a quick note for a bag you already know: roaster, brew method,
+              a star rating, a 16-term tasting wheel.
             </span>
           </button>
         </li>

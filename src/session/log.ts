@@ -82,6 +82,12 @@ export function recordSession(log: SessionLog, session: PhysicalSession): Sessio
       identification = addIdentifications(identification, detail.items);
       named = bumpNamed(named, detail.items);
       break;
+    case 'journal':
+      // One known cup, ungraded, same as a cupping bowl - see session/journal.ts. It reaches
+      // cupsTasted and nothing else: no identification total, no `named` entry (the journal's
+      // sixteen terms are not wheel node ids, so they could not populate `named` even by accident).
+      cupsTasted += 1;
+      break;
   }
 
   return {

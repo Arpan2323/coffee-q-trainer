@@ -1,4 +1,5 @@
 import type { Region } from '../domain/schema.js';
+import type { BrewMethod, JournalRadar } from './journal.js';
 
 /**
  * The physical track's ledger. Kept apart from `Progress` on purpose, and the reason is PLAN.md
@@ -16,7 +17,7 @@ export const SESSION_LOG_VERSION = 1;
 /** Sessions kept in full. Past this the oldest is dropped - the lifetime totals below do not move. */
 export const SESSION_HISTORY_LIMIT = 200;
 
-export type SessionKind = 'cupping' | 'triangulation' | 'homework' | 'aroma-kit';
+export type SessionKind = 'cupping' | 'triangulation' | 'homework' | 'aroma-kit' | 'journal';
 
 /**
  * Who poured. The app cannot verify either, but it can refuse to conflate them: a set poured by
@@ -89,11 +90,35 @@ export interface AromaKitSessionRecord {
   readonly items: readonly Identification[];
 }
 
+/**
+ * A single, known cup - see the note at the top of session/journal.ts for why this is a separate
+ * mode rather than an extra field on `CuppingSessionRecord`. `sampledDate` is deliberately absent:
+ * the session's own `at` timestamp already is the moment this cup was tasted, so asking for it a
+ * second time would just be transcribing the clock. `roastDate` has no such stand-in - it comes off
+ * the bag, and the app has no other way to know it.
+ */
+export interface JournalSessionRecord {
+  readonly kind: 'journal';
+  readonly name: string;
+  readonly roaster: string;
+  readonly producer: string;
+  readonly roastDate: string;
+  readonly brewMethod: BrewMethod;
+  /** Only meaningful when `brewMethod` is `'other'`. */
+  readonly brewMethodOther: string;
+  readonly price: string;
+  /** 0 means not rated, 1-5 is the star rating. */
+  readonly rating: number;
+  readonly radar: JournalRadar;
+  readonly notes: string;
+}
+
 export type SessionDetail =
   | CuppingSessionRecord
   | TriangulationSessionRecord
   | HomeworkSessionRecord
-  | AromaKitSessionRecord;
+  | AromaKitSessionRecord
+  | JournalSessionRecord;
 
 export interface PhysicalSession {
   readonly id: string;

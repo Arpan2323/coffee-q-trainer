@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { WHEEL, getNode } from '../domain/wheel.js';
 import { palateStats } from '../session/log.js';
 import { useSessions } from '../session/useSessions.js';
+import { radarLayout, radarPolygon, spokePoint } from '../ui/radar.js';
 import { palateProfile, topConfusions } from './store.js';
 import { useProgress } from './useProgress.js';
 import './profile.css';
@@ -20,17 +21,7 @@ import './profile.css';
  */
 
 const RADAR_SIZE = 240;
-const RADAR_R = 96;
-const CENTER = RADAR_SIZE / 2;
-
-/** Point on a spoke `i` of `n`, `value` in 0-1, starting at 12 o'clock and going clockwise. */
-function spoke(i: number, n: number, value: number, radius = RADAR_R): [number, number] {
-  const angle = -Math.PI / 2 + (i / n) * 2 * Math.PI;
-  return [CENTER + Math.cos(angle) * radius * value, CENTER + Math.sin(angle) * radius * value];
-}
-
-const polygon = (values: number[]): string =>
-  values.map((v, i) => spoke(i, values.length, v).join(',')).join(' ');
+const RADAR = radarLayout(RADAR_SIZE, 96);
 
 /**
  * The palate meter, read from the session log rather than from screen play. Its numbers answer a
@@ -210,16 +201,28 @@ export function PalateProfile() {
             <polygon
               key={r}
               className="profile-radar-grid"
-              points={polygon(axes.map(() => r))}
+              points={radarPolygon(RADAR, axes.map(() => r))}
             />
           ))}
           {axes.map((a, i) => {
-            const [x, y] = spoke(i, axes.length, 1);
-            return <line key={a.key} className="profile-radar-spoke" x1={CENTER} y1={CENTER} x2={x} y2={y} />;
+            const [x, y] = spokePoint(RADAR, i, axes.length, 1);
+            return (
+              <line
+                key={a.key}
+                className="profile-radar-spoke"
+                x1={RADAR.center}
+                y1={RADAR.center}
+                x2={x}
+                y2={y}
+              />
+            );
           })}
-          <polygon className="profile-radar-plot" points={polygon(axes.map((a) => Math.max(a.value, 0.01)))} />
+          <polygon
+            className="profile-radar-plot"
+            points={radarPolygon(RADAR, axes.map((a) => Math.max(a.value, 0.01)))}
+          />
           {axes.map((a, i) => {
-            const [x, y] = spoke(i, axes.length, 1.28);
+            const [x, y] = spokePoint(RADAR, i, axes.length, 1.28);
             return (
               <text key={a.key} className="profile-radar-label" x={x} y={y} dy="0.32em">
                 {a.label}

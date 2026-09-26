@@ -19,6 +19,7 @@ import {
   type SessionDetail,
   type SessionLog,
 } from './types.js';
+import { EMPTY_JOURNAL_RADAR } from './journal.js';
 
 const session = (detail: SessionDetail, at = 1_000): PhysicalSession => ({
   id: newSessionId(detail.kind, at),
@@ -105,6 +106,31 @@ describe('recording a physical session', () => {
     );
     expect(log.identification.attempts).toBe(2);
     expect(Object.keys(log.named)).toHaveLength(2);
+  });
+
+  // A journal entry is one known cup, ungraded like a cupping bowl - its sixteen-term wheel is not
+  // the app's own flavour wheel, so it must never be able to touch identification or `named`.
+  it('counts a journal entry as one cup and nothing graded', () => {
+    const log = recordSession(
+      EMPTY_SESSION_LOG,
+      session({
+        kind: 'journal',
+        name: 'Yirgacheffe',
+        roaster: 'Blue Tokai',
+        producer: '',
+        roastDate: '',
+        brewMethod: 'pour-over',
+        brewMethodOther: '',
+        price: '',
+        rating: 4,
+        radar: EMPTY_JOURNAL_RADAR,
+        notes: 'bright, floral',
+      }),
+    );
+    expect(log.sessionsLogged).toBe(1);
+    expect(log.cupsTasted).toBe(1);
+    expect(log.identification.attempts).toBe(0);
+    expect(log.named).toEqual({});
   });
 
   // The same discipline the round history and the confusion matrix use: trimming the history must

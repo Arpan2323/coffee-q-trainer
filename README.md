@@ -34,6 +34,7 @@ IP clearance (STRATEGY.md O4) hasn't happened, so treat this link as a working d
 | M4 · Reference Homework | done — 66 region-tagged references across all nine categories, **provisional**; three-day delay before the quiz |
 | M4 · Aroma-kit mode | done — answer-then-vial ordering, player's own kit mapping; **no vial list shipped** |
 | M4 · Palate meter | done — discrimination against 1-in-3 chance with an exact binomial p-value, kept apart from screen mastery |
+| M4 · Coffee Journal | done — non-blind, single-cup note (origin, roaster, brew method, price, rating, 16-term tasting radar); not blind, not scored, not one of PLAN.md's numbered modes |
 
 288 tests passing. Belts now narrow as they deepen: all nine categories at ring 1, five at ring 2,
 three at ring 3.
@@ -96,6 +97,9 @@ src/session/storage.ts       the physical log's own adapter and its own storage 
 src/session/codes.ts         three-digit blinding codes, shared by every physical mode
 src/session/timer.ts         the protocol clock as a pure function of elapsed seconds
 src/session/CuppingSession.tsx  the timed protocol screen and bowl logging
+src/session/journal.ts       Coffee Journal's fixed 16-term wheel and brew-method list (pure)
+src/session/CoffeeJournal.tsx   the Coffee Journal screen and its live radar preview
+src/ui/radar.ts               radar/spider-chart geometry shared by Palate Profile and Coffee Journal
 src/session/PhysicalTrack.tsx   the physical-track shell, palate meter and session log
 src/game/triangulation.ts    physical triangulation round builder, seeded coded cups (pure)
 src/game/homework.ts         Reference Homework assignment and blind quiz (pure)
@@ -538,6 +542,46 @@ This is also the only round builder in the codebase with **no seed**, because it
 randomisation is physical. `enterVial` refuses a vial already used in the drill — you cannot have drawn
 the same vial twice, so a repeat is a typo, and accepting it would let one lucky vial be scored again
 and again.
+
+### Coffee Journal is not blind, and does not pretend to be
+
+Every other physical mode is built around not knowing something until an answer is committed: a
+coded bowl, a coded reference, a vial not yet turned over. Coffee Journal is the opposite of that on
+purpose — it is a note for a bag you already know, and its fields say so: roaster, producer and price
+are information printed on the packaging, not something a blind protocol would ever expose mid-session.
+
+That is also why it is a separate mode rather than a field added to the Cupping Session's reveal step.
+The blind protocol exists specifically to keep identity hidden until the bowls are unblinded; a price
+field bolted onto that screen would be right about half a session and wrong about the other half.
+
+**No "sampled" field**, unlike the printed card it is modelled on. The card asks for both a roast date
+and a sampled date because they answer different questions — how long the bag has rested, and when
+you actually drank it. The app already has the second one: `PhysicalSession.at` is stamped the moment
+the entry is saved, so asking a second time would just be transcribing the clock. Roast date stays,
+because it comes off the bag and the app has no other way to know it.
+
+**A fixed 16-term wheel, not the app's own 110-node flavour wheel.** Sweet, Sour/Tart, Floral, Spicy,
+Salty, Berry Fruit, Citrus Fruit, Stone Fruit, Chocolate, Caramel, Smoky, Bitter, Savory, Body, Clean,
+Linger/Finish — the vocabulary from the printed template this mode is built from, kept exactly that
+coarse rather than pulled toward the SCA wheel's precision. The two wheels solve different problems:
+the app's own wheel is a scored tree whose radial position *is* perceptual distance, and Descriptor
+Golf, the confusable table and every belt are built to exploit that structure. Forcing a home tasting
+note through it would either flatten the tree into sixteen arbitrary buckets or turn a quick journal
+entry into a 110-option scavenger hunt. A separate, much coarser scale is the honest fit, and it is
+also why this mode can never write to `named` even by accident — that map is keyed by wheel node id,
+and none of these sixteen terms are one.
+
+**Ungraded, like the cupping session**, for the same reason: your own cup has no answer key. A journal
+entry reaches `cupsTasted` and nothing else — no identification total, no mastery, no wheel score.
+
+**Single-select brew method**, unlike the printed card's checkboxes. One cup was brewed one way; a
+taster who genuinely wants two brew methods on the same coffee gets two entries, which keeps the
+radar and the rating unambiguous about which cup they describe.
+
+**The radar chart is shared code, not a second copy.** `src/ui/radar.ts` holds the trigonometry both
+this screen and the Palate Profile use — what the two charts plot has nothing in common, but turning
+N values into an SVG polygon is the same problem either way, and a second hand-copied `spoke`/`polygon`
+pair would only ever drift from the first one.
 
 ### What the session log keeps, and why the totals are stored
 

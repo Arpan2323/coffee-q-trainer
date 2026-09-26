@@ -1,0 +1,180 @@
+/* Coffee Journal. Reuses .golf and .ph-* primitives from golf.css / physical.css for buttons,
+   fields and layout; this file only adds what neither already has - the metadata grid, the star
+   rating, the brew-method fieldset's inline "other" box, and the tasting-wheel radar + axis rows. */
+
+.jr-form {
+  max-width: 46rem;
+}
+
+.jr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0 1.25rem;
+  margin: 1rem 0;
+}
+
+.jr-grid .ph-field {
+  margin: 0.4rem 0;
+}
+
+.jr-brew-other {
+  display: block;
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--panel);
+  color: inherit;
+  font: inherit;
+  font-size: 0.85rem;
+  max-width: 18rem;
+}
+
+.jr-field-block {
+  margin: 1rem 0;
+}
+
+.ph-field-label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+/* Stars, large enough to tap reliably - this screen is meant to work one-handed with a cup in the
+   other. */
+
+.jr-stars {
+  display: flex;
+  gap: 0.15rem;
+}
+
+.jr-stars button {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.jr-stars button.is-filled,
+.jr-stars-readonly span.is-filled {
+  color: #d97706;
+}
+
+.jr-stars-readonly {
+  display: flex;
+  gap: 0.15rem;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--muted);
+}
+
+@media (prefers-color-scheme: dark) {
+  .jr-stars button.is-filled,
+  .jr-stars-readonly span.is-filled {
+    color: #fbbf24;
+  }
+}
+
+/* The radar. Same geometry as the Palate Profile's (src/ui/radar.ts) but its own colour, since the
+   two charts plot unrelated things and should not visually read as the same measurement. */
+
+.jr-wheel-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin: 1rem 0;
+}
+
+.jr-radar {
+  width: 220px;
+  height: 220px;
+  flex: none;
+}
+
+.jr-radar-grid {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.jr-radar-spoke {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.jr-radar-plot {
+  fill: color-mix(in srgb, #7c3aed 22%, transparent);
+  stroke: #7c3aed;
+  stroke-width: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+  .jr-radar-plot {
+    fill: color-mix(in srgb, #a78bfa 26%, transparent);
+    stroke: #a78bfa;
+  }
+}
+
+.jr-axes {
+  display: grid;
+  gap: 0.35rem;
+  flex: 1;
+  min-width: 16rem;
+}
+
+.jr-axis-row {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.jr-axis-label {
+  font-size: 0.8rem;
+}
+
+.jr-axis-choices {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.jr-axis-choices button {
+  width: 1.6rem;
+  height: 1.6rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.jr-axis-choices button.is-active {
+  border-color: #7c3aed;
+  background: color-mix(in srgb, #7c3aed 18%, transparent);
+  font-weight: 700;
+}
+
+@media (prefers-color-scheme: dark) {
+  .jr-axis-choices button.is-active {
+    border-color: #a78bfa;
+    background: color-mix(in srgb, #a78bfa 22%, transparent);
+  }
+}
+
+@media (max-width: 560px) {
+  .jr-axis-row {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}
