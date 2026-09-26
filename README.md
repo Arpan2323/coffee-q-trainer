@@ -9,7 +9,7 @@ the build; see that file before assuming a push always ships). This is the dev h
 below, not a finished product screen — content is provisional and unreviewed (next section), and
 IP clearance (STRATEGY.md O4) hasn't happened, so treat this link as a working demo, not a launch.
 
-## Status — M1, M2 and M3 complete
+## Status — M1, M2, M3 and M4 complete
 
 | Deliverable | State |
 |---|---|
@@ -28,17 +28,32 @@ IP clearance (STRATEGY.md O4) hasn't happened, so treat this link as a working d
 | M3 · Cause & Effect — Forward | done — 8 coffee profiles, **all synthetic**; predict a descriptor from origin/process/roast |
 | M3 · Cause & Effect — Reverse | done — given the cup's descriptors, name the process; binary scoring, no wheel involved |
 | M3 · Cause & Effect — Perturbation | done — categorical roast-trend table (9 categories, up/down/mixed), scored per-category across 3 coffees |
+| M4 · Cupping session timer/protocol | done — SCA protocol as a clock, coded bowls, descriptor and note logging; **no cupping form, that is M5** |
+| M4 · Physical triangulation | done — coded bases, seeded odd-cup assignment, self/helper blinding recorded separately |
+| M4 · Session log | done — separate versioned record and storage key, capped at 200 sessions with lifetime totals kept |
+| M4 · Reference Homework | done — 66 region-tagged references across all nine categories, **provisional**; three-day delay before the quiz |
+| M4 · Aroma-kit mode | done — answer-then-vial ordering, player's own kit mapping; **no vial list shipped** |
+| M4 · Palate meter | done — discrimination against 1-in-3 chance with an exact binomial p-value, kept apart from screen mastery |
 
-185 tests passing. Belts now narrow as they deepen: all nine categories at ring 1, five at ring 2,
+288 tests passing. Belts now narrow as they deepen: all nine categories at ring 1, five at ring 2,
 three at ring 3.
 
-**Nothing in the content set has been reviewed by a Q grader.** 110 definitions and 47 confusable
-weights are one practitioner's judgement. That review is Q1 KR3.1 and KR3.2 in STRATEGY.md and it
-gates v1, not M3.
+**Nothing in the content set has been reviewed by a Q grader.** 110 definitions, 47 confusable
+weights and now 66 reference standards are one practitioner's judgement. That review is Q1 KR3.1 and
+KR3.2 in STRATEGY.md and it gates v1.
+
+**M4 was built out of the order PLAN.md sets.** The plan defers the physical track past v1 and is
+explicit about why: *"build it once the screen loop is proven, not before"*, with the proving step
+being M2 in front of ~10 real beginners. That pilot has not happened, so M4 is code and content
+ahead of the evidence that was supposed to justify it. Two consequences worth holding on to. First,
+the screen-loop question the pilot was meant to answer — do beginners hedge at ring 1 forever? — is
+still open, and it is a scoring-engine question that the physical track cannot answer. Second, every
+design decision in `src/session/` is now a guess about how people cup that no one has watched them
+make; the reference list in particular wants a pilot before it wants more entries.
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173 - Descriptor Golf, Defect Lab, Cause & Effect, Palate Profile, Wheel Walk
+npm run dev      # http://localhost:5173 - Descriptor Golf, Defect Lab, Cause & Effect, Coffee in hand, Palate Profile, Wheel Walk
 npm test
 npm run typecheck
 ```
@@ -70,8 +85,22 @@ src/game/perturbation.ts     Cause & Effect Perturbation round builder, one gues
 src/game/CauseEffect.tsx     the Cause & Effect screen - direction picker, then Forward or Reverse
 src/game/PerturbationRound.tsx  the Perturbation screen
 src/progress/store.ts        streaks, mastery, decay, sampling weights, the Palate Profile (pure)
-src/progress/storage.ts      the persistence adapter - swap this for IndexedDB at M4
-src/progress/PalateProfile.tsx  the radar, coverage bars and confusion list
+src/progress/storage.ts      the persistence adapter - still localStorage, see below
+src/progress/PalateProfile.tsx  the radar, coverage bars, confusion list, and the physical block
+src/data/protocol.json       the SCA cupping protocol as a timed sequence
+src/domain/protocol.ts       loader, asserts ascending offsets - the clock depends on them
+src/domain/references.ts     region-filtered queries over the reference standards in attributes.json
+src/session/types.ts         the physical-track ledger - separate record, separate version
+src/session/log.ts           session reducers, the palate meter, the exact binomial tail (pure)
+src/session/storage.ts       the physical log's own adapter and its own storage key
+src/session/codes.ts         three-digit blinding codes, shared by every physical mode
+src/session/timer.ts         the protocol clock as a pure function of elapsed seconds
+src/session/CuppingSession.tsx  the timed protocol screen and bowl logging
+src/session/PhysicalTrack.tsx   the physical-track shell, palate meter and session log
+src/game/triangulation.ts    physical triangulation round builder, seeded coded cups (pure)
+src/game/homework.ts         Reference Homework assignment and blind quiz (pure)
+src/game/aromaKit.ts         aroma-kit drill - answer first, vial number second (pure)
+src/game/TriangulationSession.tsx / ReferenceHomework.tsx / AromaKitDrill.tsx   the three screens
 src/dev/                     harness: play a round, browse the wheel, or read the Palate Profile
 ```
 
@@ -160,10 +189,19 @@ Progress credits **the attribute the clue was written for**, not the belt's shal
 Nine Doors the target is a category, but what the player is learning to recognise is the leaf.
 
 Storage is `localStorage`, not the IndexedDB the plan named: the record is a few kilobytes and
-staying synchronous keeps the store trivially testable. IndexedDB earns its place at M4 when
-cupping session logs arrive — swapping it means replacing `storage.ts` and nothing else. Corrupt
-data, full quotas and private browsing are all handled by carrying on unrecorded; a lost streak is
-a smaller harm than a blank screen.
+staying synchronous keeps the store trivially testable. Corrupt data, full quotas and private
+browsing are all handled by carrying on unrecorded; a lost streak is a smaller harm than a blank
+screen.
+
+**M4 arrived and IndexedDB still has not, deliberately.** The note here used to say cupping session
+logs would earn it. They did not: a session record is a few hundred bytes, the history is capped at
+200, and the whole physical log lands under 100 kB against a 5 MB quota. IndexedDB would buy headroom
+nobody needs and cost async plumbing through every screen plus an `await` in every reducer test. What
+the session log did earn is its **own** adapter and its own storage key (`session/storage.ts`), and
+that is a different argument: `reviveProgress` discards the whole payload on a version mismatch, so
+sharing a key would mean an M5 change to the cupping record costing a player their streak and their
+mastered count. The IndexedDB seam is still one file, and it becomes the right call when a session
+carries photographs of the table or a full CVA form per bowl.
 
 The record schema is versioned; `reviveProgress` discards a payload from a different version rather
 than guessing a migration. Adding the Palate Profile aggregates took it to `v2`, so a pilot tester's
@@ -185,8 +223,19 @@ section 3.4. Four of its six axes are honestly computable from screen play:
 
 The radar shows a fifth spoke, **Commitment** (`1 − hedge rate`), so every axis reads "further out
 is better". **Precision** (repeatability on a re-served sample) and **Consensus** (agreement with a
-panel) need the physical track and are named as absent rather than estimated — the same discipline
-the attribute records apply to intensity anchors.
+panel) are named as absent rather than estimated — the same discipline the attribute records apply
+to intensity anchors.
+
+**M4 did not fill those two in, and it would have been easy to pretend otherwise.** Triangulation
+produces a real number about a real nose, and it is tempting to file it under Precision. It is not:
+precision is one sample scored twice and agreeing with itself, and triangulation is discrimination
+between two different coffees. The cupping screen could serve a blind duplicate and measure precision
+honestly — a small, well-defined piece of future work, and better than approximating it now.
+Consensus still needs a panel, which is M6.
+
+What M4 did add is a second block on this screen, `PhysicalEvidence`, reading the session log rather
+than screen play. The two are shown as peers and never summed. One blended "palate score" would be
+the most flattering number this app could print and the least true one.
 
 **The blind-sector line is the point.** "Still blind to Green/Vegetative, Other" is the insight
 STRATEGY.md calls slightly addictive, and it falls straight out of the coverage rule: a category
@@ -391,6 +440,111 @@ path validity, label truncation, overflow, ARIA, and the zoom transform. The pal
 accessibility pass: contrast and colour-blind simulation are outstanding, and Roasted, Spices and
 Nutty/Cocoa are close in hue by inheritance from the published wheel.
 
+## The physical track
+
+PLAN.md section 1 splits the product in two: Track A is the map, Track B is the territory, and the
+value is the bridge. M1–M3 built Track A. M4 is Track B, behind one nav entry (**Coffee in hand**)
+because the four modes share a ledger and a set of rules worth stating once.
+
+**The rule everything here obeys:** *never claim a screen taught a palate.* Screen play earns
+knowledge progress, logged physical sessions earn palate progress, and the app never adds them
+together. That is why `src/session/` is a second record with its own version and its own storage key
+rather than four more fields on `Progress`, and why the Palate Profile shows two blocks instead of
+one number.
+
+### The app cannot blind anything, so it says how each mode is blinded
+
+This is the honest centre of the whole milestone. An app with no access to the cups cannot verify
+that a taster did not peek. What it can do is make peeking visible as a choice, and refuse to
+conflate evidence of different strengths.
+
+| Mode | How it is blinded | Strength |
+|---|---|---|
+| **Aroma kit** | The wheel answer is committed *before* the vial number is entered — `enterVial` throws if it is called first | Beyond argument. The app learns what the sample was only after the answer is locked |
+| **Triangulation, helper-poured** | The pour sheet goes to someone else; the taster never sees it | Strong |
+| **Triangulation, self-poured** | Coded bases, then the bowls are shuffled without tracking. Knowing 417 is odd is harmless once you have lost track of which bowl 417 is | Depends on the taster's own discipline |
+| **Reference Homework** | Coded samples, quizzed three days later | Weakest — you can usually see that the saucer holds grated zest. Its value is the recall, not the blinding |
+| **Cupping session** | Coded bowls, named after the blind passes | Descriptors logged here are **ungraded** — your own cup has no answer key |
+
+`Blinding` is stored per triangulation session and the two are never summed: `palateStats` reports
+self-poured and helper-poured separately as well as combined. A taster who peeks has lied to their own
+log, and the consequence is worth naming — these numbers are evidence *for the taster*, never data
+about the product. Efficacy measurement (STRATEGY.md) needs helper-poured sets or an observer.
+
+### Discrimination is measured against chance, not against zero
+
+A triangulation guess is right one time in three by luck, so "67% correct" means nothing on its own.
+`binomialTailAtLeast` computes the exact upper binomial tail, and the UI reports it: 4 of 6 looks
+impressive and carries p ≈ 0.1, which is to say it is not yet evidence of anything. 12 of 18 is.
+
+Exact rather than a normal approximation, because the interesting case here is a tiny n — six sets is
+where a taster first wants to know whether they are beating a guess, and that is exactly where the
+approximation lies.
+
+### The cupping clock is a function of elapsed time, not a chain of timers
+
+`session/timer.ts` derives the whole protocol state from one number. A phone that slept through the
+crust break, a backgrounded tab, or a taster who started the clock and went to fetch a spoon all break
+a timeline built from callbacks firing on schedule; deriving from elapsed seconds means the screen
+catches up the instant it is looked at, and every offset is testable without waiting eighteen minutes.
+
+`buildProtocol` asserts the step offsets ascend, which is what lets the clock find the current step in
+one forward pass. Out of order, it would jump backwards mid-session — a bug you would only meet
+standing at a table with a bowl going cold.
+
+**The dose and the 4:00 crust break are the published protocol; the cooling offsets are estimates.**
+How fast a bowl reaches 70 °C depends on bowl mass, ambient temperature and airflow, so the steps that
+carry `approxTempC` carry it as a prompt the taster overrides, and the UI says so. A timer that
+certifies a temperature it cannot measure would be the same failure as an invented intensity anchor.
+
+### Reference standards, and the region decision
+
+66 references across 65 attributes, covering all nine categories, authored into `attributes.json`
+under the `references` field the M1 schema already defined. No intensity anchors: those are panel
+measurement, and the rule has not changed. `reviewStatus` stays `provisional`.
+
+`regions` is now an **enum** (`IN` / `EU` / `US`), not free strings. A typo'd region is the worst kind
+of content bug here — the reference stays valid, loads without complaint, and is silently absent from
+every homework list the filter builds.
+
+PLAN.md decision 2 — which region to author first — **is still open, and this content set does not
+dodge it by tagging everything global**. Each reference names the regions where that specific product
+is an ordinary purchase, which is why the counts differ: India reaches 56 attributes, Europe 65, the
+US 64. Maple syrup is EU/US, Dettol is IN/EU, rose water is everywhere because gulab jal is. The
+region picker shows those counts while asking, so the decision can be made from evidence rather than
+intuition, and no region is preselected — a default would answer the open question by accident.
+
+### Homework is where spaced repetition finally reaches the physical world
+
+The homework pool is keyed by attribute node id, which is exactly what `weightsForRound` returns. So
+unlike the Cause & Effect modes — whose pools are profile ids, and whose weighting is a documented
+no-op — passing weights into `createAssignment` genuinely biases the draw. **A descriptor you keep
+missing on the wheel is a descriptor the app sends you to go and smell.** That connection is the
+single most useful thing in the physical track, and it is the reason the reference list lives on the
+attribute records rather than in a content file of its own.
+
+The three-day delay is enforced, not decorative: `isDue` refuses the quiz until it has passed, for the
+same reason mastery refuses a third exact answer inside 48 hours. A learning metric that can be
+crammed is an engagement metric wearing a lab coat.
+
+### The aroma kit ships no vial list
+
+Kits number their vials differently, a commercial kit's contents list is a licensed asset like the
+wheel artwork (PLAN.md section 2.5), and a taster who decanted their own standards has a mapping
+nobody could have shipped. So the mapping is entered once by the person holding the box and lives in
+the session log.
+
+This is also the only round builder in the codebase with **no seed**, because it draws nothing: the
+randomisation is physical. `enterVial` refuses a vial already used in the drill — you cannot have drawn
+the same vial twice, so a repeat is a typo, and accepting it would let one lucky vial be scored again
+and again.
+
+### What the session log keeps, and why the totals are stored
+
+`sessions` is capped at 200 and the lifetime totals live beside it rather than being derived from it.
+Deriving "sessions logged" from a capped array would make the number go *down* on the 201st session —
+the same silent-drift failure the round history and the confusion matrix already avoid the same way.
+
 ## Content invariants worth knowing
 
 - Node ids are dot-delimited paths (`fruity.berry.blackberry`) generated from short author-facing
@@ -404,3 +558,9 @@ Nutty/Cocoa are close in hue by inheritance from the published wheel.
 - `defect: "contextual"` marks attributes that are faults only past an intensity or outside a
   process style. Fermented and overripe are sought after in some naturals — Defect Lab must not
   teach that every ferment note is a flaw.
+- A reference's `regions` is an enum, not free text, and it is the homework filter's only input. A
+  reference tagged with a region where its product is not an ordinary purchase sends a learner
+  shopping for something they cannot buy, which is the one failure that makes the whole bridge
+  useless. Tag what is true, not what is convenient.
+- Reference standards carry no `intensity`, for the same reason attribute records do not: a
+  calibrated 0–15 anchor is panel measurement against a physical kit.

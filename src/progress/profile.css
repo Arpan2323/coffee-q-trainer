@@ -176,3 +176,10 @@
   color: var(--muted);
   font-size: 0.82rem;
 }
+
+/* The physical block. Same type scale as the screen-play axes, because the two are meant to be read
+   as peers - not as a headline number and a footnote. */
+
+.profile-physical {
+  margin-bottom: 1rem;
+}

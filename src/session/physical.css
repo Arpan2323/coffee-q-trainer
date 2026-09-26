@@ -1,0 +1,601 @@
+/* The physical track. Phone-first for a reason the other screens can get away with ignoring: this
+   is the one part of the app used standing at a cupping table, one-handed, with wet hands. Tap
+   targets stay large and the clock stays the biggest thing on the screen. */
+
+.ph-menu,
+.ph-setup,
+.ph-session,
+.ph-pour,
+.ph-taste {
+  max-width: 42rem;
+  min-width: 0;
+}
+
+.ph-modes,
+.ph-regions {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ph-modes button,
+.ph-regions button {
+  display: grid;
+  gap: 0.25rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--panel);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ph-modes button:hover,
+.ph-regions button:hover {
+  border-color: var(--fg);
+}
+
+.ph-modes strong,
+.ph-regions strong {
+  font-size: 0.95rem;
+}
+
+.ph-modes span,
+.ph-regions span {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.ph-regions small {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.ph-meter {
+  max-width: 40rem;
+}
+
+.ph-meter-empty {
+  margin: 1rem 0;
+  padding: 0.8rem 1rem;
+  border: 1px dashed var(--line);
+  border-radius: 9px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  max-width: 40rem;
+}
+
+/* Fields */
+
+.ph-field {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0.75rem 0;
+  max-width: 18rem;
+}
+
+.ph-field-wide {
+  max-width: 34rem;
+}
+
+.ph-field > span {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+.ph-field input,
+.ph-field textarea,
+.ph-kit select {
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--panel);
+  color: inherit;
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.ph-fieldset {
+  display: grid;
+  gap: 0.4rem;
+  margin: 1rem 0;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  max-width: 34rem;
+}
+
+.ph-fieldset legend {
+  padding: 0 0.35rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+.ph-fieldset label {
+  font-size: 0.85rem;
+}
+
+.ph-dose {
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+.ph-dose small {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.ph-prep {
+  margin: 0.5rem 0 1.25rem;
+  padding-left: 1.2rem;
+  max-width: 40rem;
+}
+
+.ph-prep li {
+  margin-bottom: 0.6rem;
+  font-size: 0.88rem;
+}
+
+.ph-prep p {
+  margin: 0.15rem 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+/* The clock. Biggest thing on the screen, because it is read from a metre away. */
+
+.ph-clock {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+}
+
+.ph-elapsed {
+  font-size: 2.6rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.ph-step strong {
+  font-size: 1rem;
+}
+
+.ph-step p {
+  margin: 0.2rem 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.ph-temp {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-style: italic;
+}
+
+.ph-next {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.ph-steps {
+  display: grid;
+  gap: 0.1rem;
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+  max-width: 24rem;
+}
+
+.ph-steps li {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 0.6rem;
+  padding: 0.25rem 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+}
+
+.ph-steps li.is-done {
+  color: inherit;
+}
+
+.ph-steps li.is-current {
+  color: inherit;
+  font-weight: 700;
+}
+
+.ph-at {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Bowl logging */
+
+.ph-log {
+  margin-top: 1.25rem;
+}
+
+.ph-bowls {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0.75rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ph-bowls li {
+  display: grid;
+  grid-template-columns: 4rem 12rem 1fr;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.ph-bowls li.is-active {
+  border-left: 3px solid var(--fg);
+  padding-left: 0.5rem;
+}
+
+.ph-bowls button {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.ph-bowls li.is-active button {
+  border-color: var(--fg);
+  background: var(--panel);
+  font-weight: 700;
+}
+
+.ph-bowls input {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--panel);
+  color: inherit;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.ph-descriptors {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* Triangulation */
+
+.ph-warning {
+  margin: 0.5rem 0 1rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid #b45309;
+  border-radius: 8px;
+  background: var(--panel);
+  font-size: 0.87rem;
+}
+
+.ph-sheet {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.ph-sheet dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+.ph-sheet dd {
+  margin: 0.2rem 0 0;
+  font-size: 1.6rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.ph-instruction {
+  margin: 0.75rem 0;
+  font-size: 0.92rem;
+}
+
+.ph-verdict {
+  margin: 1rem 0;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.ph-verdict.is-correct {
+  border-left-color: #15803d;
+}
+
+.ph-verdict.is-wrong {
+  border-left-color: #b45309;
+}
+
+.ph-verdict p {
+  margin: 0.3rem 0 0;
+  font-size: 0.87rem;
+  color: var(--muted);
+}
+
+.ph-verdict p strong {
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.ph-error {
+  margin: 0.4rem 0 0;
+  color: #b45309;
+  font-size: 0.82rem;
+}
+
+/* Homework */
+
+.ph-due {
+  margin: 1rem 0;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  font-size: 0.88rem;
+}
+
+.ph-due.is-ready {
+  border-left: 3px solid #15803d;
+}
+
+.ph-assignment {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ph-assignment li {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--panel);
+}
+
+.ph-assignment-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.ph-code {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.ph-product {
+  margin: 0.3rem 0 0;
+  font-size: 0.88rem;
+}
+
+.ph-ref-prep {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.ph-sample-code {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.ph-sample-code strong {
+  font-variant-numeric: tabular-nums;
+}
+
+/* `.golf button` in golf.css is one class plus one element, so it outranks a bare `.ph-link` and
+   turns this inline link into a filled button mid-sentence. Matched specificity rather than
+   !important. */
+.golf .ph-link {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Aroma kit */
+
+.ph-kit {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 0.4rem;
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ph-kit li {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.ph-vial {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* Session log */
+
+.ph-sessions {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ph-sessions > li {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--panel);
+}
+
+.ph-session-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.ph-session-head span {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.ph-session-line {
+  margin: 0.25rem 0 0;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.ph-session-bowls {
+  display: grid;
+  gap: 0.15rem;
+  margin: 0.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ph-session-bowls li {
+  display: grid;
+  grid-template-columns: 3rem 9rem 1fr;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+}
+
+.ph-session-time {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.ph-session-note {
+  margin: 0.35rem 0 0;
+  font-size: 0.82rem;
+}
+
+/* The honesty notes. Same visual weight as the synthetic-profile disclosure in Cause & Effect:
+   quiet, but never hidden. */
+
+.ph-caveat {
+  margin: 1rem 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  max-width: 52ch;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ph-warning {
+    border-left-color: #f59e0b;
+  }
+
+  .ph-verdict.is-correct {
+    border-left-color: #4ade80;
+  }
+
+  .ph-verdict.is-wrong,
+  .ph-error {
+    border-left-color: #f59e0b;
+  }
+
+  .ph-error {
+    color: #f59e0b;
+  }
+
+  .ph-due.is-ready {
+    border-left-color: #4ade80;
+  }
+}
+
+@media (max-width: 560px) {
+  .ph-bowls li,
+  .ph-session-bowls li {
+    grid-template-columns: 1fr;
+  }
+
+  .ph-elapsed {
+    font-size: 2.2rem;
+  }
+}
+
+/* Kit mapping. One select, not one per vial: a 36-vial kit against 110 attributes would put four
+   thousand option elements on a screen that is meant to work on a phone. */
+
+.ph-add-vial {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+
+.ph-add-vial .ph-field {
+  margin: 0;
+}
+
+.ph-add-vial .ph-field:first-child {
+  max-width: 6rem;
+}
+
+.ph-kit li button {
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+}
+
+.ph-kit li button:hover {
+  color: inherit;
+  border-color: var(--fg);
+}

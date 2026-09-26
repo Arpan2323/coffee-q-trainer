@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Flavor wheel coffee sensory trainer - M1/M2 complete, M3 nearly done",
+  "description": "Flavor wheel coffee sensory trainer - M1-M4 complete; screen track plus the physical track",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

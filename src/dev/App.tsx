@@ -8,6 +8,7 @@ import { DescriptorGolf } from '../game/DescriptorGolf.js';
 import { DefectLab } from '../game/DefectLab.js';
 import { CauseEffect } from '../game/CauseEffect.js';
 import { PalateProfile } from '../progress/PalateProfile.js';
+import { PhysicalTrack } from '../session/PhysicalTrack.js';
 import './app.css';
 
 const MODALITY_LABEL: Record<AttributeRecord['modality'][number], string> = {
@@ -103,7 +104,9 @@ function AttributeDetail({ record }: { record: AttributeRecord }) {
  * playing a round.
  */
 export function App() {
-  const [mode, setMode] = useState<'golf' | 'defects' | 'cause-effect' | 'browse' | 'profile'>('golf');
+  const [mode, setMode] = useState<
+    'golf' | 'defects' | 'cause-effect' | 'physical' | 'browse' | 'profile'
+  >('golf');
   const [focusId, setFocusId] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
@@ -152,6 +155,13 @@ export function App() {
           </button>
           <button
             type="button"
+            className={mode === 'physical' ? 'is-active' : ''}
+            onClick={() => setMode('physical')}
+          >
+            Coffee in hand
+          </button>
+          <button
+            type="button"
             className={mode === 'browse' ? 'is-active' : ''}
             onClick={() => setMode('browse')}
           >
@@ -178,6 +188,8 @@ export function App() {
       {mode === 'defects' && <DefectLab />}
 
       {mode === 'cause-effect' && <CauseEffect />}
+
+      {mode === 'physical' && <PhysicalTrack />}
 
       {mode === 'profile' && <PalateProfile />}
 

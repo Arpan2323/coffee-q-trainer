@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
-import { WHEEL } from '../domain/wheel.js';
+import { WHEEL, getNode } from '../domain/wheel.js';
+import { palateStats } from '../session/log.js';
+import { useSessions } from '../session/useSessions.js';
 import { palateProfile, topConfusions } from './store.js';
 import { useProgress } from './useProgress.js';
 import './profile.css';
@@ -10,6 +12,11 @@ import './profile.css';
  * so every spoke reads "further out is better"). Precision and Consensus need a re-served sample and
  * a panel; they are named as missing rather than estimated, the same way attribute records leave
  * out an intensity anchor nobody has measured.
+ *
+ * Since M4 the screen carries a second, separate block: what the physical track has recorded. The two
+ * are shown side by side and never summed, which is PLAN.md section 1's rule - screen play earns
+ * knowledge, logged sessions earn palate. A single blended "palate score" would be the most flattering
+ * number the app could print and the least true one.
  */
 
 const RADAR_SIZE = 240;
@@ -25,6 +32,102 @@ function spoke(i: number, n: number, value: number, radius = RADAR_R): [number, 
 const polygon = (values: number[]): string =>
   values.map((v, i) => spoke(i, values.length, v).join(',')).join(' ');
 
+/**
+ * The palate meter, read from the session log rather than from screen play. Its numbers answer a
+ * different question from the radar above it: not "do you know the word" but "can your nose do it".
+ */
+function PhysicalEvidence() {
+  const { log } = useSessions();
+  const stats = useMemo(() => palateStats(log), [log]);
+
+  const named = useMemo(
+    () =>
+      Object.entries(log.named)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 12)
+        .map(([nodeId, count]) => ({ label: getNode(WHEEL, nodeId).label, count })),
+    [log.named],
+  );
+
+  if (stats.empty) {
+    return (
+      <>
+        <h3>What your nose has done</h3>
+        <p className="profile-empty-note">
+          Nothing logged yet. Coffee in hand is the other half of this screen, and no amount of screen
+          play can fill it in — that separation is the point.
+        </p>
+      </>
+    );
+  }
+
+  const all = stats.discriminationAll;
+  const helper = stats.discrimination.helper;
+
+  return (
+    <>
+      <h3>What your nose has done</h3>
+      <dl className="profile-axes profile-physical">
+        <div>
+          <dt>Sessions</dt>
+          <dd>{stats.sessionsLogged}</dd>
+          <small>{stats.cupsTasted} cups tasted</small>
+        </div>
+        <div>
+          <dt>Discrimination</dt>
+          <dd>
+            {all.sets === 0 ? '—' : `${Math.round(all.rate * 100)}%`}
+          </dd>
+          <small>
+            {all.sets === 0
+              ? 'no triangulation sets yet'
+              : `${all.correct} of ${all.sets} sets · ${Math.round(all.chance * 100)}% by guessing`}
+          </small>
+        </div>
+        <div>
+          <dt>Above chance</dt>
+          <dd>{all.pValue === null ? '—' : all.pValue < 0.001 ? '<0.001' : all.pValue.toFixed(3)}</dd>
+          <small>
+            {all.pValue === null
+              ? 'needs sets'
+              : all.pValue < 0.05
+                ? 'this is now evidence'
+                : 'not yet evidence — keep going'}
+          </small>
+        </div>
+        <div>
+          <dt>Named blind</dt>
+          <dd>{stats.namedBreadth}</dd>
+          <small>
+            {stats.identifications} identifications, mean{' '}
+            {Math.round(stats.identificationAccuracy)}
+          </small>
+        </div>
+      </dl>
+
+      {helper.sets > 0 && (
+        <p className="profile-empty-note">
+          Helper-poured: {helper.correct} of {helper.sets} sets. That is the subset nobody has to take
+          on trust — self-poured sets depend on your own shuffling.
+        </p>
+      )}
+
+      {named.length > 0 && (
+        <ul className="profile-confusions">
+          {named.map((n) => (
+            <li key={n.label}>
+              <span>
+                Named <strong>{n.label}</strong> from a real smell
+              </span>
+              <span className="profile-conf-count">{n.count}×</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  );
+}
+
 export function PalateProfile() {
   const { progress } = useProgress();
   const profile = useMemo(() => palateProfile(progress, WHEEL), [progress]);
@@ -39,6 +142,7 @@ export function PalateProfile() {
           specific you commit, how close you land, and which of the nine categories you are still
           blind to.
         </p>
+        <PhysicalEvidence />
       </section>
     );
   }
@@ -90,8 +194,9 @@ export function PalateProfile() {
     <section className="profile">
       <h2>Palate Profile</h2>
       <p className="profile-lede">
-        {profile.answered} answers scored. Precision and Consensus stay blank until the physical
-        track — a re-served sample proves repeatability, a panel gives consensus.
+        {profile.answered} answers scored — all of it screen play. Precision and Consensus are still
+        blank: precision needs the same sample served twice blind in one session, which the cupping
+        screen does not yet do, and consensus needs a panel, which is M6.
       </p>
 
       <div className="profile-radar-row">
@@ -157,6 +262,8 @@ export function PalateProfile() {
           </li>
         ))}
       </ul>
+
+      <PhysicalEvidence />
 
       <h3>Confused with</h3>
       {confusions.length === 0 ? (

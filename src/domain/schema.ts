@@ -93,6 +93,15 @@ export const roastTrendsSourceSchema = z.object({
 });
 
 /**
+ * Grocery availability differs enormously between these three, which is why the homework list is
+ * region-filtered rather than global. Three is deliberately few: PLAN.md's open decision is which
+ * *one* region to author first, and a wider enum would let that decision be dodged by tagging
+ * everything everywhere.
+ */
+export const REGIONS = ['IN', 'EU', 'US'] as const;
+const regionSchema = z.enum(REGIONS);
+
+/**
  * Attribute records are the separate content asset that the taxonomy hangs meaning on: what the
  * attribute means, what to buy to smell it, and what causes it in the cup. The schema lands in M1
  * so the content workstream has a target to author against; the records themselves are M2 work and
@@ -124,8 +133,14 @@ export const attributeRecordSchema = z
             name: z.string().min(1),
             prep: z.string().min(1),
             intensity: z.number().min(0).max(15).optional(),
-            /** Where this reference is actually buyable - availability is regional. */
-            regions: z.array(z.string().min(1)).min(1),
+            /**
+             * Where this reference is actually buyable - availability is regional, and PLAN.md
+             * section 5 names it as a real localisation problem rather than a nicety. An enum
+             * rather than free strings because a typo'd region is the worst kind of content bug
+             * here: the reference stays valid, loads without complaint, and is silently absent
+             * from every homework list the region filter builds.
+             */
+            regions: z.array(regionSchema).min(1),
           })
           .strict(),
       )
@@ -199,6 +214,57 @@ export const profilesSourceSchema = z.object({
   profiles: z.array(coffeeProfileSchema).min(1),
 });
 
+/**
+ * The cupping protocol as a timed sequence - M4's Track B spine. `at` is seconds from water-on for
+ * every step, which is what makes the clock a pure function of elapsed time (see session/timer.ts)
+ * rather than a pile of setTimeouts.
+ *
+ * `approxTempC` is optional and its absence is meaningful: the dose, the pour temperature and the
+ * 4:00 crust break are the published protocol, but how fast a bowl cools to 70 C depends on bowl
+ * mass, ambient temperature and airflow. The steps that carry a temperature carry it as an estimate
+ * the taster overrides, and the UI must present it that way - a timer that certifies 70 C it cannot
+ * measure is exactly the kind of invented number this content set refuses elsewhere.
+ */
+const protocolStepSchema = z
+  .object({
+    id: localId,
+    at: z.number().int().min(0),
+    title: z.string().min(1),
+    detail: z.string().min(1),
+    approxTempC: z.number().positive().optional(),
+    /** Which cupping-form attributes this pass is for. Empty for the mechanical steps. */
+    sensory: z.array(z.string().min(1)),
+  })
+  .strict();
+
+const protocolPrepSchema = z
+  .object({
+    id: localId,
+    title: z.string().min(1),
+    detail: z.string().min(1),
+  })
+  .strict();
+
+export const protocolSourceSchema = z
+  .object({
+    version: z.string(),
+    note: z.string().optional(),
+    reviewStatus: z.string(),
+    reviewTarget: z.string().optional(),
+    ratio: z
+      .object({
+        coffeeG: z.number().positive(),
+        waterMl: z.number().positive(),
+        waterTempC: z.number().positive(),
+        note: z.string().min(1),
+      })
+      .strict(),
+    /** Done before the clock starts, so these carry no offset. */
+    prep: z.array(protocolPrepSchema).min(1),
+    steps: z.array(protocolStepSchema).min(1),
+  })
+  .strict();
+
 export type WheelSource = z.infer<typeof wheelSourceSchema>;
 export type AttributesSource = z.infer<typeof attributesSourceSchema>;
 export type ConfusableSource = z.infer<typeof confusableSourceSchema>;
@@ -210,3 +276,9 @@ export type Process = CoffeeProfile['process'];
 export type RoastTrendsSource = z.infer<typeof roastTrendsSourceSchema>;
 export type RoastTrend = z.infer<typeof roastTrendSchema>;
 export type TrendDirection = RoastTrend['direction'];
+export type Region = (typeof REGIONS)[number];
+export type ProtocolSource = z.infer<typeof protocolSourceSchema>;
+export type ProtocolStep = z.infer<typeof protocolStepSchema>;
+export type ProtocolPrep = z.infer<typeof protocolPrepSchema>;
+/** Pulled out because Reference Homework assigns one of these, not a whole attribute record. */
+export type ReferenceStandard = NonNullable<AttributeRecord['references']>[number];

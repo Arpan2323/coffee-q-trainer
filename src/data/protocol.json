@@ -1,0 +1,91 @@
+{
+  "version": "0.1.0",
+  "reviewStatus": "provisional",
+  "reviewTarget": "a Q grader who runs tables weekly should check the offsets against a real bowl",
+  "note": "The SCA cupping protocol as a timed sequence. Doses and the 4:00 crust break are the published protocol and are not ours to vary. The cooling offsets are estimates: a cupping bowl's temperature curve depends on bowl mass, ambient temperature and room airflow, so the clock prompts the pass and the cup decides whether it is ready. Every offset is seconds from water-on.",
+  "ratio": {
+    "coffeeG": 8.25,
+    "waterMl": 150,
+    "waterTempC": 93,
+    "note": "8.25 g per 150 ml is the SCA ratio. Scale both together; the ratio is the protocol, the volume is your bowl."
+  },
+  "prep": [
+    {
+      "id": "dose",
+      "title": "Dose and grind",
+      "detail": "Weigh 8.25 g per bowl and grind coarser than filter, around 70-75% through a 20 mesh sieve. Grind bowl by bowl, not one batch split up, or the last bowl is staler than the first."
+    },
+    {
+      "id": "dry-fragrance",
+      "title": "Dry fragrance",
+      "detail": "Sniff each bowl within 15 minutes of grinding, before any water. This is the only point in the session where you smell the coffee dry, and it is the pass most people skip."
+    },
+    {
+      "id": "code",
+      "title": "Code the bowls",
+      "detail": "Write each bowl's code on its base, not its rim, then set the bowls down in an order you did not choose. A code you can read from above is not a blind code."
+    }
+  ],
+  "steps": [
+    {
+      "id": "pour",
+      "at": 0,
+      "title": "Pour",
+      "detail": "Water just off the boil, about 93 C, poured to the brim in one go so all the grounds are wetted. Start the clock as the first bowl is filled.",
+      "sensory": []
+    },
+    {
+      "id": "steep",
+      "at": 15,
+      "title": "Steep undisturbed",
+      "detail": "Do not stir. The crust that forms is holding the aroma you are about to release.",
+      "sensory": []
+    },
+    {
+      "id": "break",
+      "at": 240,
+      "title": "Break the crust",
+      "detail": "Three gentle pushes away from you with the back of the spoon, nose over the bowl as it opens. This is the aroma-at-break pass and it happens once.",
+      "sensory": ["aroma"]
+    },
+    {
+      "id": "skim",
+      "at": 300,
+      "title": "Skim",
+      "detail": "Lift the foam and floating grounds off with two spoons. Rinse the spoon between bowls or you carry one coffee into the next.",
+      "sensory": []
+    },
+    {
+      "id": "first-pass",
+      "at": 480,
+      "approxTempC": 70,
+      "title": "First pass - flavour and aftertaste",
+      "detail": "Slurp hard enough to aerate. Flavour and aftertaste read best here, on the way down from about 70 C.",
+      "sensory": ["flavor", "aftertaste"]
+    },
+    {
+      "id": "second-pass",
+      "at": 720,
+      "approxTempC": 60,
+      "title": "Second pass - acidity, body, balance",
+      "detail": "Acidity and body separate as the cup cools. Compare bowl against bowl on one attribute at a time, not bowl by bowl holistically.",
+      "sensory": ["acidity", "body", "balance"]
+    },
+    {
+      "id": "third-pass",
+      "at": 1080,
+      "approxTempC": 50,
+      "title": "Third pass - sweetness and uniformity",
+      "detail": "Sweetness, uniformity and clean cup are cool-cup judgements. Faults that hid under heat surface here.",
+      "sensory": ["sweetness", "uniformity", "clean-cup"]
+    },
+    {
+      "id": "room-temp",
+      "at": 1500,
+      "approxTempC": 37,
+      "title": "Room-temperature pass",
+      "detail": "The last honest pass. Below about 21 C stop scoring - what you are tasting is no longer the coffee anyone will drink.",
+      "sensory": ["overall"]
+    }
+  ]
+}

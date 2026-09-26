@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "note": "One record for all 110 attributes on the wheel. The beginner definition is the Descriptor Golf clue, so it must describe the attribute WITHOUT using any word from its own label, or the hole becomes a word search against a wheel that already shows every name - buildAttributes throws on a clue that leaks, and a test covers it. The expert definition carries the diagnostic detail a Q candidate needs, and repeatedly names what an attribute is confused with and why. Intensity anchors are deliberately absent: a calibrated 0-15 value is panel measurement data against a physical kit, not something that can be written from a desk.",
   "reviewStatus": "provisional",
   "records": [
@@ -26,6 +26,13 @@
         "beginner": "Dry cured leaf without any sweetening: dusty, slightly bitter, the smell of a fresh cigarette before it is lit.",
         "expert": "Unsweetened cured leaf. Frequently confused with aged or old-crop woodiness, which arrives from storage rather than from the roast."
       },
+      "references": [
+        {
+          "name": "Unsmoked pipe tobacco or a cigar leaf, from a tobacconist",
+          "prep": "A pinch in a covered cup, smelled unlit. Unlit is the whole reference - anything burning has moved to smoky.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"],
       "causes": [{ "note": "Often reported in aged or long-stored lots as well as darker roasts." }]
     },
@@ -62,6 +69,13 @@
         "beginner": "Dry, powdery and cold, like a fireplace the morning after.",
         "expert": "Residual carbon character. Distinguished from the stinging neighbour by being drying and inert rather than pungent."
       },
+      "references": [
+        {
+          "name": "Cold ash from a wood fire or a charcoal grill",
+          "prep": "A teaspoon of cold, dry ash in a covered cup. It must be cold and it must be dry: warm ash smells of smoke, which is a different attribute one wedge away.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"],
       "causes": [{ "roast": ["dark"], "note": "Surface carbonisation, often alongside oil migration to the bean surface." }]
     },
@@ -71,6 +85,18 @@
         "beginner": "Wood-fire aroma clinging to clothing — drying on the palate rather than sharp.",
         "expert": "Phenolic-adjacent wood combustion character. Stylistic at low intensity in dark blends; at high intensity it is indistinguishable from a roast fault."
       },
+      "references": [
+        {
+          "name": "Lapsang souchong tea, dry leaf",
+          "prep": "Smell the dry leaf, then steep 2 g in 100 ml of water just off the boil for three minutes and smell the surface. Pine-smoked tea is the cleanest single-note smoke available in a kitchen.",
+          "regions": ["IN", "EU", "US"]
+        },
+        {
+          "name": "Smoked paprika (pimenton de la Vera)",
+          "prep": "A quarter teaspoon in a covered cup. Warm it briefly in the hand first - the aroma is slow to leave a cold powder.",
+          "regions": ["EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"],
       "causes": [{ "roast": ["medium-dark", "dark"], "note": "Also introduced by exhaust or chaff burning in a poorly maintained roaster." }]
     },
@@ -89,6 +115,13 @@
         "beginner": "Dry, plain and husky, like uncooked oats or the smell inside a flour bag.",
         "expert": "Raw starch character with no sweetness developed. A reliable marker of under-development, and easily mistaken for staling."
       },
+      "references": [
+        {
+          "name": "Unsweetened puffed wheat or plain toasted wheat cereal",
+          "prep": "Crush a tablespoon coarsely, cover for five minutes, then smell. Buy the unsweetened one: added sugar drags the reference toward caramel and away from the point.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"],
       "causes": [{ "roast": ["light"], "note": "Insufficient development time; the classic under-roast signature." }]
     },
@@ -98,6 +131,13 @@
         "beginner": "Toasted grain with sweetness behind it, like the crust of a fresh loaf or a milkshake powder.",
         "expert": "Toasted starch with caramelisation present. The sweet counterpart to plain toasted starch, and a sign that development was adequate."
       },
+      "references": [
+        {
+          "name": "Malted barley drink powder - Horlicks, Ovaltine, or dry malt extract from a brewing supplier",
+          "prep": "A heaped teaspoon of the dry powder in a covered cup. Smell it dry first, then add 30 ml of warm water and smell again - the wet smell is the one that turns up in coffee.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"],
       "causes": [{ "roast": ["medium"], "note": "Appears once development is sufficient to caramelise sugars alongside the starches." }]
     },
@@ -132,6 +172,13 @@
         "beginner": "The dusty, skin-on, faintly savoury kernel you find in a bar snack bowl.",
         "expert": "Legume rather than true kernel character: drier and more savoury than the others in this group, with a papery skin note."
       },
+      "references": [
+        {
+          "name": "Roasted unsalted peanuts, skins on",
+          "prep": "Crush three or four nuts and cover for two minutes. Salted nuts confound the basic-taste reference with the aroma one.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -140,6 +187,13 @@
         "beginner": "Sweet, buttery and slightly floral kernel — the base of a chocolate spread.",
         "expert": "The sweetest and most aromatic of the kernel group, with a distinct lactonic roundness the others lack."
       },
+      "references": [
+        {
+          "name": "Shelled hazelnuts, raw",
+          "prep": "Crush two nuts and cover for two minutes. Hazelnut spread will not do - it is mostly sugar and cocoa.",
+          "regions": ["EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -148,6 +202,13 @@
         "beginner": "Blanched, faintly bitter kernel with a marzipan edge.",
         "expert": "Benzaldehyde-adjacent character. The driest of the kernel group and the one most often confused with toasted starch."
       },
+      "references": [
+        {
+          "name": "Blanched raw almonds",
+          "prep": "Crush two nuts and cover. Keep a roasted almond alongside: the pair separates the nut from the roast, which is the confusion the wheel places two wedges apart.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -156,6 +217,13 @@
         "beginner": "Sweetened, milky and rounded confection character.",
         "expert": "Sweetened confection with dairy roundness. Separated from its darker sibling by sweetness and lower drying bitterness."
       },
+      "references": [
+        {
+          "name": "Unsweetened cocoa powder, not drinking chocolate",
+          "prep": "A teaspoon in a covered cup. Check the label for added sugar or milk solids; either one turns the reference into a confectionery smell.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -164,6 +232,13 @@
         "beginner": "High-percentage confection: drying, bitter, with little sweetness to soften it.",
         "expert": "Unsweetened to high-percentage confection with pronounced astringency. Substantially a roast artefact in coffee rather than an origin character."
       },
+      "references": [
+        {
+          "name": "Plain dark chocolate, 85% cocoa solids or higher",
+          "prep": "Break a square, let it sit covered for five minutes at room temperature, then smell. Taste it too: this attribute carries bitterness that cocoa powder alone does not.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor", "mouthfeel"],
       "causes": [{ "roast": ["medium-dark", "dark"], "note": "Deepens with development; at the far end it becomes indistinguishable from roast character." }]
     },
@@ -190,6 +265,13 @@
         "beginner": "Warm, creamy, faintly floral pod character with real complexity behind it.",
         "expert": "Natural pod extract: complex, with floral and lactonic facets absent from the isolated compound."
       },
+      "references": [
+        {
+          "name": "A whole vanilla pod",
+          "prep": "Split the pod lengthways and smell the seeds and the inner wall. Keep it in a sealed jar between sessions; it stays useful for years.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -198,6 +280,13 @@
         "beginner": "The single flat note of a synthesised compound: sugary, one-dimensional, like cheap ice cream.",
         "expert": "The isolated compound. Reads as a single note where the natural extract reads as a chord - the distinction is complexity, not intensity."
       },
+      "references": [
+        {
+          "name": "Synthetic vanilla essence, labelled vanillin or vanilla flavouring",
+          "prep": "One drop on a strip of filter paper, smelled after ten seconds. Smell it against a real pod in the same session - that pair is the lesson, and neither one teaches it alone.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma"]
     },
     {
@@ -222,6 +311,13 @@
         "beginner": "Thick, dark, faintly bitter cane syrup with a mineral edge.",
         "expert": "The darkest point of the caramelisation range, carrying bitterness and mineral depth alongside the sweetness."
       },
+      "references": [
+        {
+          "name": "Blackstrap molasses, or Indian sugarcane kakvi",
+          "prep": "Half a teaspoon in a covered cup, smelled at room temperature. Treacle and golden syrup are lighter and sit closer to caramel.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -230,6 +326,13 @@
         "beginner": "Woody, buttery sap boiled down — thinner and more aromatic than cane.",
         "expert": "Distinguished from cane-derived sweetness by a woody, faintly resinous top note and lower viscosity of impression."
       },
+      "references": [
+        {
+          "name": "Pure maple syrup, dark grade",
+          "prep": "Half a teaspoon in a covered cup. Maple-flavoured pancake syrup is fenugreek and caramel - it smells like the idea of the reference rather than the reference.",
+          "regions": ["EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -238,6 +341,13 @@
         "beginner": "Sugar taken just past melting: toasty, faintly bitter, deeply aromatic.",
         "expert": "Mid-range caramelisation. Sits directly on the boundary with roast character, and which word a taster reaches for is usually decided by roast level."
       },
+      "references": [
+        {
+          "name": "White sugar, caramelised dry",
+          "prep": "Melt a teaspoon of sugar in a dry pan until it turns amber, then take it off the heat before it darkens further and let it cool in the pan. Stop at amber: pushed further it becomes burnt, which is a different category.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"],
       "causes": [{ "roast": ["medium", "medium-dark"], "note": "A sugar-browning product; the continuum it shares with roast character has no sharp edge." }]
     },
@@ -247,6 +357,13 @@
         "beginner": "Floral, waxy, slightly sharp sweetness straight from the comb.",
         "expert": "Floral-sweet with a waxy body. The most origin-driven member of this group, and the least explicable as a roast artefact."
       },
+      "references": [
+        {
+          "name": "A mild single-flower honey - acacia or clover",
+          "prep": "Half a teaspoon in a covered cup, room temperature. Avoid strong honeys such as buckwheat or eucalyptus: they carry their own floral and medicinal notes.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
 
@@ -297,6 +414,13 @@
         "beginner": "Deep, dark, jammy soft fruit with a faint floral edge and little sharpness.",
         "expert": "Dark soft fruit with lower acidity and a floral top note. Distinguished from its bramble neighbour by depth rather than sharpness."
       },
+      "references": [
+        {
+          "name": "Blackberry preserve with no added flavouring",
+          "prep": "Half a teaspoon in a covered cup at room temperature. Check the label for elderberry or apple juice concentrate, which many preserves use as a base.",
+          "regions": ["EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -305,6 +429,13 @@
         "beginner": "Bright, tart and slightly perfumed soft fruit; sharper and more delicate than the darker ones.",
         "expert": "High-acid bramble character with pronounced perfume. Sharper and less dense than its dark neighbour."
       },
+      "references": [
+        {
+          "name": "Raspberry preserve, whole-fruit",
+          "prep": "Half a teaspoon in a covered cup. Smell it beside the blackberry reference: these two are the sibling pair the scoring engine prices at 70, and most people cannot split them on the first attempt.",
+          "regions": ["EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -313,6 +444,13 @@
         "beginner": "Soft, round, faintly waxy dark fruit — sweet with almost no bite.",
         "expert": "Round, low-acid dark fruit. Frequently a marker of extended fermentation in naturals rather than of origin, which is worth saying out loud."
       },
+      "references": [
+        {
+          "name": "Dried blueberries, or blueberry preserve",
+          "prep": "Crush three dried berries, or half a teaspoon of preserve, and cover for five minutes.",
+          "regions": ["EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"],
       "causes": [{ "process": ["natural"], "note": "Often produced by extended pulp contact rather than by variety or terroir." }]
     },
@@ -322,6 +460,13 @@
         "beginner": "Light, sweet red fruit with a faint green-stem note; fragrant rather than deep.",
         "expert": "Fragrant red fruit with a green-stem facet. At higher intensity it slides toward the overripe boundary."
       },
+      "references": [
+        {
+          "name": "Strawberry preserve, whole-fruit",
+          "prep": "Half a teaspoon in a covered cup. A jelly rather than a preserve is mostly sugar and pectin and smells of very little.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -330,6 +475,13 @@
         "beginner": "Sticky sun-dried vine fruit, deep and slightly leathery.",
         "expert": "Dehydrated vine fruit; the lighter of the two dried attributes, carrying less bitterness than its stone-fruit sibling."
       },
+      "references": [
+        {
+          "name": "Dark raisins, not golden sultanas",
+          "prep": "Four or five raisins, torn open, covered for five minutes. Golden sultanas are sulphured and smell of it.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -338,6 +490,13 @@
         "beginner": "Dark, syrupy dried stone fruit with a faint bitterness behind the sweetness.",
         "expert": "Dehydrated stone fruit. Darker and more bitter than its vine-fruit sibling, and the closer of the two to molasses."
       },
+      "references": [
+        {
+          "name": "Pitted prunes",
+          "prep": "Tear one open and cover for five minutes. The reference is the dark, cooked-fruit depth, not the sweetness.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -346,6 +505,13 @@
         "beginner": "Sweet, fatty, faintly milky tropical flesh with a dry, fibrous edge.",
         "expert": "Lactonic tropical character. Shares fatty sweetness with the kernel group, which is why it crosses that category boundary so readily."
       },
+      "references": [
+        {
+          "name": "Fresh coconut flesh, or unsweetened desiccated coconut",
+          "prep": "A teaspoon in a covered cup. Sweetened desiccated coconut is a confectionery smell and will not serve.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -354,6 +520,13 @@
         "beginner": "Sweet dark stone fruit with a faint marzipan note behind it.",
         "expert": "Stone fruit with a benzaldehyde facet. Common in naturals; the marzipan note is what separates it from soft dark fruit."
       },
+      "references": [
+        {
+          "name": "Dried sour cherries, or cherry preserve",
+          "prep": "Tear two dried cherries open and cover for five minutes. Glace cherries are almond essence and sugar - a different reference entirely.",
+          "regions": ["EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -370,6 +543,13 @@
         "beginner": "Sharp tropical sweetness with an enzymatic, almost prickly edge.",
         "expert": "High-acid tropical character with a bromelain-like bite. At intensity it becomes hard to separate from early ferment."
       },
+      "references": [
+        {
+          "name": "Fresh pineapple",
+          "prep": "A small piece, covered, smelled at room temperature. Tinned pineapple loses the ester top note that makes this attribute recognisable.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor", "mouthfeel"]
     },
     {
@@ -386,6 +566,13 @@
         "beginner": "Crisp orchard sharpness — clean, watery-sweet, with a green snap.",
         "expert": "Malic-driven pome character. The fruit face of an acid a grader would name directly; the same percept from the other side."
       },
+      "references": [
+        {
+          "name": "A green apple",
+          "prep": "Cut a slice, leave it two minutes to begin oxidising, then smell. Two minutes is deliberate: the reference most coffees carry is a slightly oxidised apple, not a just-cut one.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -394,6 +581,13 @@
         "beginner": "Soft, fuzzy-skinned stone fruit; floral, sweet and low in sharpness.",
         "expert": "Lactonic stone fruit with floral lift. Rounder and less acidic than pome character."
       },
+      "references": [
+        {
+          "name": "Tinned peach in juice, not syrup",
+          "prep": "A piece in a covered cup with a little of its juice. Tinned is the better reference here: it is consistent all year, where a fresh peach is only itself for a fortnight.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -410,6 +604,13 @@
         "beginner": "Bitter-edged pink zest with a slightly resinous, mouth-drying finish.",
         "expert": "Bitter citrus with naringin-like astringency — the most bitter and most drying member of the group."
       },
+      "references": [
+        {
+          "name": "A fresh grapefruit, pink or white",
+          "prep": "Zest a little onto a saucer. The sulphurous edge under the citrus is the part that distinguishes it from orange, and it is the part that survives into a cup.",
+          "regions": ["EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor", "mouthfeel"]
     },
     {
@@ -418,6 +619,13 @@
         "beginner": "Round, sweet zest with soft acidity and a warm peel aroma.",
         "expert": "Sweet citrus with lower acidity than the sharp members; the most approachable of the group and the least diagnostic."
       },
+      "references": [
+        {
+          "name": "A fresh orange",
+          "prep": "Zest a little onto a saucer. Squeeze the peel to spray the oil if the zest smells thin.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -426,6 +634,13 @@
         "beginner": "Clean, sharp, mouth-watering zest — bright without much sweetness.",
         "expert": "High citric expression with clean zest aromatics. The usual reference point for the acid itself."
       },
+      "references": [
+        {
+          "name": "A fresh lemon",
+          "prep": "Grate a little zest onto a saucer and smell within a minute. Zest, not juice: the juice is the acid reference, the peel oil is the aroma one.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -434,6 +649,13 @@
         "beginner": "Sharp zest with a green, faintly bitter edge; more aromatic than sweet.",
         "expert": "Sharp citrus with a green terpene facet that distinguishes it from its yellow neighbour."
       },
+      "references": [
+        {
+          "name": "A fresh lime",
+          "prep": "Zest a little onto a saucer and smell immediately. Lime oil fades faster than lemon - grate it last if you are running several citrus references in one session.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
 
@@ -477,6 +699,13 @@
         "beginner": "The sharp, nose-tingling smell of vinegar.",
         "expert": "Vinegar character. In small amounts it lifts and brightens; in quantity it is the leading edge of a ferment fault."
       },
+      "references": [
+        {
+          "name": "White distilled vinegar",
+          "prep": "One part vinegar to twenty parts water. Smell and taste. At full strength it will scour your nose for the rest of the session.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"],
       "causes": [{ "process": ["natural", "anaerobic"], "note": "Acetic bacteria during fermentation; the first marker to appear as control slips." }]
     },
@@ -486,6 +715,13 @@
         "beginner": "Rancid dairy — the sour smell of butter left out far too long.",
         "expert": "Rancid butterfat character. A definitive over-fermentation marker, and frequently mislabelled as animalic by untrained panels."
       },
+      "references": [
+        {
+          "name": "Butter left out to go rancid",
+          "prep": "Leave a teaspoon of unsalted butter uncovered at room temperature for three days, then cover and smell. Unpleasant, and that is the reference - this is what over-fermentation smells like in a cup.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"],
       "causes": [{ "process": ["natural", "anaerobic"], "note": "Anaerobic bacterial activity past the useful window." }]
     },
@@ -504,6 +740,13 @@
         "beginner": "Clean, sharp brightness of the kind that makes the mouth water — the sensation under lemon and lime.",
         "expert": "The dominant acid in citrus. Clean and mouth-watering; distinguished from malic by lacking the green pome facet."
       },
+      "references": [
+        {
+          "name": "Food-grade citric acid - sold as nimbu ka phool in India, as a preserving acid elsewhere",
+          "prep": "0.5 g in 100 ml of water at room temperature. Taste, do not smell: this is a basic taste and it has almost no aroma. Make it fresh each session.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["flavor", "basic-taste"]
     },
     {
@@ -512,6 +755,13 @@
         "beginner": "Crisp green sharpness, like biting a tart apple.",
         "expert": "The dominant acid in pome fruit. Green and crisp, and the acid most often reported as a fruit rather than as a sensation."
       },
+      "references": [
+        {
+          "name": "Food-grade malic acid, from a brewing or winemaking supplier",
+          "prep": "0.5 g in 100 ml of water. Taste it against the citric acid solution at the same concentration - side by side is the only way this pair teaches anything, and citric-versus-malic is the confusion the curated table exists for.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["flavor", "basic-taste"]
     },
     {
@@ -520,6 +770,13 @@
         "beginner": "Sweet vine fruit with a warm boozy lift behind it.",
         "expert": "Vine character with ethanol lift. The boundary with plain vine fruit is the presence of alcohol and acetic top notes, not the fruit itself."
       },
+      "references": [
+        {
+          "name": "A dry red wine",
+          "prep": "10 ml in a covered glass, left five minutes. Use something plain and young; an oaked or aged wine brings vanilla and leather that belong to other wedges.",
+          "regions": ["EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -528,6 +785,13 @@
         "beginner": "Warm, oaky spirit character with vanilla and caramel behind the burn.",
         "expert": "Barrel-aged spirit character: ethanol with oak lactones. Rare, and usually stylistic rather than faulty."
       },
+      "references": [
+        {
+          "name": "A blended whisky",
+          "prep": "5 ml in a covered glass. Smell across the rim rather than into the glass - ethanol at full strength numbs the nose for several minutes.",
+          "regions": ["EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -536,6 +800,13 @@
         "beginner": "Pulpy, yeasty, slightly sour funk — fruit that has begun to turn.",
         "expert": "Uncontrolled pulp breakdown. Sought after in some modern processing and disqualifying in a washed lot; the cup cannot tell you which was intended."
       },
+      "references": [
+        {
+          "name": "Unflavoured kombucha, or the brine from naturally fermented pickles",
+          "prep": "10 ml in a covered cup. This is the attribute Defect Lab flags as context-dependent, so smell it with that in mind: the question is never whether it is present but whether it is in a coffee that wanted it.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"],
       "causes": [{ "process": ["natural", "anaerobic"], "note": "Extended pulp contact, wet weather during drying, or deliberate tank fermentation." }]
     },
@@ -545,6 +816,13 @@
         "beginner": "Fruit a day or two past its best: heavy, sweet, and starting to go.",
         "expert": "The transition point between desirable fruit and ferment, and the most common split-the-table call on a cupping table."
       },
+      "references": [
+        {
+          "name": "A banana left until the skin is fully black",
+          "prep": "Smell the intact fruit, then peel it and smell again. Four or five days past ripe at room temperature gets you there.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
 
@@ -563,6 +841,13 @@
         "beginner": "Smooth, fatty, faintly peppery pressed-fruit character with a leafy edge.",
         "expert": "Fatty, peppery character. Rare, and more often registered as a texture impression than as an aroma."
       },
+      "references": [
+        {
+          "name": "Extra-virgin olive oil, a freshly opened bottle",
+          "prep": "5 ml in a covered cup, warmed in the hand. A bottle open for months has gone flat and stale, which teaches the wrong attribute.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor", "mouthfeel"]
     },
     {
@@ -588,6 +873,13 @@
         "beginner": "Starchy, dull legume character, like the water from a tin of pulses.",
         "expert": "Cooked legume character. Almost indistinguishable from fresh pod character and, like it, a marker of under-development."
       },
+      "references": [
+        {
+          "name": "Dry raw kidney beans or chickpeas",
+          "prep": "Crush a tablespoon coarsely and cover for five minutes. Raw and dry: cooked or tinned beans smell of the cooking, not the legume.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -605,6 +897,13 @@
         "beginner": "The bright snap of a freshly split legume casing.",
         "expert": "Fresh legume character, aldehyde-driven. The freshest member of the plant group and the least unpleasant."
       },
+      "references": [
+        {
+          "name": "Fresh peas in the pod",
+          "prep": "Snap two pods open and cover for two minutes. Frozen peas will not serve: the aroma is in the pod, not the pea.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -613,6 +912,13 @@
         "beginner": "Living, watery, just-cut plant smell — cool rather than dry.",
         "expert": "Cut-plant aldehydes at low intensity; the most pleasant expression available in this group."
       },
+      "references": [
+        {
+          "name": "Freshly cut grass",
+          "prep": "A pinch of clippings, bruised between the fingers, smelled within a minute. The compound responsible fades fast, so this reference has to be made rather than stored.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -621,6 +927,13 @@
         "beginner": "Deep leafy character, like raw spinach or chard.",
         "expert": "Concentrated chlorophyll character; heavier and less bright than cut-plant notes."
       },
+      "references": [
+        {
+          "name": "Raw spinach leaves",
+          "prep": "Bruise three leaves and cover for two minutes.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -637,6 +950,13 @@
         "beginner": "Dry, dusty, sun-cured grass — warm and faintly sweet, with all the moisture gone out of it.",
         "expert": "Dried grass character. Sits on the boundary with chamomile, and old-crop lots frequently show it alongside woodiness."
       },
+      "references": [
+        {
+          "name": "Hay or dried grass, from a pet shop or a field edge",
+          "prep": "A small handful in a covered container. Keep it dry - damp hay turns musty, which is a fault in a different category.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"],
       "causes": [{ "note": "Ageing in storage as well as drying conditions at origin." }]
     },
@@ -646,6 +966,13 @@
         "beginner": "Aromatic leafy sharpness — mint, thyme or sage rather than grass.",
         "expert": "Aromatic herbaceous character with terpene lift, distinct from the flat green of cooked plant matter."
       },
+      "references": [
+        {
+          "name": "Fresh coriander leaf",
+          "prep": "Bruise two leaves and cover. Substitute flat-leaf parsley if coriander reads as soapy to you - that is a genuine genetic difference and not worth training against.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
 
@@ -688,6 +1015,13 @@
         "beginner": "Dry, flat and faintly fatty, like a damp packing box drying out.",
         "expert": "Lipid oxidation product. Further along the staling continuum than simple flatness, and the point at which most drinkers notice."
       },
+      "references": [
+        {
+          "name": "Corrugated cardboard",
+          "prep": "Tear a piece to expose the fluting, breathe on it or mist it very lightly, and smell. The tear matters - a cut edge gives up much less.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -696,6 +1030,13 @@
         "beginner": "Dry, thin and dusty, like the inside of an old book.",
         "expert": "Dry oxidised character without the fatty note of its cardboard neighbour."
       },
+      "references": [
+        {
+          "name": "An unrinsed paper filter",
+          "prep": "Smell a dry filter, then pour 50 ml of hot water through one and smell the water. This is the reference that explains why rinsing the filter is not superstition.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -704,6 +1045,13 @@
         "beginner": "Dry, hollow, old-timber character with the sweetness gone out of it.",
         "expert": "Old-crop marker. Frequently reported as tobacco, which arrives from the roast rather than from storage - a useful diagnostic split."
       },
+      "references": [
+        {
+          "name": "Pencil shavings or a wooden coffee stirrer",
+          "prep": "A pinch of fresh shavings in a covered cup. Cedar pencil is the cleanest version of this.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"],
       "causes": [{ "note": "Extended green storage; the classic past-crop signature." }]
     },
@@ -729,6 +1077,13 @@
         "beginner": "Damp soil and cellar floor — wet ground rather than dry powder.",
         "expert": "Geosmin-driven soil character from damp storage. The wet counterpart to dusty staling."
       },
+      "references": [
+        {
+          "name": "Damp soil from a pot plant",
+          "prep": "A teaspoon of moist soil in a covered cup. Potting compost, not garden soil with roots and leaf litter in it.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -753,6 +1108,13 @@
         "beginner": "Antiseptic and sharp — a hospital corridor, or a freshly opened plaster.",
         "expert": "A serious fault, usually from bacterial contamination or specific agronomic problems. Shares an eugenol-adjacent family with clove, which is why the confusion is legitimate."
       },
+      "references": [
+        {
+          "name": "Dettol antiseptic liquid, or any chloroxylenol disinfectant",
+          "prep": "One drop on a strip of filter paper. Phenolic is the fault most likely to be described as simply bad by someone who cannot name it, which is precisely why it earns a reference.",
+          "regions": ["IN", "EU"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -761,6 +1123,13 @@
         "beginner": "One of the basic tastes: the drying, sharp sensation at the back of the tongue.",
         "expert": "A basic taste, not an aroma. Excess usually indicates over-extraction or dark roast rather than a green defect."
       },
+      "references": [
+        {
+          "name": "Tonic water, left open until flat",
+          "prep": "50 ml at room temperature, tasted. The quinine is the bitterness; flat tonic removes the carbonation that otherwise reads as acidity.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["basic-taste"]
     },
     {
@@ -769,6 +1138,13 @@
         "beginner": "One of the basic tastes: a mineral, saline edge.",
         "expert": "A basic taste. Rare in coffee; when present it usually points at brewing water or under-extraction rather than the bean."
       },
+      "references": [
+        {
+          "name": "Table salt",
+          "prep": "1 g in 100 ml of water. Taste only. Worth making once at this concentration so you know what a genuinely saline cup tastes like rather than guessing at it.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["basic-taste"]
     },
     {
@@ -777,6 +1153,13 @@
         "beginner": "Sharp and clinical — antiseptic, iodine, a first-aid box.",
         "expert": "Clinical taint, near-synonymous in practice with phenol. Tasters reach for this word first and the diagnostic term second."
       },
+      "references": [
+        {
+          "name": "Iodine tincture, or a crushed soluble aspirin",
+          "prep": "One drop of tincture on filter paper, or a crushed tablet in a covered cup. Iodine is also the rioy reference, and the overlap is real rather than sloppy.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -801,6 +1184,13 @@
         "beginner": "Hot tyres and elastic bands — a burnt synthetic smell.",
         "expert": "Common and characteristic in some robusta, where it is not a fault at all. Context decides, which makes it a good test of a taster's judgement."
       },
+      "references": [
+        {
+          "name": "A new rubber band, or an inner-tube patch",
+          "prep": "Two or three bands in a covered cup, warmed in the hand for a minute. Warmth is what makes rubber give anything up.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
 
@@ -818,6 +1208,13 @@
         "beginner": "A sharp physical bite in the nose and throat rather than a smell.",
         "expert": "Trigeminal irritation without a defining aroma. Perceived as sensation rather than scent, which is why it resists description."
       },
+      "references": [
+        {
+          "name": "Fresh ginger root",
+          "prep": "Grate a little onto a saucer. The reference is the sharp, penetrating quality that seems to reach the back of the nose, not the flavour.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "mouthfeel"]
     },
     {
@@ -826,6 +1223,13 @@
         "beginner": "Dry, woody heat with a sneeze-provoking sharpness.",
         "expert": "Piperine-driven character with woody top notes; distinguished from generic pungency by having an identifiable aroma."
       },
+      "references": [
+        {
+          "name": "Black peppercorns",
+          "prep": "Crack three or four and cover for a minute. Freshly cracked - the aroma is largely gone from pre-ground pepper.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor", "mouthfeel"]
     },
     {
@@ -842,6 +1246,13 @@
         "beginner": "Sweet liquorice warmth with a cooling finish.",
         "expert": "Anethole-driven sweet seasoning. The cooling facet is what separates it from the other warm spices."
       },
+      "references": [
+        {
+          "name": "Star anise, or fennel seed",
+          "prep": "Crush one point of a star, or a pinch of fennel, and cover. Both carry anethole, which is the compound the attribute is really about.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -850,6 +1261,13 @@
         "beginner": "Dry, dusty, faintly woody warmth with a bitter edge.",
         "expert": "Dry, resinous warmth. The least sweet member of the warm seasoning group."
       },
+      "references": [
+        {
+          "name": "A whole nutmeg",
+          "prep": "Grate a little onto a saucer and smell fresh. Pre-ground nutmeg is largely gone within weeks of grinding.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -858,6 +1276,13 @@
         "beginner": "Sweet bark warmth, dry and slightly sharp.",
         "expert": "Cinnamaldehyde character. Frequently a roast artefact rather than an origin note, particularly at lighter development."
       },
+      "references": [
+        {
+          "name": "A cinnamon or cassia quill",
+          "prep": "Scrape the inner surface with a knife and smell the scrapings. Most of what is sold as cinnamon in India and North America is cassia - blunter and more medicinal than true Ceylon cinnamon. Either serves as a reference as long as you know which one you have.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"],
       "causes": [{ "roast": ["light", "medium"], "note": "Often produced in the drum rather than carried from the farm." }]
     },
@@ -867,6 +1292,13 @@
         "beginner": "Intense sweet-warm bud character with a numbing, faintly antiseptic edge.",
         "expert": "Eugenol-driven. The pleasant expression of the compound family that reads as a serious fault when it dominates."
       },
+      "references": [
+        {
+          "name": "Whole cloves",
+          "prep": "Crush one and cover for a minute. Powerful enough to dominate a session, so smell it last.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor", "mouthfeel"]
     },
 
@@ -885,6 +1317,13 @@
         "beginner": "Dry, tannic, faintly perfumed leaf infusion with a drying finish.",
         "expert": "Tannic infusion character with floral lift. Astringency is what separates it from the blossom notes proper."
       },
+      "references": [
+        {
+          "name": "Unflavoured black tea, a good loose leaf",
+          "prep": "Smell the dry leaf, then steep 2 g in 100 ml just off the boil for three minutes and smell the surface. A plain Assam or Ceylon; anything bergamot-scented is a different reference.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor", "mouthfeel"]
     },
     {
@@ -901,6 +1340,13 @@
         "beginner": "Soft, sweet, faintly dried-grass flower infusion.",
         "expert": "Dried flower character sitting directly on the boundary with cured grass - a defensible confusion rather than an error."
       },
+      "references": [
+        {
+          "name": "Dried chamomile flowers",
+          "prep": "Open a tea bag or use loose flowers, a teaspoon in a covered cup. Smell it against the hay reference: chamomile sits right on that boundary and the pair is a genuinely hard discrimination.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -909,6 +1355,13 @@
         "beginner": "Sweet, heavy, unmistakably perfumed petal character.",
         "expert": "Geraniol and phenethyl alcohol driven; heavier and sweeter than the other blossoms."
       },
+      "references": [
+        {
+          "name": "Dried rose petals, or food-grade rose water",
+          "prep": "A pinch of petals in a covered cup, or one drop of rose water on filter paper. Rose water is widespread in India as gulab jal and is the more consistent of the two.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     },
     {
@@ -917,6 +1370,13 @@
         "beginner": "Intense, sweet, slightly green white-flower perfume.",
         "expert": "Indole-containing white blossom. The most intense floral, and the one most often paired with leaf-infusion character."
       },
+      "references": [
+        {
+          "name": "Jasmine-scented green tea, dry leaf",
+          "prep": "Smell the dry leaf in a covered cup. Scented tea rather than jasmine flowers: the flower is seasonal and the tea is the same every time, which is what a reference standard has to be.",
+          "regions": ["IN", "EU", "US"]
+        }
+      ],
       "modality": ["aroma", "flavor"]
     }
   ]
