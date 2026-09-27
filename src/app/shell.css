@@ -1,0 +1,1169 @@
+/*
+ * The product shell: Wheel / Play / Profile, laid out as a phone-width column. Organic is a
+ * light-only system, so the shell pins `color-scheme: light` and maps the variables the older drill
+ * screens read (--bg, --fg, --muted, --line, --panel) onto its tokens rather than restyling them.
+ */
+body {
+  margin: 0;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.cq-page {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+}
+
+.cq {
+  --bg: var(--color-bg);
+  --fg: var(--color-text);
+  --muted: var(--color-neutral-700);
+  --line: var(--color-divider);
+  --panel: color-mix(in srgb, var(--color-text) 4%, transparent);
+
+  color-scheme: light;
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Drill screens were built for a desktop column; give them room when there is room. */
+.cq.is-wide {
+  max-width: 1100px;
+}
+
+.cq *,
+.cq *::before,
+.cq *::after {
+  box-sizing: border-box;
+}
+
+.cq button {
+  font: inherit;
+  color: inherit;
+}
+
+.cq :focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.cq-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 0 24px;
+}
+
+.cq-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 0 22px;
+}
+
+.cq-screen.is-tight {
+  gap: 12px;
+  padding: 0 18px;
+}
+
+.cq-h1 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.cq-h2 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.cq-lede {
+  margin: 6px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-neutral-800);
+  text-wrap: pretty;
+}
+
+.cq-muted {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-neutral-700);
+  text-wrap: pretty;
+}
+
+.cq-kicker {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-neutral-700);
+}
+
+.cq-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cq-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cq-card {
+  background: var(--color-neutral-100);
+  border-radius: var(--radius-lg);
+}
+
+.cq-fade {
+  animation: cqFade 0.4s both;
+}
+
+@keyframes cqFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cqUp {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* — buttons — */
+.cq-btn {
+  border: 0;
+  cursor: pointer;
+  border-radius: 999px;
+  font-family: var(--font-heading) !important;
+  font-weight: var(--font-heading-weight);
+  font-size: 16px;
+  line-height: 1.2;
+  padding: 13px 22px;
+}
+
+.cq-btn-primary {
+  background: var(--color-accent);
+  color: var(--color-bg) !important;
+}
+
+.cq-btn-primary:hover {
+  background: var(--color-accent-600);
+}
+
+.cq-btn-primary:active {
+  background: var(--color-accent-700);
+}
+
+.cq-btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background: var(--color-accent);
+}
+
+.cq-btn-secondary {
+  background: transparent;
+  border: 1px solid var(--color-divider);
+}
+
+.cq-btn-secondary:hover {
+  background: color-mix(in srgb, var(--color-text) 7%, transparent);
+}
+
+.cq-btn-sm {
+  font-size: 15px;
+  padding: 12px 22px;
+}
+
+.cq-icon-btn {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-neutral-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cq-icon-btn:hover {
+  background: var(--color-neutral-200);
+}
+
+/* — header chips — */
+.cq-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.cq-brand {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.cq-chips {
+  display: flex;
+  gap: 5px;
+  flex: none;
+}
+
+.cq-chip {
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cq-chip.is-accent {
+  background: var(--color-accent-200);
+  color: var(--color-accent-800);
+}
+
+.cq-chip.is-accent-2 {
+  background: var(--color-accent-2-200);
+  color: var(--color-accent-2-800);
+}
+
+/* — the wheel inside the shell — */
+.cq-wheel {
+  display: flex;
+  justify-content: center;
+  margin: 0 -12px;
+}
+
+.cq .flavor-wheel {
+  --wheel-stroke: var(--color-bg);
+  --wheel-text: var(--color-text);
+  --wheel-text-inverse: #fff;
+  --wheel-hub-fill: var(--color-neutral-100);
+  --wheel-hub-stroke: transparent;
+  --wheel-focus: var(--color-text);
+  --wheel-reveal: var(--color-accent-2-700);
+  --wheel-pin-target: var(--color-accent-2-700);
+  --wheel-pin-answer: var(--color-accent);
+  --wheel-pin-ring: var(--color-neutral-100);
+
+  max-height: none;
+}
+
+.cq .wedge-label,
+.cq .wheel-hub-hint,
+.cq .wheel-pin-label {
+  font-family: var(--font-body);
+}
+
+.cq .wheel-hub-label {
+  font-family: var(--font-heading);
+  font-weight: 400;
+}
+
+/* — Wheel tab — */
+.cq-daily {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 20px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cq-daily-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.cq-daily-head .cq-kicker {
+  color: var(--color-accent-700);
+  font-size: 12px;
+}
+
+.cq-daily-meta {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-neutral-700);
+}
+
+.cq-quote {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 21px;
+  line-height: 1.25;
+  text-wrap: pretty;
+}
+
+.cq-daily .cq-btn {
+  align-self: flex-start;
+}
+
+.cq-cat-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.cq-cat-name {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  line-height: 1.1;
+}
+
+.cq-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cq-group {
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  background: var(--color-neutral-100);
+  transition: background 0.2s;
+}
+
+.cq-group.is-on {
+  background: color-mix(in srgb, var(--cat) 22%, var(--color-neutral-100));
+}
+
+.cq-group-head {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.cq-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: none;
+  background: var(--cat);
+}
+
+.cq-group-name {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.cq-group-meta {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--color-neutral-700);
+}
+
+.cq-desc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cq-desc-chip {
+  border: 0;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 13px !important;
+  font-weight: 600;
+  cursor: pointer;
+  background: color-mix(in srgb, var(--cat) 16%, var(--color-bg));
+  transition: background 0.2s;
+}
+
+.cq-desc-chip.is-on {
+  background: var(--cat);
+  color: #fff !important;
+}
+
+.cq-detail {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cq-detail-name {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.cq-detail p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-neutral-800);
+}
+
+.cq-detail .cq-provisional {
+  font-size: 12px;
+  color: var(--color-neutral-600);
+}
+
+/* — Play tab — */
+.cq-belts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cq-belt {
+  all: unset;
+  box-sizing: border-box;
+  border-radius: var(--radius-lg);
+  padding: 18px 18px 16px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  cursor: pointer;
+  background: var(--color-neutral-100);
+  --belt-fg: var(--color-text);
+  --belt-sub: var(--color-neutral-700);
+  --belt-meta: var(--color-neutral-600);
+}
+
+.cq-belt:hover {
+  filter: brightness(0.98);
+}
+
+.cq-belt:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.cq-belt.is-current {
+  background: var(--color-neutral-900);
+  --belt-fg: var(--color-bg);
+  --belt-sub: var(--color-neutral-300);
+  --belt-meta: var(--color-accent-300);
+}
+
+.cq-belt.is-locked {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.cq-belt-badge {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  background: var(--color-neutral-200);
+  color: var(--color-neutral-700);
+}
+
+.cq-belt.is-current .cq-belt-badge {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.cq-belt.is-earned .cq-belt-badge {
+  background: var(--color-accent-2-500);
+  color: #fff;
+}
+
+.cq-belt-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cq-belt-top {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.cq-belt-name {
+  font-family: var(--font-heading);
+  font-size: 19px;
+  color: var(--belt-fg);
+}
+
+.cq-belt-status {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--belt-meta);
+}
+
+.cq-belt-desc {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--belt-sub);
+}
+
+.cq-belt-meta {
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--belt-meta);
+}
+
+.cq-drills {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.cq-drill {
+  all: unset;
+  box-sizing: border-box;
+  background: var(--color-neutral-100);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  min-height: 104px;
+}
+
+.cq-drill:hover {
+  background: var(--color-neutral-200);
+}
+
+.cq-drill:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.cq-drill-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--cat);
+}
+
+.cq-drill-name {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.cq-drill-short {
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--color-neutral-700);
+}
+
+/* — the game — */
+.cq-game-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cq-game-title {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.cq-game-score {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+}
+
+.cq-game-big {
+  font-family: var(--font-heading);
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.cq-game-big span {
+  color: var(--color-neutral-600);
+}
+
+.cq-card-row {
+  display: grid;
+  gap: 4px;
+}
+
+.cq-hole {
+  height: 28px;
+  border-radius: 999px;
+  border: 2px solid var(--color-neutral-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-neutral-500);
+  font-variant-numeric: tabular-nums;
+}
+
+.cq-hole.is-now {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.cq-tone-good {
+  background: var(--color-accent-2-200);
+  color: var(--color-accent-2-800) !important;
+}
+
+.cq-tone-par {
+  background: var(--color-neutral-200);
+  color: var(--color-neutral-800) !important;
+}
+
+.cq-tone-bad {
+  background: var(--color-accent-200);
+  color: var(--color-accent-800) !important;
+}
+
+.cq-hole[class*='cq-tone-'] {
+  border-color: transparent;
+}
+
+.cq-clue {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cq-clue-ask {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-accent-700);
+}
+
+.cq-clue .cq-quote {
+  font-size: 19px;
+  line-height: 1.3;
+}
+
+.cq-commit {
+  position: sticky;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-neutral-100);
+  border-radius: 999px;
+  padding: 6px 6px 6px 20px;
+  box-shadow: var(--shadow-md);
+}
+
+.cq-commit-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.cq-commit-path {
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cq-commit .cq-btn {
+  flex: none;
+}
+
+.cq-feedback {
+  position: sticky;
+  bottom: 12px;
+  background: var(--color-neutral-100);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 18px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: cqUp 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.cq-feedback-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cq-feedback-score {
+  width: 52px;
+  height: 52px;
+  flex: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 20px;
+}
+
+.cq-feedback-term {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.cq-feedback-reason {
+  font-size: 14px;
+  color: var(--color-neutral-800);
+}
+
+.cq-feedback-grid {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 4px 10px;
+  font-size: 14px;
+}
+
+.cq-feedback-grid dt {
+  color: var(--color-neutral-700);
+  font-weight: 600;
+}
+
+.cq-feedback-grid dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.cq-feedback-grid .is-pin {
+  color: var(--color-accent-2-800);
+}
+
+.cq-feedback-grid .is-you {
+  color: var(--color-accent-800);
+}
+
+.cq-feedback-note {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--color-neutral-700);
+}
+
+/* — results — */
+.cq-result-big {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cq-result-vs {
+  font-family: var(--font-heading);
+  font-size: 56px;
+  line-height: 1;
+}
+
+.cq-result-sub {
+  font-size: 15px;
+  color: var(--color-neutral-800);
+}
+
+.cq-result-belt {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-accent-800);
+}
+
+.cq-result-belt.is-earned {
+  color: var(--color-accent-2-800);
+}
+
+.cq-result-wheel {
+  padding: 14px 0 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.cq-result-wheel .cq-wheel {
+  width: 100%;
+  margin: 0;
+}
+
+.cq-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-neutral-800);
+}
+
+.cq-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cq-legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.cq-legend i.is-path {
+  width: 16px;
+  height: 0;
+  border-radius: 0;
+  border-top: 2px dashed var(--color-accent-700);
+}
+
+.cq-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.cq-stat {
+  background: var(--color-neutral-100);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cq-stat strong {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.cq-stat span {
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--color-neutral-700);
+}
+
+.cq-mastered {
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-2-100);
+  color: var(--color-accent-2-800);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.cq-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px 18px;
+}
+
+.cq-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.cq-row + .cq-row {
+  border-top: 1px solid var(--color-divider);
+}
+
+.cq-row-n {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cq-row-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.cq-row-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.cq-row-sub {
+  font-size: 12px;
+  color: var(--color-neutral-700);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cq-pill {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.cq-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* — Profile tab — */
+.cq-bars {
+  padding: 8px 18px;
+}
+
+.cq-bar-row {
+  display: grid;
+  grid-template-columns: 1fr 110px 40px;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.cq-bar-row + .cq-bar-row {
+  border-top: 1px solid var(--color-divider);
+}
+
+.cq-bar-name {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cq-bar-name span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cq-bar-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-neutral-200);
+  overflow: hidden;
+}
+
+.cq-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--cat);
+  transition: width 0.6s;
+}
+
+.cq-bar-pct {
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.cq-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.cq-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-neutral-700);
+}
+
+.cq-day i {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--color-neutral-300);
+}
+
+.cq-day.is-today i {
+  border-color: var(--color-accent-300);
+}
+
+.cq-day.is-played i {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.cq-embedded {
+  padding: 18px;
+  overflow-x: auto;
+}
+
+.cq-embedded h2 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+}
+
+/* — drill screen — */
+.cq-drill-screen .cq-game-head {
+  padding: 0 18px;
+  max-width: 1100px;
+}
+
+.cq-drill-body {
+  padding: 8px 18px 0;
+}
+
+/* — tab bar — */
+.cq-tabs {
+  flex: none;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 28px calc(14px + env(safe-area-inset-bottom));
+  background: var(--color-neutral-100);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: var(--shadow-md);
+}
+
+.cq-tab {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 64px;
+  min-height: 44px;
+  cursor: pointer;
+  color: var(--color-neutral-600);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.cq-tab[aria-current='page'] {
+  color: var(--color-accent);
+}
+
+.cq-tab:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+/* — bottom sheet — */
+.cq-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  background: color-mix(in srgb, var(--color-neutral-900) 35%, transparent);
+  animation: cqFade 0.25s both;
+}
+
+.cq-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 41;
+  background: var(--color-bg);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 14px 22px calc(28px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: cqUp 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.cq-sheet-grip {
+  align-self: center;
+  width: 40px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--color-neutral-300);
+}
+
+.cq-sheet .cq-drill-dot {
+  width: 44px;
+  height: 44px;
+}
+
+.cq-sheet-title {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  line-height: 1.1;
+}
+
+.cq-sheet .cq-chip {
+  align-self: flex-start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cq-fade,
+  .cq-feedback,
+  .cq-sheet,
+  .cq-scrim {
+    animation: none;
+  }
+}
