@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useRef } from 'react';
 import type { KeyboardEvent } from 'react';
 import type { Wheel } from '../domain/types.js';
-import { getNode } from '../domain/wheel.js';
+import { getNode, isAncestor } from '../domain/wheel.js';
 import {
   HUB_RADIUS,
   OUTER_RADIUS,
@@ -12,6 +12,7 @@ import {
   fitText,
   layoutWheel,
   occupiedRings,
+  polarToCartesian,
   radialLabel,
   ringRadii,
   type WedgeLayout,
@@ -38,6 +39,17 @@ export interface FlavorWheelProps {
   readonly onSelect: (id: string | null) => void;
   /** Marks the correct answer once a hole is revealed, so the error path is visible on the wheel. */
   readonly revealId?: string | null;
+  /**
+   * Scorecard overlay: one pin per hole at the target, and where the answer landed elsewhere, a
+   * numbered marker joined to it by a dashed error path. Drawn over the wedges, never instead of them.
+   */
+  readonly pins?: readonly WheelPin[];
+}
+
+export interface WheelPin {
+  readonly targetId: string;
+  readonly answerId: string | null;
+  readonly label: string;
 }
 
 interface Placed extends WedgeLayout {
@@ -53,6 +65,7 @@ export function FlavorWheel({
   selectedId,
   onSelect,
   revealId = null,
+  pins = [],
 }: FlavorWheelProps) {
   const groupRefs = useRef(new Map<string, SVGGElement | null>());
 
@@ -156,6 +169,17 @@ export function FlavorWheel({
     [activeId, placed, moveTo, onFocusChange, zoomOut],
   );
 
+  // A selected branch lights everything under it too, so choosing a category (or zooming into one)
+  // highlights that sector rather than dimming the wedges that belong to it.
+  const inSelection = (id: string): boolean =>
+    selectedId !== null && isAncestor(wheel, selectedId, id);
+
+  const centroid = (id: string) => {
+    const wedge = placed.find((p) => p.node.id === id);
+    if (!wedge) return null;
+    return polarToCartesian(0, 0, (wedge.rInner + wedge.rOuter) / 2, (wedge.start + wedge.end) / 2);
+  };
+
   const focusNode = focusId === null ? null : getNode(wheel, focusId);
 
   return (
@@ -232,7 +256,7 @@ export function FlavorWheel({
               `ring-${displayRing}`,
               isSelected ? 'is-selected' : '',
               node.id === revealId ? 'is-revealed' : '',
-              (selectedId || revealId) && !onPath ? 'is-dimmed' : '',
+              (selectedId || revealId) && !onPath && !inSelection(node.id) ? 'is-dimmed' : '',
               node.defect === true ? 'is-defect' : '',
             ]
               .filter(Boolean)
@@ -294,6 +318,39 @@ export function FlavorWheel({
           </g>
         );
       })}
+
+      {pins.length > 0 && (
+        <g className="wheel-pins" aria-hidden="true">
+          {pins.map((pin, i) => {
+            const target = centroid(pin.targetId);
+            if (!target) return null;
+            const answer =
+              pin.answerId !== null && pin.answerId !== pin.targetId ? centroid(pin.answerId) : null;
+            return (
+              <g key={i}>
+                {answer && (
+                  <line
+                    className="wheel-pin-path"
+                    x1={answer.x}
+                    y1={answer.y}
+                    x2={target.x}
+                    y2={target.y}
+                  />
+                )}
+                <circle className="wheel-pin-target" cx={target.x} cy={target.y} r={10} />
+                {answer && (
+                  <>
+                    <circle className="wheel-pin-answer" cx={answer.x} cy={answer.y} r={14} />
+                    <text className="wheel-pin-label" x={answer.x} y={answer.y}>
+                      {pin.label}
+                    </text>
+                  </>
+                )}
+              </g>
+            );
+          })}
+        </g>
+      )}
     </svg>
   );
 }

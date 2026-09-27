@@ -9,7 +9,7 @@ import { masteredIds, progressStats, weightsForRound } from '../progress/store.j
 import './golf.css';
 
 /** Plain-language names for the scoring relations. "ancestor-ring2" means nothing to a beginner. */
-const RELATION_LABEL: Record<Relation, string> = {
+export const RELATION_LABEL: Record<Relation, string> = {
   exact: 'Exact',
   sibling: 'Next door',
   descendant: 'More specific than asked',

@@ -170,3 +170,43 @@
   }
 }
 
+
+/* Scorecard overlay. The pin is the answer the clue was written for; the numbered marker is where
+   the player committed, and the dashed line between them is the size of the miss. */
+.flavor-wheel {
+  --wheel-pin-target: #15803d;
+  --wheel-pin-answer: #c2410c;
+  --wheel-pin-ring: #fffbf7;
+}
+
+.wheel-pins {
+  pointer-events: none;
+}
+
+.wheel-pin-path {
+  stroke: var(--wheel-pin-answer);
+  stroke-width: 3.5;
+  stroke-dasharray: 7 5;
+  stroke-linecap: round;
+}
+
+.wheel-pin-target,
+.wheel-pin-answer {
+  stroke: var(--wheel-pin-ring);
+  stroke-width: 3.5;
+}
+
+.wheel-pin-target {
+  fill: var(--wheel-pin-target);
+}
+
+.wheel-pin-answer {
+  fill: var(--wheel-pin-answer);
+}
+
+.wheel-pin-label {
+  fill: #fff;
+  font: 700 14px system-ui, -apple-system, 'Segoe UI', sans-serif;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
