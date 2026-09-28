@@ -225,9 +225,10 @@ body {
 /* — header chips — */
 .cq-topbar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  gap: 8px 12px;
 }
 
 .cq-brand {
@@ -237,6 +238,9 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  /* Room for "Coffee Q Trainer" before the streak and belt chips push it to ellipsis; below that,
+     flex-wrap gives the chips their own row rather than clipping the brand. */
+  flex: 1 1 165px;
   min-width: 0;
 }
 
